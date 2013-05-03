@@ -8,6 +8,7 @@ import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.block.RunsafeChest;
 import no.runsafe.framework.timer.IScheduler;
+import no.runsafe.peeveepeearena.PvPArenaEngine;
 import org.bukkit.Effect;
 import org.bukkit.Material;
 
@@ -15,10 +16,11 @@ import java.util.Map;
 
 public class ChestDropHandler implements IConfigurationChanged
 {
-	public ChestDropHandler(IScheduler scheduler, IOutput output, LootTableManager lootTableManager)
+	public ChestDropHandler(IScheduler scheduler, IOutput output, PvPArenaEngine engine, LootTableManager lootTableManager)
 	{
 		this.scheduler = scheduler;
 		this.output = output;
+		this.engine = engine;
 		this.lootTableManager = lootTableManager;
 
 		this.setupNextEvent();
@@ -49,6 +51,7 @@ public class ChestDropHandler implements IConfigurationChanged
 				runEvent();
 			}
 		}, this.chestDropPreEventTime);
+		this.engine.broadcastMessage("A treasure chest will spawn in the PvP arena soon!");
 	}
 
 	public void runEvent()
@@ -74,6 +77,7 @@ public class ChestDropHandler implements IConfigurationChanged
 		RunsafeChest chest = (RunsafeChest) block.getBlockState();
 		String loot = this.lootTableManager.getRandomLootTable();
 		if (loot != null) chest.getInventory().unserialize(loot);
+		this.engine.broadcastMessage("A treasure chest has spawned in the PvP arena!");
 	}
 
 	public void endEvent()
@@ -101,6 +105,7 @@ public class ChestDropHandler implements IConfigurationChanged
 
 	private IScheduler scheduler;
 	private IOutput output;
+	private PvPArenaEngine engine;
 	private int chestDropEventCooldown;
 	private int chestDropPreEventTime;
 	private int chestDropEventLength;

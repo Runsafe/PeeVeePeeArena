@@ -12,6 +12,8 @@ public class Plugin extends RunsafeConfigurablePlugin
 	@Override
 	protected void PluginSetup()
 	{
+		addComponent(PvPArenaEngine.class);
+
 		// Chest Drop
 		addComponent(ChestDropHandler.class); // Handler
 		addComponent(ChestDropRepository.class); // Repository
