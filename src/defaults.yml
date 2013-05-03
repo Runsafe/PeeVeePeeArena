@@ -2,7 +2,7 @@ chestDropTime: 60
 chestDropPreEventTime: 10
 chestDropEventLength: 30
 chestDropLocation:
-  x: 0
-  y: 0
-  z: 0
-  world: world
+  x: 197
+  y: 64
+  z: 260
+  world: gameroom
