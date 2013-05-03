@@ -85,7 +85,7 @@ public class ChestDropHandler implements IConfigurationChanged
 		this.chestDropPreEventTime = configuration.getConfigValueAsInt("chestDropPreEventTime");
 		this.chestDropEventLength = configuration.getConfigValueAsInt("chestDropEventLength");
 
-		Map<String, String> location = configuration.getConfigValuesAsMap("chestLocation");
+		Map<String, String> location = configuration.getConfigValuesAsMap("chestDropLocation");
 		this.chestLocation = new RunsafeLocation(
 				RunsafeServer.Instance.getWorld(location.get("world")),
 				Integer.valueOf(location.get("x")),
