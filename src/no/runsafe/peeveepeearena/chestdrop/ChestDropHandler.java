@@ -74,7 +74,7 @@ public class ChestDropHandler implements IConfigurationChanged
 				this.chestLocation.getZ(),
 				4F, false, false
 		);
-		this.chestLocation.getWorld().strikeLightning(this.chestLocation);
+		this.chestLocation.getWorld().strikeLightningEffect(this.chestLocation);
 
 		RunsafeBlock block = this.chestLocation.getBlock();
 		block.setTypeId(Material.CHEST.getId());
