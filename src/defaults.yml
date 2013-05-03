@@ -1,6 +1,6 @@
-chestDropTime: 60
-chestDropPreEventTime: 10
-chestDropEventLength: 30
+chestDropTime: 10800
+chestDropPreEventTime: 300
+chestDropEventLength: 1200
 chestDropLocation:
   x: 197
   y: 64
