@@ -8,6 +8,7 @@ import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.block.RunsafeChest;
 import no.runsafe.framework.timer.IScheduler;
+import org.bukkit.Effect;
 import org.bukkit.Material;
 
 import java.util.Map;
@@ -64,6 +65,9 @@ public class ChestDropHandler implements IConfigurationChanged
 			}
 		}, this.chestDropEventLength);
 
+		this.chestLocation.getWorld().createExplosion(this.chestLocation, 0F, false);
+		this.chestLocation.getWorld().strikeLightning(this.chestLocation);
+
 		RunsafeBlock block = this.chestLocation.getBlock();
 		block.setTypeId(Material.CHEST.getId());
 
@@ -76,6 +80,7 @@ public class ChestDropHandler implements IConfigurationChanged
 	{
 		this.output.fine("Event ended, removing the loot chest.");
 		this.chestLocation.getBlock().setTypeId(Material.AIR.getId());
+		this.chestLocation.getWorld().playEffect(this.chestLocation, Effect.SMOKE, 0);
 	}
 
 	@Override
