@@ -2,6 +2,7 @@ package no.runsafe.peeveepeearena.chestdrop;
 
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
+import no.runsafe.framework.event.IPluginEnabled;
 import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.RunsafeServer;
@@ -15,7 +16,7 @@ import org.bukkit.Material;
 
 import java.util.Map;
 
-public class ChestDropHandler implements IConfigurationChanged
+public class ChestDropHandler implements IConfigurationChanged, IPluginEnabled
 {
 	public ChestDropHandler(IScheduler scheduler, IOutput output, PvPArenaEngine engine, LootTableManager lootTableManager)
 	{
@@ -23,8 +24,6 @@ public class ChestDropHandler implements IConfigurationChanged
 		this.output = output;
 		this.engine = engine;
 		this.lootTableManager = lootTableManager;
-
-		this.setupNextEvent();
 	}
 
 	private void setupNextEvent()
@@ -113,6 +112,12 @@ public class ChestDropHandler implements IConfigurationChanged
 				Integer.valueOf(location.get("y")),
 				Integer.valueOf(location.get("z"))
 		);
+	}
+
+	@Override
+	public void OnPluginEnabled()
+	{
+		this.setupNextEvent();
 	}
 
 	private IScheduler scheduler;
