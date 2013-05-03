@@ -6,6 +6,7 @@ import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.block.RunsafeBlock;
+import no.runsafe.framework.server.block.RunsafeBlockState;
 import no.runsafe.framework.server.block.RunsafeChest;
 import no.runsafe.framework.timer.IScheduler;
 import no.runsafe.peeveepeearena.PvPArenaEngine;
@@ -88,7 +89,13 @@ public class ChestDropHandler implements IConfigurationChanged
 	public void endEvent()
 	{
 		this.output.fine("Event ended, removing the loot chest.");
-		this.chestLocation.getBlock().setTypeId(Material.AIR.getId());
+		RunsafeBlock block = this.chestLocation.getBlock();
+		RunsafeBlockState state = block.getBlockState();
+
+		if (state instanceof RunsafeChest)
+			((RunsafeChest) state).getInventory().clear();
+
+		block.setTypeId(Material.AIR.getId());
 		this.chestLocation.getWorld().playEffect(this.chestLocation, Effect.SMOKE, 0);
 	}
 
