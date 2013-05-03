@@ -68,7 +68,12 @@ public class ChestDropHandler implements IConfigurationChanged
 			}
 		}, this.chestDropEventLength);
 
-		this.chestLocation.getWorld().createExplosion(this.chestLocation, 0F, false);
+		this.chestLocation.getWorld().createExplosion(
+				this.chestLocation.getX(),
+				this.chestLocation.getY(),
+				this.chestLocation.getZ(),
+				1F, false, false
+		);
 		this.chestLocation.getWorld().strikeLightning(this.chestLocation);
 
 		RunsafeBlock block = this.chestLocation.getBlock();
