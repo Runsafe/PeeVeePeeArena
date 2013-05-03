@@ -72,7 +72,7 @@ public class ChestDropHandler implements IConfigurationChanged
 				this.chestLocation.getX(),
 				this.chestLocation.getY(),
 				this.chestLocation.getZ(),
-				1F, false, false
+				4F, false, false
 		);
 		this.chestLocation.getWorld().strikeLightning(this.chestLocation);
 
