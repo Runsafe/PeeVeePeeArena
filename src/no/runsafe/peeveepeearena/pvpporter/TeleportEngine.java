@@ -13,7 +13,12 @@ public class TeleportEngine implements IConfigurationChanged
 {
 	public void teleportIntoArena(RunsafePlayer player)
 	{
-		RunsafeLocation newLocation = this.teleportPoint;
+		RunsafeLocation newLocation = new RunsafeLocation(
+				this.teleportPoint.getWorld(),
+				this.teleportPoint.getX(),
+				this.teleportPoint.getY(),
+				this.teleportPoint.getZ()
+		);
 		int highX = this.teleportPoint.getBlockX() + this.teleportRadius;
 		int highZ = this.teleportPoint.getBlockZ() + this.teleportRadius;
 		int lowX = this.teleportPoint.getBlockX() - this.teleportRadius;

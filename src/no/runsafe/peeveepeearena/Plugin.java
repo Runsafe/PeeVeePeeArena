@@ -21,7 +21,6 @@ public class Plugin extends RunsafeConfigurablePlugin
 		// Teleport
 		addComponent(TeleportEngine.class);
 
-
 		// Chest Drop
 		addComponent(ChestDropHandler.class); // Handler
 		addComponent(ChestDropRepository.class); // Repository

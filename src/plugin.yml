@@ -6,3 +6,5 @@ description:
 commands:
   createchestdrop:
     description: Creates a loot table for the chest drop
+  forcepvpchest:
+    description: Forces a PvP chest in the arena.
