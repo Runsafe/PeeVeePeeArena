@@ -20,12 +20,12 @@ public class TeleportEngine implements IConfigurationChanged
 		int lowZ = this.teleportPoint.getBlockZ() - this.teleportRadius;
 
 		newLocation.setX(this.getRandom(lowX, highX));
-		newLocation.setY(this.getRandom(lowZ, highZ));
+		newLocation.setZ(this.getRandom(lowZ, highZ));
 
 		while (!this.safeToTeleport(newLocation))
 		{
 			newLocation.setX(this.getRandom(lowX, highX));
-			newLocation.setY(this.getRandom(lowZ, highZ));
+			newLocation.setZ(this.getRandom(lowZ, highZ));
 		}
 
 		player.teleport(newLocation);
