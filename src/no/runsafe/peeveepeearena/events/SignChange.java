@@ -10,7 +10,7 @@ public class SignChange implements ISignChange
 	public boolean OnSignChange(RunsafePlayer player, RunsafeBlock block, String[] text)
 	{
 		if (text[0].equalsIgnoreCase("[PVP Warp]"))
-			if (player.hasPermission("runsafe.peeveepee.teleport.create"))
+			if (!player.hasPermission("runsafe.peeveepee.teleport.create"))
 				return false;
 
 		return true;
