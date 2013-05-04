@@ -6,3 +6,9 @@ chestDropLocation:
   y: 64
   z: 260
   world: gameroom
+teleporterPosition:
+  x: 197
+  y: 64
+  z: 260
+  world: gameroom
+teleporterRadius: 32
