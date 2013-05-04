@@ -26,10 +26,22 @@ public class ChestDropHandler implements IConfigurationChanged, IPluginEnabled
 		this.lootTableManager = lootTableManager;
 	}
 
+	public boolean forceStartEvent()
+	{
+		if (this.currentEvent > -1)
+		{
+			this.output.fine("Force skipped the current event task");
+			this.scheduler.cancelTask(this.currentEvent);
+			this.runPreEvent();
+			return true;
+		}
+		return false;
+	}
+
 	private void setupNextEvent()
 	{
 		this.output.fine("Scheduled next chest drop pre-event in " + this.chestDropEventCooldown + " seconds.");
-		this.scheduler.startSyncTask(new Runnable()
+		this.currentEvent = this.scheduler.startSyncTask(new Runnable()
 		{
 			@Override
 			public void run()
@@ -41,6 +53,7 @@ public class ChestDropHandler implements IConfigurationChanged, IPluginEnabled
 
 	public void runPreEvent()
 	{
+		this.currentEvent = -1;
 		this.output.fine("Running scheduled pre-event");
 		this.output.fine("Scheduling chest drop event in " + this.chestDropPreEventTime + " seconds");
 		this.scheduler.startSyncTask(new Runnable()
@@ -128,4 +141,5 @@ public class ChestDropHandler implements IConfigurationChanged, IPluginEnabled
 	private int chestDropEventLength;
 	private LootTableManager lootTableManager;
 	private RunsafeLocation chestLocation;
+	private int currentEvent;
 }

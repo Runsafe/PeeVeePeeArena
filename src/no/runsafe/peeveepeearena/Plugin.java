@@ -5,6 +5,7 @@ import no.runsafe.peeveepeearena.chestdrop.ChestDropHandler;
 import no.runsafe.peeveepeearena.chestdrop.ChestDropRepository;
 import no.runsafe.peeveepeearena.chestdrop.LootTableManager;
 import no.runsafe.peeveepeearena.commands.CreateChestDrop;
+import no.runsafe.peeveepeearena.commands.ForcePvPChest;
 import no.runsafe.peeveepeearena.events.CloseInventory;
 import no.runsafe.peeveepeearena.events.RightClickBlock;
 import no.runsafe.peeveepeearena.events.SignChange;
@@ -20,6 +21,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		// Teleport
 		addComponent(TeleportEngine.class);
 
+
 		// Chest Drop
 		addComponent(ChestDropHandler.class); // Handler
 		addComponent(ChestDropRepository.class); // Repository
@@ -32,5 +34,6 @@ public class Plugin extends RunsafeConfigurablePlugin
 
 		// Commands
 		addComponent(CreateChestDrop.class);
+		addComponent(ForcePvPChest.class);
 	}
 }
