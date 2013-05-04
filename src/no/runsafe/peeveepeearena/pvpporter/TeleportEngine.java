@@ -22,7 +22,7 @@ public class TeleportEngine implements IConfigurationChanged
 		while (!this.safeToTeleport(newLocation))
 		{
 			newLocation.setX(lowX + (int)(Math.random() * ((highX - lowX) + 1)));
-			newLocation.setY(lowZ + (int)(Math.random() * ((highZ - lowZ) + 1)));
+			newLocation.setZ(lowZ + (int)(Math.random() * ((highZ - lowZ) + 1)));
 		}
 
 		player.teleport(newLocation);
@@ -39,7 +39,7 @@ public class TeleportEngine implements IConfigurationChanged
 		this.teleportRadius = configuration.getConfigValueAsInt("teleporterRadius");
 		Map<String, String> teleporterPoint = configuration.getConfigValuesAsMap("teleporterPosition");
 		this.teleportPoint = new RunsafeLocation(
-				RunsafeServer.Instance.getWorld(teleporterPoint.get("world")),
+			RunsafeServer.Instance.getWorld(teleporterPoint.get("world")),
 			Integer.valueOf(teleporterPoint.get("x")),
 			Integer.valueOf(teleporterPoint.get("y")),
 			Integer.valueOf(teleporterPoint.get("z"))
