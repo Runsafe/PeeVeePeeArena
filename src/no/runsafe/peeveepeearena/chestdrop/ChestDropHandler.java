@@ -92,10 +92,15 @@ public class ChestDropHandler implements IConfigurationChanged, IPluginEnabled
 		RunsafeBlock block = this.chestLocation.getBlock();
 		block.setTypeId(Material.CHEST.getId());
 
-		RunsafeChest chest = (RunsafeChest) block.getBlockState();
-		String loot = this.lootTableManager.getRandomLootTable();
-		if (loot != null) chest.getInventory().unserialize(loot);
-		this.engine.broadcastMessage("A treasure chest has spawned in the PvP arena!");
+		RunsafeBlockState state = block.getBlockState();
+
+		if (state instanceof RunsafeChest)
+		{
+			RunsafeChest chest = (RunsafeChest) block.getBlockState();
+			String loot = this.lootTableManager.getRandomLootTable();
+			if (loot != null) chest.getInventory().unserialize(loot);
+			this.engine.broadcastMessage("A treasure chest has spawned in the PvP arena!");
+		}
 	}
 
 	public void endEvent()
