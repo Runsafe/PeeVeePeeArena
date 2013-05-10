@@ -19,14 +19,14 @@ public class Plugin extends RunsafeConfigurablePlugin
 		// Repositories
 		this.addComponent(PlayerRatingRepository.class);
 
+		// Teleport
+		addComponent(TeleportEngine.class);
+
 		// Commands
 		Command pvp = new Command("pvp", "PvP related commands", null);
 		pvp.addSubCommand(getInstance(Teleport.class));
 		pvp.addSubCommand(getInstance(GetRating.class));
 		this.addComponent(pvp);
-
-		// Teleport
-		addComponent(TeleportEngine.class);
 
 		// Events
 		addComponent(SignChange.class);
