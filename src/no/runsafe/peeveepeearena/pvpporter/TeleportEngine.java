@@ -4,6 +4,7 @@ import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
 import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.RunsafeServer;
+import no.runsafe.framework.server.RunsafeWorld;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import org.bukkit.Material;
 
@@ -46,19 +47,36 @@ public class TeleportEngine implements IConfigurationChanged
 		return location.getBlock().getMaterialType().getMaterialId() == Material.AIR.getId();
 	}
 
+	public void teleportToArena(RunsafePlayer player)
+	{
+		player.teleport(this.arenaPoint);
+	}
+
 	@Override
 	public void OnConfigurationChanged(IConfiguration configuration)
 	{
+		this.pvpWorld = RunsafeServer.Instance.getWorld(configuration.getConfigValueAsString("pvpWorld"));
+
 		this.teleportRadius = configuration.getConfigValueAsInt("teleporterRadius");
 		Map<String, String> teleporterPoint = configuration.getConfigValuesAsMap("teleporterPosition");
 		this.teleportPoint = new RunsafeLocation(
-			RunsafeServer.Instance.getWorld(teleporterPoint.get("world")),
+			this.pvpWorld,
 			Integer.valueOf(teleporterPoint.get("x")),
 			Integer.valueOf(teleporterPoint.get("y")),
 			Integer.valueOf(teleporterPoint.get("z"))
 		);
+
+		Map<String, String> arenaPoint = configuration.getConfigValuesAsMap("arenaTeleport");
+		this.arenaPoint = new RunsafeLocation(
+			this.pvpWorld,
+			Integer.valueOf(arenaPoint.get("x")),
+			Integer.valueOf(arenaPoint.get("y")),
+			Integer.valueOf(arenaPoint.get("z"))
+		);
 	}
 
 	private RunsafeLocation teleportPoint;
+	private RunsafeLocation arenaPoint;
+	private RunsafeWorld pvpWorld;
 	private int teleportRadius;
 }

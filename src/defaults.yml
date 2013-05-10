@@ -1,14 +1,11 @@
-chestDropTime: 10800
-chestDropPreEventTime: 300
-chestDropEventLength: 1200
-chestDropLocation:
-  x: 197
-  y: 64
-  z: 260
-  world: gameroom
+pvpWorld: gameroom
+defaultRating: 1200
+arenaTeleport:
+  x: 200
+  y: 90
+  z: 200
 teleporterPosition:
   x: 197
   y: 64
   z: 260
-  world: gameroom
 teleporterRadius: 32
