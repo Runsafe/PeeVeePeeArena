@@ -5,6 +5,7 @@ import no.runsafe.framework.command.Command;
 import no.runsafe.peeveepeearena.commands.GetRating;
 import no.runsafe.peeveepeearena.commands.Teleport;
 import no.runsafe.peeveepeearena.events.PlayerDeath;
+import no.runsafe.peeveepeearena.events.PlayerDropItems;
 import no.runsafe.peeveepeearena.events.RightClickBlock;
 import no.runsafe.peeveepeearena.events.SignChange;
 import no.runsafe.peeveepeearena.pvpporter.TeleportEngine;
@@ -33,5 +34,6 @@ public class Plugin extends RunsafeConfigurablePlugin
 		addComponent(SignChange.class);
 		addComponent(RightClickBlock.class);
 		addComponent(PlayerDeath.class);
+		addComponent(PlayerDropItems.class);
 	}
 }
