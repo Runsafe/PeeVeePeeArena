@@ -10,7 +10,6 @@ import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeSkullMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.mailbox.MailHandler;
-import no.runsafe.peeveepeearena.PvPArenaEngine;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -18,10 +17,9 @@ import java.util.HashMap;
 
 public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 {
-	public PlayerDeath(MailHandler mailHandler, PvPArenaEngine engine)
+	public PlayerDeath(MailHandler mailHandler)
 	{
 		this.mailHandler = mailHandler;
-		this.engine = engine;
 	}
 
 	@Override
@@ -77,11 +75,10 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		}
 
 		if (broadcast != null)
-			this.engine.broadcastMessage(String.format(broadcast, player.getPrettyName()));
+			RunsafeServer.Instance.broadcastMessage(String.format(broadcast, player.getPrettyName()));
 	}
 
 	private String pvpWorldName;
 	private MailHandler mailHandler;
-	private PvPArenaEngine engine;
 	private HashMap<String, Integer> kills = new HashMap<String, Integer>();
 }
