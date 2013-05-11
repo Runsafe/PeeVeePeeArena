@@ -32,7 +32,7 @@ public class PlayerScoresRepository extends Repository
 		if (data != null)
 		{
 			scores.put("kills", Integer.valueOf((String) data.get("kills")));
-			scores.put("deaths", Integer.valueOf((String) data.get("deaths")));
+			scores.put("deaths", (Integer) data.get("deaths"));
 		}
 
 		return scores;
