@@ -2,7 +2,7 @@ package no.runsafe.peeveepeearena;
 
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.command.Command;
-import no.runsafe.mailbox.MailHandler;
+import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.commands.GetRating;
 import no.runsafe.peeveepeearena.commands.Teleport;
 import no.runsafe.peeveepeearena.events.PlayerDeath;
@@ -17,7 +17,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 	@Override
 	protected void PluginSetup()
 	{
-		this.addComponent(Instances.get("RunsafeMailbox").getComponent(MailHandler.class));
+		this.addComponent(Instances.get("RunsafeMailbox").getComponent(MailSender.class));
 		this.addComponent(PvPArenaEngine.class);
 		this.addComponent(RatingHandler.class);
 

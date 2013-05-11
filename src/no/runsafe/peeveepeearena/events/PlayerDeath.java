@@ -10,7 +10,7 @@ import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeSkullMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
-import no.runsafe.mailbox.MailHandler;
+import no.runsafe.mailbox.MailSender;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ import java.util.HashMap;
 
 public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 {
-	public PlayerDeath(MailHandler mailHandler, IOutput output)
+	public PlayerDeath(MailSender mailSender, IOutput output)
 	{
-		this.mailHandler = mailHandler;
+		this.mailSender = mailSender;
 		this.output = output;
 	}
 
@@ -41,7 +41,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 
 			if (Math.random() * 100 == 0)
 			{
-				if (this.mailHandler.hasFreeMailboxSpace(killer))
+				if (this.mailSender.hasFreeMailboxSpace(killer))
 				{
 					RunsafeInventory newPackage = RunsafeServer.Instance.createInventory(null, 54);
 					RunsafeItemStack head = new RunsafeItemStack(Material.SKULL_ITEM.getId(), 1, (short) 3);
@@ -49,7 +49,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 					meta.setOwner(killed.getName());
 					head.setItemMeta(meta);
 					newPackage.addItems(head);
-					this.mailHandler.sendMail(killer, "Kjorn the arena Janitor", newPackage);
+					//this.mailHandler.sendMail(killer, "Kjorn the arena Janitor", newPackage);
 					this.output.broadcastColoured(String.format("&f%s&f gained the head of %s&f from PvP.", killer.getPrettyName(), killed.getPrettyName()));
 				}
 			}
@@ -84,7 +84,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	}
 
 	private String pvpWorldName;
-	private MailHandler mailHandler;
+	private MailSender mailSender;
 	private HashMap<String, Integer> kills = new HashMap<String, Integer>();
 	private IOutput output;
 }
