@@ -3,6 +3,7 @@ package no.runsafe.peeveepeearena.events;
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
 import no.runsafe.framework.event.player.IPlayerDeathEvent;
+import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
@@ -17,9 +18,10 @@ import java.util.HashMap;
 
 public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 {
-	public PlayerDeath(MailHandler mailHandler)
+	public PlayerDeath(MailHandler mailHandler, IOutput output)
 	{
 		this.mailHandler = mailHandler;
+		this.output = output;
 	}
 
 	@Override
@@ -48,6 +50,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 					head.setItemMeta(meta);
 					newPackage.addItems(head);
 					this.mailHandler.sendMail(killer, "Kjorn the arena Janitor", newPackage);
+					this.output.broadcastColoured(String.format("&f%s&f gained the head of %s&f from PvP.", killer.getPrettyName(), killed.getPrettyName()));
 				}
 			}
 		}
@@ -83,4 +86,5 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	private String pvpWorldName;
 	private MailHandler mailHandler;
 	private HashMap<String, Integer> kills = new HashMap<String, Integer>();
+	private IOutput output;
 }
