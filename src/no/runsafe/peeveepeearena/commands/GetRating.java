@@ -17,7 +17,8 @@ public class GetRating extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		return String.format("&Your PvP rating is currently %s.", this.playerRatingRepository.getRating(executor));
+		int rating = this.playerRatingRepository.getRating(executor);
+		return String.format("&fYour PvP rating is currently %s%s&f.", (rating < 0 ? "&a" : "&c"), rating);
 	}
 
 	private PlayerRatingRepository playerRatingRepository;
