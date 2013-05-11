@@ -19,6 +19,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 	{
 		this.addComponent(Instances.get("RunsafeMailbox").getComponent(MailHandler.class));
 		this.addComponent(PvPArenaEngine.class);
+		this.addComponent(RatingHandler.class);
 
 		// Repositories
 		this.addComponent(PlayerRatingRepository.class);
