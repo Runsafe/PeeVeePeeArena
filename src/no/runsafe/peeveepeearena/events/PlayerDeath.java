@@ -32,6 +32,8 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			RunsafePlayer killer = event.getEntity().getKiller();
 			this.killSpreeCheck(killer);
 
+			this.kills.remove(killed.getName());
+
 			killed.sendColouredMessage(String.format("&fYou lost no rating from being killed by %s&f.", killer.getPrettyName()));
 			killer.sendColouredMessage(String.format("&fYou gained no rating for killing %s&f.", killed.getPrettyName()));
 
