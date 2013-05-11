@@ -11,6 +11,7 @@ import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeSkullMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.mailbox.MailSender;
+import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
@@ -18,8 +19,9 @@ import java.util.HashMap;
 
 public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 {
-	public PlayerDeath(MailSender mailSender, IOutput output)
+	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, IOutput output)
 	{
+		this.playerScoresRepository = playerScoresRepository;
 		this.mailSender = mailSender;
 		this.output = output;
 	}
@@ -38,6 +40,9 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 
 			killed.sendColouredMessage(String.format("&fYou lost no rating from being killed by %s&f.", killer.getPrettyName()));
 			killer.sendColouredMessage(String.format("&fYou gained no rating for killing %s&f.", killed.getPrettyName()));
+
+			this.playerScoresRepository.incrementDeaths(killed);
+			this.playerScoresRepository.incrementKills(killer);
 
 			if (Math.random() * 100 == 0)
 			{
@@ -83,6 +88,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			RunsafeServer.Instance.broadcastMessage(String.format(broadcast, player.getPrettyName()));
 	}
 
+	private PlayerScoresRepository playerScoresRepository;
 	private String pvpWorldName;
 	private MailSender mailSender;
 	private HashMap<String, Integer> kills = new HashMap<String, Integer>();
