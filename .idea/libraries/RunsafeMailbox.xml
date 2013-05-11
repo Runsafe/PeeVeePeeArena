@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="RunsafeMailbox">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../out/RunsafeMailbox.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
