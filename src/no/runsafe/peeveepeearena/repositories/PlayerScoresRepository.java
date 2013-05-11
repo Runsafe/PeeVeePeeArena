@@ -22,7 +22,7 @@ public class PlayerScoresRepository extends Repository
 		return "peeveepee_scores";
 	}
 
-	public HashMap<String, Integer> getKills(RunsafePlayer player)
+	public HashMap<String, Integer> getScores(RunsafePlayer player)
 	{
 		HashMap<String, Integer> scores = new HashMap<String, Integer>();
 		Map<String, Object> data = this.database.QueryRow(
