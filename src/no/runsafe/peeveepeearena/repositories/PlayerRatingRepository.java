@@ -36,6 +36,14 @@ public class PlayerRatingRepository extends Repository implements IConfiguration
 		return this.defaultRating;
 	}
 
+	public void updateRating(RunsafePlayer player, int newRating)
+	{
+		this.database.Execute(
+			"INSERT INTO peeveepee_ratings (playerName, rating) VALUES(?, ?) " +
+				"ON DUPLICATE KEY UPDATE rating = ?", player.getName(), newRating,  newRating
+		);
+	}
+
 	@Override
 	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
 	{

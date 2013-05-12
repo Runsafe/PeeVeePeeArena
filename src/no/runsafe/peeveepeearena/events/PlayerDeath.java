@@ -11,19 +11,22 @@ import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeSkullMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.mailbox.MailSender;
+import no.runsafe.peeveepeearena.RatingHandler;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 {
-	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, IOutput output)
+	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, IOutput output, RatingHandler ratingHandler)
 	{
 		this.playerScoresRepository = playerScoresRepository;
 		this.mailSender = mailSender;
 		this.output = output;
+		this.ratingHandler = ratingHandler;
 	}
 
 	@Override
@@ -38,8 +41,26 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 
 			this.kills.remove(killed.getName());
 
-			killed.sendColouredMessage(String.format("&fYou lost no rating from being killed by %s&f.", killer.getPrettyName()));
-			killer.sendColouredMessage(String.format("&fYou gained no rating for killing %s&f.", killed.getPrettyName()));
+			List<Integer> ratings = this.ratingHandler.getNewRating(killer, killed);
+
+			int winnerRatingChange = ratings.get(0);
+			int looserRatingChange = ratings.get(1);
+
+			killer.sendColouredMessage(
+				String.format(
+					"&fYou gained %s rating for killing %s&f.",
+					(winnerRatingChange == 0 ? "no" : winnerRatingChange),
+					killed.getPrettyName()
+				)
+			);
+
+			killed.sendColouredMessage(
+				String.format(
+					"&fYou lost %s rating from being killed by %s&f.",
+					(looserRatingChange == 0 ? "no" : looserRatingChange),
+					killer.getPrettyName()
+				)
+			);
 
 			this.playerScoresRepository.incrementDeaths(killed);
 			this.playerScoresRepository.incrementKills(killer);
@@ -95,4 +116,5 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	private HashMap<String, Integer> kills = new HashMap<String, Integer>();
 	private IOutput output;
 	private int headDropChance;
+	private RatingHandler ratingHandler;
 }
