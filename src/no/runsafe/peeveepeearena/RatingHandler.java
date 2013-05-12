@@ -2,6 +2,7 @@ package no.runsafe.peeveepeearena;
 
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
+import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.repositories.PlayerRatingRepository;
 
@@ -22,7 +23,9 @@ public class RatingHandler implements IConfigurationChanged
 
 	private int getExpectedRating(int playerRating, int againstPlayerRating)
 	{
-		return 1 / (1 + 10 ^ ((againstPlayerRating - playerRating) / 400));
+		int ea = 1 / (1 + 10 ^ ((againstPlayerRating - playerRating) / 400));
+		RunsafeServer.Instance.broadcastMessage("GER: " + ea);
+		return ea;
 	}
 
 	public List<Integer> getNewRating(RunsafePlayer winner, RunsafePlayer looser)
