@@ -22,7 +22,7 @@ public class RatingHandler implements IConfigurationChanged
 
 	private double getExpectedRating(int playerRating, int againstPlayerRating)
 	{
-		return 1 / (Math.pow(1 + 10, (againstPlayerRating - playerRating) / 400));
+		return 1 / Math.pow(1 + 10, (againstPlayerRating - playerRating) / 400);
 	}
 
 	public List<Integer> getNewRating(RunsafePlayer winner, RunsafePlayer looser)
