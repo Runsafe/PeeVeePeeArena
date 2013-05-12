@@ -44,7 +44,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			this.playerScoresRepository.incrementDeaths(killed);
 			this.playerScoresRepository.incrementKills(killer);
 
-			if (Math.random() * 100 == 0)
+			if ((Math.random() * 100) + 1 >= this.headDropChance)
 			{
 				if (this.mailSender.hasFreeMailboxSpace(killer))
 				{
@@ -65,6 +65,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	public void OnConfigurationChanged(IConfiguration configuration)
 	{
 		this.pvpWorldName = configuration.getConfigValueAsString("pvpWorld");
+		this.headDropChance = configuration.getConfigValueAsInt("headDropChance");
 	}
 
 	private void killSpreeCheck(RunsafePlayer player)
@@ -93,4 +94,5 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	private MailSender mailSender;
 	private HashMap<String, Integer> kills = new HashMap<String, Integer>();
 	private IOutput output;
+	private int headDropChance;
 }
