@@ -31,7 +31,7 @@ public class PlayerRatingRepository extends Repository implements IConfiguration
 		);
 
 		if (data != null)
-			return Integer.valueOf((String) data.get("rating"));
+			return (Integer) data.get("rating");
 
 		return this.defaultRating;
 	}
