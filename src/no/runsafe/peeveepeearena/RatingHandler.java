@@ -2,7 +2,6 @@ package no.runsafe.peeveepeearena;
 
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
-import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.repositories.PlayerRatingRepository;
 
@@ -11,10 +10,9 @@ import java.util.List;
 
 public class RatingHandler implements IConfigurationChanged
 {
-	public RatingHandler(PlayerRatingRepository repository, IOutput output)
+	public RatingHandler(PlayerRatingRepository repository)
 	{
 		this.repository = repository;
-		this.output = output;
 	}
 
 	public int getRating(RunsafePlayer player)
@@ -24,9 +22,7 @@ public class RatingHandler implements IConfigurationChanged
 
 	private double getExpectedRating(int playerRating, int againstPlayerRating)
 	{
-		double r = 1 / (1 + Math.pow(10, (againstPlayerRating - playerRating) / 400));
-		this.output.broadcastColoured("R: " + r + " E: 0.5@1500/1500");
-		return r;
+		return 1 / (1 + Math.pow(10, (againstPlayerRating - playerRating) / 400));
 	}
 
 	public List<Integer> getNewRating(RunsafePlayer winner, RunsafePlayer looser)
@@ -55,5 +51,4 @@ public class RatingHandler implements IConfigurationChanged
 
 	private PlayerRatingRepository repository;
 	private int kFactor;
-	private IOutput output;
 }
