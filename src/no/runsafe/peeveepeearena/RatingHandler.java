@@ -24,7 +24,7 @@ public class RatingHandler implements IConfigurationChanged
 
 	private double getExpectedRating(int playerRating, int againstPlayerRating)
 	{
-		double r = 1 / Math.pow(1 + 10, (againstPlayerRating - playerRating) / 400);
+		double r = 1 / (1 + Math.pow(10, (againstPlayerRating - playerRating) / 400));
 		this.output.broadcastColoured("R: " + r + " E: 0.5@1500/1500");
 		return r;
 	}
