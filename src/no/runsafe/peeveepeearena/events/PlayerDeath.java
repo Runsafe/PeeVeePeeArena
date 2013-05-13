@@ -8,7 +8,6 @@ import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.item.meta.RunsafeSkullMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.mailbox.MailSender;
@@ -28,12 +27,6 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		this.mailSender = mailSender;
 		this.output = output;
 		this.ratingHandler = ratingHandler;
-
-		this.currency = new RunsafeItemStack(Material.BONE.getId(), 1);
-		RunsafeItemMeta meta = this.currency.getItemMeta();
-		meta.setDisplayName("PvP Kill Token");
-		meta.addLore("Used to buy items for the PvP arena.");
-		this.currency.setItemMeta(meta);
 	}
 
 	@Override
@@ -69,8 +62,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			);
 
 			int pointsGain = winnerRatingChange * this.pointsPerRating;
-			this.currency.setAmount(pointsGain);
-			killer.getInventory().addItems(this.currency.clone());
+
 			killer.sendColouredMessage(String.format("&fYou gain &a%s&f PvP tokens.", pointsGain));
 
 			this.playerScoresRepository.incrementDeaths(killed);
@@ -122,7 +114,6 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			RunsafeServer.Instance.broadcastMessage(String.format(broadcast, player.getPrettyName()));
 	}
 
-	private RunsafeItemStack currency;
 	private PlayerScoresRepository playerScoresRepository;
 	private String pvpWorldName;
 	private MailSender mailSender;
