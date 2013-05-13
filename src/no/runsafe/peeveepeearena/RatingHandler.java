@@ -3,14 +3,14 @@ package no.runsafe.peeveepeearena;
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
 import no.runsafe.framework.server.player.RunsafePlayer;
-import no.runsafe.peeveepeearena.repositories.PlayerRatingRepository;
+import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RatingHandler implements IConfigurationChanged
 {
-	public RatingHandler(PlayerRatingRepository repository)
+	public RatingHandler(PlayerScoresRepository repository)
 	{
 		this.repository = repository;
 	}
@@ -49,6 +49,6 @@ public class RatingHandler implements IConfigurationChanged
 		this.kFactor = configuration.getConfigValueAsInt("ratingKFactor");
 	}
 
-	private PlayerRatingRepository repository;
+	private PlayerScoresRepository repository;
 	private int kFactor;
 }

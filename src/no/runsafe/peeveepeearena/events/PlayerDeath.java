@@ -42,7 +42,14 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		RunsafePlayer killed = event.getEntity();
 		if (killed.getWorld().getName().equals(pvpWorldName))
 		{
-			event.setDrops(new ArrayList<RunsafeItemStack>());
+			List<RunsafeItemStack> drops = new ArrayList<RunsafeItemStack>();
+
+			for (RunsafeItemStack item : event.getDrops())
+				if (item.getItemId() == Material.BONE.getId())
+					drops.add(item);
+
+			event.setDrops(drops);
+			
 			RunsafePlayer killer = event.getEntity().getKiller();
 			this.killSpreeCheck(killer);
 			this.kills.remove(killed.getName());

@@ -11,7 +11,6 @@ import no.runsafe.peeveepeearena.events.PlayerDropItems;
 import no.runsafe.peeveepeearena.events.RightClickBlock;
 import no.runsafe.peeveepeearena.events.SignChange;
 import no.runsafe.peeveepeearena.pvpporter.TeleportEngine;
-import no.runsafe.peeveepeearena.repositories.PlayerRatingRepository;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 
 public class Plugin extends RunsafeConfigurablePlugin
@@ -24,7 +23,6 @@ public class Plugin extends RunsafeConfigurablePlugin
 		this.addComponent(RatingHandler.class);
 
 		// Repositories
-		this.addComponent(PlayerRatingRepository.class);
 		this.addComponent(PlayerScoresRepository.class);
 
 		// Teleport
