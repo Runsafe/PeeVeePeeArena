@@ -8,6 +8,7 @@ import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.item.meta.RunsafeSkullMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.mailbox.MailSender;
@@ -27,6 +28,12 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		this.mailSender = mailSender;
 		this.output = output;
 		this.ratingHandler = ratingHandler;
+
+		this.currency = new RunsafeItemStack(Material.BONE.getId(), 1);
+		RunsafeItemMeta meta = this.currency.getItemMeta();
+		meta.setDisplayName("PvP Kill Token");
+		meta.addLore("Used to buy items for the PvP arena.");
+		this.currency.setItemMeta(meta);
 	}
 
 	@Override
@@ -38,9 +45,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			event.setDrops(new ArrayList<RunsafeItemStack>());
 			RunsafePlayer killer = event.getEntity().getKiller();
 			this.killSpreeCheck(killer);
-
 			this.kills.remove(killed.getName());
-
 			List<Integer> ratings = this.ratingHandler.getNewRating(killer, killed);
 
 			int winnerRatingChange = ratings.get(0);
@@ -56,14 +61,19 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 
 			killed.sendColouredMessage(
 				String.format(
-					"&fYou &clost&f %s rating from being killed by %s&f.",
-					(looserRatingChange == 0 ? "no" : looserRatingChange),
-					killer.getPrettyName()
+						"&fYou &clost&f %s rating from being killed by %s&f.",
+						(looserRatingChange == 0 ? "no" : looserRatingChange),
+						killer.getPrettyName()
 				)
 			);
 
+			this.currency.setAmount(winnerRatingChange * this.pointsPerRating);
+			killer.getInventory().addItems(this.currency.clone());
+
 			this.playerScoresRepository.incrementDeaths(killed);
 			this.playerScoresRepository.incrementKills(killer);
+
+			killer.getInventory().addItems();
 
 			if ((Math.random() * 100) + 1 <= this.headDropChance)
 			{
@@ -87,6 +97,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	{
 		this.pvpWorldName = configuration.getConfigValueAsString("pvpWorld");
 		this.headDropChance = configuration.getConfigValueAsInt("headDropChance");
+		this.pointsPerRating = configuration.getConfigValueAsInt("pointsPerRating");
 	}
 
 	private void killSpreeCheck(RunsafePlayer player)
@@ -110,11 +121,13 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			RunsafeServer.Instance.broadcastMessage(String.format(broadcast, player.getPrettyName()));
 	}
 
+	private RunsafeItemStack currency;
 	private PlayerScoresRepository playerScoresRepository;
 	private String pvpWorldName;
 	private MailSender mailSender;
 	private HashMap<String, Integer> kills = new HashMap<String, Integer>();
 	private IOutput output;
 	private int headDropChance;
+	private int pointsPerRating;
 	private RatingHandler ratingHandler;
 }
