@@ -3,7 +3,6 @@ package no.runsafe.peeveepeearena.events;
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
 import no.runsafe.framework.event.player.IPlayerDeathEvent;
-import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
@@ -21,11 +20,10 @@ import java.util.List;
 
 public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 {
-	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, IOutput output, RatingHandler ratingHandler)
+	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, RatingHandler ratingHandler)
 	{
 		this.playerScoresRepository = playerScoresRepository;
 		this.mailSender = mailSender;
-		this.output = output;
 		this.ratingHandler = ratingHandler;
 	}
 
@@ -79,7 +77,6 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 					head.setItemMeta(meta);
 					newPackage.addItems(head);
 					this.mailSender.sendMail(killer, "Kjorn the Arena Janitor", newPackage);
-					this.output.broadcastColoured(String.format("&f%s&f gained the head of %s&f from PvP.", killer.getPrettyName(), killed.getPrettyName()));
 				}
 			}
 		}
@@ -118,7 +115,6 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	private String pvpWorldName;
 	private MailSender mailSender;
 	private HashMap<String, Integer> kills = new HashMap<String, Integer>();
-	private IOutput output;
 	private int headDropChance;
 	private int pointsPerRating;
 	private RatingHandler ratingHandler;
