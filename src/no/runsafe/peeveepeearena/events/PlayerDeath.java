@@ -73,8 +73,6 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			this.playerScoresRepository.incrementDeaths(killed);
 			this.playerScoresRepository.incrementKills(killer);
 
-			killer.getInventory().addItems();
-
 			if ((Math.random() * 100) + 1 <= this.headDropChance)
 			{
 				if (this.mailSender.hasFreeMailboxSpace(killer))
