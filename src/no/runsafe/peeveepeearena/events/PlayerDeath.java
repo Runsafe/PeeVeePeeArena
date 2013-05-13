@@ -63,6 +63,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 
 			int pointsGain = winnerRatingChange * this.pointsPerRating;
 			killer.sendColouredMessage(String.format("&7&oYou gain %s PvP points.", pointsGain));
+			this.playerScoresRepository.updatePoints(killer, pointsGain);
 
 			this.playerScoresRepository.incrementDeaths(killed);
 			this.playerScoresRepository.incrementKills(killer);
