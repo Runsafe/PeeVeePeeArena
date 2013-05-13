@@ -85,7 +85,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 					meta.setOwner(killed.getName());
 					head.setItemMeta(meta);
 					newPackage.addItems(head);
-					this.mailSender.sendMail(killer, "Kjorn the arena janitor", newPackage);
+					this.mailSender.sendMail(killer, "Kjorn the Arena Janitor", newPackage);
 					this.output.broadcastColoured(String.format("&f%s&f gained the head of %s&f from PvP.", killer.getPrettyName(), killed.getPrettyName()));
 				}
 			}
