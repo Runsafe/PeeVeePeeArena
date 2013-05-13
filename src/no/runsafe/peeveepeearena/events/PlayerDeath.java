@@ -45,17 +45,17 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 
 			killer.sendColouredMessage(
 				String.format(
-					"&fYou &agained&f %s rating for killing %s&f.",
+					"&7&oYou gained %s rating for killing %s.",
 					(winnerRatingChange == 0 ? "no" : winnerRatingChange),
-					killed.getPrettyName()
+					killed.getName()
 				)
 			);
 
 			killed.sendColouredMessage(
 				String.format(
-						"&fYou &clost&f %s rating from being killed by %s&f.",
+						"&7&oYou lost %s rating from being killed by %s.",
 						(looserRatingChange == 0 ? "no" : looserRatingChange),
-						killer.getPrettyName()
+						killer.getName()
 				)
 			);
 
