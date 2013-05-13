@@ -3,6 +3,7 @@ package no.runsafe.peeveepeearena;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.command.Command;
 import no.runsafe.mailbox.MailSender;
+import no.runsafe.peeveepeearena.commands.GetPoints;
 import no.runsafe.peeveepeearena.commands.GetRating;
 import no.runsafe.peeveepeearena.commands.GetScore;
 import no.runsafe.peeveepeearena.commands.Teleport;
@@ -33,6 +34,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		pvp.addSubCommand(getInstance(Teleport.class));
 		pvp.addSubCommand(getInstance(GetRating.class));
 		pvp.addSubCommand(getInstance(GetScore.class));
+		pvp.addSubCommand(getInstance(GetPoints.class));
 		this.addComponent(pvp);
 
 		// Events
