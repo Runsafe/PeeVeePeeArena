@@ -67,8 +67,10 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 				)
 			);
 
-			this.currency.setAmount(winnerRatingChange * this.pointsPerRating);
+			int pointsGain = winnerRatingChange * this.pointsPerRating;
+			this.currency.setAmount(pointsGain);
 			killer.getInventory().addItems(this.currency.clone());
+			killer.sendColouredMessage(String.format("&fYou gain &a%s&f PvP tokens.", pointsGain));
 
 			this.playerScoresRepository.incrementDeaths(killed);
 			this.playerScoresRepository.incrementKills(killer);
