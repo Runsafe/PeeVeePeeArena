@@ -21,6 +21,13 @@ public class ShopItemSet
 		this.items = itemHolder;
 	}
 
+	public ShopItemSet(int ID, String name, int cost)
+	{
+		this.ID = ID;
+		this.name = name;
+		this.cost = cost;
+	}
+
 	public int getID()
 	{
 		return this.ID;

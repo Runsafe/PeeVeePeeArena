@@ -76,6 +76,18 @@ public class ShopRepository extends Repository
 		return true;
 	}
 
+	public List<ShopItemSet> getAllSets()
+	{
+		List<ShopItemSet> itemSets = new ArrayList<ShopItemSet>();
+		List<Map<String, Object>> data = this.database.Query("SELECT ID, name, cost FROM peeveepee_shop");
+
+		if (data != null)
+			for (Map<String, Object> node : data)
+				itemSets.add(new ShopItemSet((Integer) node.get("ID"), (String) node.get("name"), (Integer) node.get("cost")));
+
+		return itemSets;
+	}
+
 	@Override
 	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
 	{
