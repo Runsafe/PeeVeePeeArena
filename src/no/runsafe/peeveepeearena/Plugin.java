@@ -10,6 +10,7 @@ import no.runsafe.peeveepeearena.events.RightClickBlock;
 import no.runsafe.peeveepeearena.events.SignChange;
 import no.runsafe.peeveepeearena.pvpporter.TeleportEngine;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
+import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
 public class Plugin extends RunsafeConfigurablePlugin
 {
@@ -22,6 +23,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 
 		// Repositories
 		this.addComponent(PlayerScoresRepository.class);
+		this.addComponent(ShopRepository.class);
 
 		// Teleport
 		this.addComponent(TeleportEngine.class);
@@ -41,8 +43,6 @@ public class Plugin extends RunsafeConfigurablePlugin
 		pvpAdmin.addSubCommand(getInstance(GetItemSet.class));
 
 		pvp.addSubCommand(pvpAdmin);
-
-
 
 		// Events
 		this.addComponent(SignChange.class);
