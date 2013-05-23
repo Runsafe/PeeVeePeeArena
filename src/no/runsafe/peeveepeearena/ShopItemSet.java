@@ -36,17 +36,12 @@ public class ShopItemSet
 		return this.cost;
 	}
 
-	private int getSetSize()
-	{
-		return this.items.getContents().size();
-	}
-
 	public boolean giveToPlayer(RunsafePlayer player)
 	{
 		RunsafeInventory playerInventory = player.getInventory();
 		List<RunsafeItemStack> setContents = this.items.getContents();
 
-		if (playerInventory.getSize() - this.getSetSize() < setContents.size())
+		if (playerInventory.getSize() - playerInventory.getContents().size() < setContents.size())
 			return false; // Not enough room in the players inventory.
 
 		for (RunsafeItemStack item : this.items.getContents())
