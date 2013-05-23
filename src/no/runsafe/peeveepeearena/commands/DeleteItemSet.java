@@ -18,7 +18,9 @@ public class DeleteItemSet extends ExecutableCommand
 	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters)
 	{
 		int itemSetID = Integer.parseInt(parameters.get("id"));
-		this.shopRepository.deleteItemSet(itemSetID);
+		if (!this.shopRepository.deleteItemSet(itemSetID))
+			return "&cUnable to find an item set with that ID";
+
 		return "&2The item set has been deleted.";
 	}
 
