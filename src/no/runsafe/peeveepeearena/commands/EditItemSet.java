@@ -17,13 +17,14 @@ public class EditItemSet extends PlayerCommand
 	@Override
 	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
 	{
-		this.shopRepository.editItemSet(
+		boolean edit = this.shopRepository.editItemSet(
 				Integer.parseInt(parameters.get("id")),
 				parameters.get("name"),
 				Integer.parseInt(parameters.get("cost")),
 				executor.getInventory()
 		);
-		return "&sThe item set has been updated.";
+
+		return (edit ? "&sThe item set has been updated." : "&cUnable to find an item set with that ID.");
 	}
 
 	private ShopRepository shopRepository;
