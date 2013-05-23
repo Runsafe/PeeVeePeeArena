@@ -3,10 +3,7 @@ package no.runsafe.peeveepeearena;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.command.Command;
 import no.runsafe.mailbox.MailSender;
-import no.runsafe.peeveepeearena.commands.GetPoints;
-import no.runsafe.peeveepeearena.commands.GetRating;
-import no.runsafe.peeveepeearena.commands.GetScore;
-import no.runsafe.peeveepeearena.commands.Teleport;
+import no.runsafe.peeveepeearena.commands.*;
 import no.runsafe.peeveepeearena.events.PlayerDeath;
 import no.runsafe.peeveepeearena.events.PlayerDropItems;
 import no.runsafe.peeveepeearena.events.RightClickBlock;
@@ -36,6 +33,12 @@ public class Plugin extends RunsafeConfigurablePlugin
 		pvp.addSubCommand(getInstance(GetScore.class));
 		pvp.addSubCommand(getInstance(GetPoints.class));
 		this.addComponent(pvp);
+
+		Command pvpAdmin = new Command("pvpadmin", "PvP admin related commands", null);
+		pvpAdmin.addSubCommand(getInstance(CreateItemSet.class));
+		pvpAdmin.addSubCommand(getInstance(DeleteItemSet.class));
+		pvpAdmin.addSubCommand(getInstance(EditItemSet.class));
+		pvpAdmin.addSubCommand(getInstance(GetItemSet.class));
 
 		// Events
 		this.addComponent(SignChange.class);
