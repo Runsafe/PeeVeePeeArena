@@ -30,27 +30,33 @@ public class ShopRepository extends Repository
 
 	public ShopItemSet getItemSet(int id)
 	{
-		Map<String, Object> data = this.database.QueryRow(
-				"SELECT name, cost, items FROM peeveepee_shop WHERE ID = ?", id
-		);
-
-		if (data != null)
-			return new ShopItemSet(
-				id,
-				(String) data.get("name"),
-				(Integer) data.get("cost"),
-				(String) data.get("items")
+		if (this.itemSetExists(id))
+		{
+			Map<String, Object> data = this.database.QueryRow(
+					"SELECT name, cost, items FROM peeveepee_shop WHERE ID = ?", id
 			);
 
+			if (data != null)
+				return new ShopItemSet(
+					id,
+					(String) data.get("name"),
+					(Integer) data.get("cost"),
+					(String) data.get("items")
+				);
+		}
 		return null;
 	}
 
-	public void editItemSet(int id, String name, int cost, RunsafeInventory itemHolder)
+	public boolean editItemSet(int id, String name, int cost, RunsafeInventory itemHolder)
 	{
+		if (!this.itemSetExists(id))
+			return false;
+
 		this.database.Execute(
 				"UPDATE peeveepee_shop SET name = ?, cost = ?, items = ? WHERE ID = ?",
 				name, cost, itemHolder.serialize(), id
 		);
+		return true;
 	}
 
 	public void createItemSet(String name, int cost, RunsafeInventory itemHolder)
@@ -61,9 +67,13 @@ public class ShopRepository extends Repository
 		);
 	}
 
-	public void deleteItemSet(int id)
+	public boolean deleteItemSet(int id)
 	{
+		if (!this.itemSetExists(id))
+			return false;
+
 		this.database.Execute("DELETE FROM peeveepee_shop WHERE ID = ?", id);
+		return true;
 	}
 
 	@Override
