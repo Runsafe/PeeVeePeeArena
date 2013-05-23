@@ -20,6 +20,9 @@ public class GetItemSet extends PlayerCommand
 	{
 		ShopItemSet itemSet = this.shopRepository.getItemSet(Integer.parseInt(parameters.get("id")));
 
+		if (itemSet == null)
+			return "&cUnable to find an item set with that ID.";
+
 		if (!itemSet.giveToPlayer(executor))
 			return "&cThere is not enough space in your inventory to hold this set.";
 
