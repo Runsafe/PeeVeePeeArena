@@ -22,6 +22,12 @@ public class ShopRepository extends Repository
 		return "peeveepee_shop";
 	}
 
+	public boolean itemSetExists(int id)
+	{
+		Map<String, Object> data = this.database.QueryRow("SELECT ID FROM peeveepee_shop WHERE ID = ?", id);
+		return !data.isEmpty();
+	}
+
 	public ShopItemSet getItemSet(int id)
 	{
 		Map<String, Object> data = this.database.QueryRow(
