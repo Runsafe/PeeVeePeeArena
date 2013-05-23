@@ -12,7 +12,7 @@ public class ListItemSets extends ExecutableCommand
 {
 	public ListItemSets(ShopRepository shopRepository)
 	{
-		super("listsets", "Lists all the available item sets in the shop", "runsafe.peeveepeearena.set.list");
+		super("listsets", "Lists all the available item sets in the shop", "runsafe.peeveepee.set.list");
 		this.shopRepository = shopRepository;
 	}
 
