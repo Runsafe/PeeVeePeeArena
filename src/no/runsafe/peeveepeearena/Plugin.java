@@ -34,11 +34,15 @@ public class Plugin extends RunsafeConfigurablePlugin
 		pvp.addSubCommand(getInstance(GetPoints.class));
 		this.addComponent(pvp);
 
-		Command pvpAdmin = new Command("pvpadmin", "PvP admin related commands", null);
+		Command pvpAdmin = new Command("admin", "PvP admin related commands", null);
 		pvpAdmin.addSubCommand(getInstance(CreateItemSet.class));
 		pvpAdmin.addSubCommand(getInstance(DeleteItemSet.class));
 		pvpAdmin.addSubCommand(getInstance(EditItemSet.class));
 		pvpAdmin.addSubCommand(getInstance(GetItemSet.class));
+
+		pvp.addSubCommand(pvpAdmin);
+
+
 
 		// Events
 		this.addComponent(SignChange.class);
