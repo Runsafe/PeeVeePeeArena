@@ -10,6 +10,7 @@ import no.runsafe.peeveepeearena.events.RightClickBlock;
 import no.runsafe.peeveepeearena.events.SignChange;
 import no.runsafe.peeveepeearena.pvpporter.TeleportEngine;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
+import no.runsafe.peeveepeearena.repositories.PurchasedRepository;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
 public class Plugin extends RunsafeConfigurablePlugin
@@ -24,6 +25,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		// Repositories
 		this.addComponent(PlayerScoresRepository.class);
 		this.addComponent(ShopRepository.class);
+		this.addComponent(PurchasedRepository.class);
 
 		// Teleport
 		this.addComponent(TeleportEngine.class);
