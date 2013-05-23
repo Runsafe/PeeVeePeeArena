@@ -41,6 +41,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		pvpAdmin.addSubCommand(getInstance(DeleteItemSet.class));
 		pvpAdmin.addSubCommand(getInstance(EditItemSet.class));
 		pvpAdmin.addSubCommand(getInstance(GetItemSet.class));
+		pvpAdmin.addSubCommand(getInstance(ListItemSets.class));
 
 		pvp.addSubCommand(pvpAdmin);
 
