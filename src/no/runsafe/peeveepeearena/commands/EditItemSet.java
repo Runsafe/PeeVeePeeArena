@@ -24,7 +24,7 @@ public class EditItemSet extends PlayerCommand
 				executor.getInventory()
 		);
 
-		return (edit ? "&sThe item set has been updated." : "&cUnable to find an item set with that ID.");
+		return (edit ? "&2The item set has been updated." : "&cUnable to find an item set with that ID.");
 	}
 
 	private ShopRepository shopRepository;
