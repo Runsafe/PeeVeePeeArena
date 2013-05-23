@@ -19,7 +19,7 @@ public class DeleteItemSet extends ExecutableCommand
 	{
 		int itemSetID = Integer.parseInt(parameters.get("id"));
 		if (!this.shopRepository.deleteItemSet(itemSetID))
-			return "&cUnable to find an item set with that ID";
+			return "&cUnable to find an item set with that ID.";
 
 		return "&2The item set has been deleted.";
 	}
