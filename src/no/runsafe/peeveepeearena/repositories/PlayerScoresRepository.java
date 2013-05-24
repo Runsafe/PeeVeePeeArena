@@ -115,10 +115,19 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 		versions.put(1, sql);
 
 		ArrayList<String> update = new ArrayList<String>();
-
 		update.add("ALTER TABLE `peeveepee_scores` ADD COLUMN `rating` INT(5) DEFAULT '1500' AFTER `deaths`, ADD COLUMN `points` INT(10) DEFAULT '0' AFTER `rating`;");
 		update.add("ALTER TABLE `peeveepee_scores` CHANGE COLUMN `kills` `kills` int(10) DEFAULT '0' AFTER `playerName`, CHANGE COLUMN `deaths` `deaths` int(10) DEFAULT '0' AFTER `kills`;");
 		versions.put(2, update);
+
+		ArrayList<String> update_two = new ArrayList<String>();
+		update_two.add("" +
+				"ALTER TABLE `peeveepee_scores` " +
+				"CHANGE COLUMN `kills` `kills` int(10) NOT NULL DEFAULT '0' AFTER `playerName`," +
+				"CHANGE COLUMN `deaths` `deaths` int(10) NOT NULL DEFAULT '0' AFTER `kills`," +
+				"CHANGE COLUMN `rating` `rating` int(5) NOT NULL DEFAULT '1500' AFTER `deaths`," +
+				"CHANGE COLUMN `points` `points` int(10) NOT NULL DEFAULT '0' AFTER `rating`;");
+		versions.put(3, update_two);
+
 
 		return versions;
 	}
