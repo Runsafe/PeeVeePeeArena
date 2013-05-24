@@ -10,7 +10,8 @@ public class EditItemSet extends PlayerCommand
 {
 	public EditItemSet(ShopRepository shopRepository)
 	{
-		super("editset", "Edits an item set.", "runsafe.peeveepee.set.edit", "id", "name", "cost");
+		super("editset", "Edits an item set.", "runsafe.peeveepee.set.edit", "id", "cost", "name");
+		super.captureTail();
 		this.shopRepository = shopRepository;
 	}
 

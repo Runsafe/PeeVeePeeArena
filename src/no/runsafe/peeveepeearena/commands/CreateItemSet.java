@@ -10,7 +10,8 @@ public class CreateItemSet extends PlayerCommand
 {
 	public CreateItemSet(ShopRepository shopRepository)
 	{
-		super("createset", "Creates an item set for the shop", "runsafe.peeveepee.set.create", "name", "cost");
+		super("createset", "Creates an item set for the shop", "runsafe.peeveepee.set.create", "cost", "name");
+		super.captureTail();
 		this.shopRepository = shopRepository;
 	}
 
