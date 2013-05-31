@@ -28,7 +28,7 @@ public class CustomItemHandler implements IPlayerRightClick
 				String itemName = meta.getDisplayName();
 				if (itemName != null)
 				{
-					if (this.customItems.containsKey(itemName))
+					if (this.customItems.containsKey(itemName.toLowerCase()))
 					{
 						ICustomItem customItem = this.customItems.get(itemName);
 						customItem.onUse(player);
