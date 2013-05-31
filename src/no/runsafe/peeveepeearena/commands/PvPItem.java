@@ -12,6 +12,7 @@ public class PvPItem extends PlayerCommand
 	{
 		super("item", "Gives you one of the PvP items", "runsafe.peeveepeearena.item.give", "item");
 		this.customItemHandler = customItemHandler;
+		this.captureTail();
 	}
 
 	@Override
