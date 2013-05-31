@@ -30,6 +30,7 @@ public class JarOfDirt implements ICustomItem
 	{
 		RunsafeItemStack item = new RunsafeItemStack(Material.EXP_BOTTLE.getId());
 		RunsafeItemMeta meta = item.getItemMeta();
+		meta.setDisplayName(this.getItemName());
 		meta.addLore("You've got a jar of dirt, guess what's inside it!");
 		item.setItemMeta(meta);
 
