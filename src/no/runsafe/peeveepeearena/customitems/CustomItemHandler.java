@@ -22,7 +22,7 @@ public class CustomItemHandler implements IPlayerRightClick
 	@Override
 	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeItemStack usingItem, RunsafeBlock targetBlock)
 	{
-		if (usingItem != null && this.pvpEngine.isInPvPWorld(player))
+		if (usingItem != null)
 		{
 			RunsafeItemMeta meta = usingItem.getItemMeta();
 			if (meta != null)
@@ -33,9 +33,12 @@ public class CustomItemHandler implements IPlayerRightClick
 					itemName = itemName.toLowerCase();
 					if (this.customItems.containsKey(itemName))
 					{
-						ICustomItem customItem = this.customItems.get(itemName);
-						customItem.onUse(player);
-						usingItem.remove(1);
+						if (this.pvpEngine.isInPvPWorld(player))
+						{
+							ICustomItem customItem = this.customItems.get(itemName);
+							customItem.onUse(player);
+							usingItem.remove(1);
+						}
 						return false;
 					}
 				}
