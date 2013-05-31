@@ -4,6 +4,8 @@ import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.command.Command;
 import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.commands.*;
+import no.runsafe.peeveepeearena.customitems.CustomItemHandler;
+import no.runsafe.peeveepeearena.customitems.JarOfDirt;
 import no.runsafe.peeveepeearena.events.PlayerDeath;
 import no.runsafe.peeveepeearena.events.PlayerDropItems;
 import no.runsafe.peeveepeearena.events.RightClickBlock;
@@ -45,6 +47,8 @@ public class Plugin extends RunsafeConfigurablePlugin
 		pvpAdmin.addSubCommand(getInstance(EditItemSet.class));
 		pvpAdmin.addSubCommand(getInstance(GetItemSet.class));
 		pvpAdmin.addSubCommand(getInstance(ListItemSets.class));
+		pvpAdmin.addSubCommand(getInstance(PvPItems.class));
+		pvpAdmin.addSubCommand(getInstance(PvPItem.class));
 
 		pvp.addSubCommand(pvpAdmin);
 
@@ -53,5 +57,9 @@ public class Plugin extends RunsafeConfigurablePlugin
 		this.addComponent(RightClickBlock.class);
 		this.addComponent(PlayerDeath.class);
 		this.addComponent(PlayerDropItems.class);
+
+		// Custom Items
+		this.addComponent(CustomItemHandler.class);
+		this.addComponent(JarOfDirt.class);
 	}
 }
