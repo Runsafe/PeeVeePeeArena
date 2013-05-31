@@ -14,7 +14,7 @@ public class CustomItemHandler implements IPlayerRightClick
 	public CustomItemHandler(ICustomItem[] customItems)
 	{
 		for (ICustomItem item : customItems)
-			this.customItems.put(item.getItemName(), item);
+			this.customItems.put(item.getItemName().toLowerCase(), item);
 	}
 
 	@Override
@@ -47,14 +47,14 @@ public class CustomItemHandler implements IPlayerRightClick
 
 	public boolean customItemExists(String customItemName)
 	{
-		return this.customItems.containsKey(customItemName);
+		return this.customItems.containsKey(customItemName.toLowerCase());
 	}
 
 	public void givePlayerCustomItem(RunsafePlayer player, String customItemName)
 	{
 		if (this.customItemExists(customItemName))
 		{
-			ICustomItem item = this.customItems.get(customItemName);
+			ICustomItem item = this.customItems.get(customItemName.toLowerCase());
 			player.getInventory().addItems(item.getItem());
 		}
 	}
