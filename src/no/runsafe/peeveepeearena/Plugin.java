@@ -32,6 +32,10 @@ public class Plugin extends RunsafeConfigurablePlugin
 		// Teleport
 		this.addComponent(TeleportEngine.class);
 
+		// Custom Items
+		this.addComponent(CustomItemHandler.class);
+		this.addComponent(JarOfDirt.class);
+
 		// Commands
 		Command pvp = new Command("pvp", "PvP related commands", null);
 		pvp.addSubCommand(getInstance(Teleport.class));
@@ -57,9 +61,5 @@ public class Plugin extends RunsafeConfigurablePlugin
 		this.addComponent(RightClickBlock.class);
 		this.addComponent(PlayerDeath.class);
 		this.addComponent(PlayerDropItems.class);
-
-		// Custom Items
-		this.addComponent(CustomItemHandler.class);
-		this.addComponent(JarOfDirt.class);
 	}
 }
