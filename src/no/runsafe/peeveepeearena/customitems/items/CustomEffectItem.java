@@ -10,7 +10,7 @@ public class CustomEffectItem
 {
 	public void applyRandomEffect(RunsafePlayer player)
 	{
-		this.itemEffects.get((int) (Math.random() * itemEffects.size()) * 10).performEffect(player);
+		this.itemEffects.get((int) (Math.random() * 10) * itemEffects.size()).performEffect(player);
 	}
 
 	public void addEffect(ICustomItemEffect effect)
