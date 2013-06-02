@@ -1,14 +1,13 @@
 package no.runsafe.peeveepeearena.customitems.effects;
 
+import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.server.player.RunsafePlayer;
-import no.runsafe.framework.server.potion.RunsafePotionEffect;
-import no.runsafe.framework.server.potion.RunsafePotionEffectType;
 
 public class PoisonSelf implements ICustomItemEffect
 {
 	@Override
 	public void performEffect(RunsafePlayer player)
 	{
-		player.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.POISON, 10, 1));
+		Buff.Combat.Damage.Poison.amplification(1).duration(10).applyTo(player);
 	}
 }

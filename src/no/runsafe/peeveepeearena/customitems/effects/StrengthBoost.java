@@ -1,14 +1,13 @@
 package no.runsafe.peeveepeearena.customitems.effects;
 
+import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.server.player.RunsafePlayer;
-import no.runsafe.framework.server.potion.RunsafePotionEffect;
-import no.runsafe.framework.server.potion.RunsafePotionEffectType;
 
 public class StrengthBoost implements ICustomItemEffect
 {
 	@Override
 	public void performEffect(RunsafePlayer player)
 	{
-		player.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.INCREASE_DAMAGE, 20, 1));
+		Buff.Combat.Damage.Increase.duration(20).amplification(1).applyTo(player);
 	}
 }

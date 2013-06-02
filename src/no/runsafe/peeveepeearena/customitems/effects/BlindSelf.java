@@ -1,14 +1,13 @@
 package no.runsafe.peeveepeearena.customitems.effects;
 
+import no.runsafe.framework.minecraft.Buff;
 import no.runsafe.framework.server.player.RunsafePlayer;
-import no.runsafe.framework.server.potion.RunsafePotionEffect;
-import no.runsafe.framework.server.potion.RunsafePotionEffectType;
 
 public class BlindSelf implements ICustomItemEffect
 {
 	@Override
 	public void performEffect(RunsafePlayer player)
 	{
-		player.addPotionEffect(RunsafePotionEffect.create(RunsafePotionEffectType.BLINDNESS, 10, 60));
+		Buff.Combat.Blindness.duration(10).amplification(60).applyTo(player);
 	}
 }
