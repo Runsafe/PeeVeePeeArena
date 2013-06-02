@@ -8,6 +8,6 @@ public class BlindSelf implements ICustomItemEffect
 	@Override
 	public void performEffect(RunsafePlayer player)
 	{
-		Buff.Combat.Blindness.duration(10).amplification(60).applyTo(player);
+		Buff.Combat.Blindness.duration(10).amplification(20).applyTo(player);
 	}
 }
