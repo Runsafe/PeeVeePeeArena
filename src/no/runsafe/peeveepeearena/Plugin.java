@@ -23,7 +23,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 	protected void PluginSetup()
 	{
 		this.addComponent(Instances.get("RunsafeMailbox").getComponent(MailSender.class));
-		addComponent(Instances.get("RunsafeWorldGuardBridge").getComponent(WorldGuardInterface.class));
+		this.addComponent(Instances.get("RunsafeWorldGuardBridge").getComponent(WorldGuardInterface.class));
 		this.addComponent(PvPArenaEngine.class);
 		this.addComponent(RatingHandler.class);
 
