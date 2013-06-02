@@ -1,4 +1,5 @@
 pvpWorld: gameroom
+pvpZoneRegion: pvpring
 defaultRating: 1200
 arenaTeleport:
   x: 200

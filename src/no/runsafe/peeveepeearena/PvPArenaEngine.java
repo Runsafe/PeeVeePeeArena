@@ -6,12 +6,14 @@ import no.runsafe.framework.output.IOutput;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.RunsafeWorld;
 import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.worldguardbridge.WorldGuardInterface;
 
 public class PvPArenaEngine implements IConfigurationChanged
 {
-	public PvPArenaEngine(IOutput output)
+	public PvPArenaEngine(IOutput output, WorldGuardInterface worldGuardInterface)
 	{
 		this.output = output;
+		this.worldGuardInterface = worldGuardInterface;
 	}
 
 	public void broadcastMessage(String message)
@@ -29,12 +31,20 @@ public class PvPArenaEngine implements IConfigurationChanged
 		return player.getWorld().getName().equals(this.pvpWorld);
 	}
 
+	public boolean isInPvPZone(RunsafePlayer player)
+	{
+		return this.isInPvPWorld(player) && worldGuardInterface.getApplicableRegions(player).contains(this.pvpRegion);
+	}
+
 	@Override
 	public void OnConfigurationChanged(IConfiguration configuration)
 	{
 		this.pvpWorld = configuration.getConfigValueAsString("pvpWorld");
+		this.pvpRegion = configuration.getConfigValueAsString("pvpZoneRegion");
 	}
 
 	private IOutput output;
 	private String pvpWorld;
+	private String pvpRegion;
+	private WorldGuardInterface worldGuardInterface;
 }
