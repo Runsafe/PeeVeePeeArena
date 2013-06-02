@@ -8,6 +8,6 @@ public class SpeedBoost implements ICustomItemEffect
 	@Override
 	public void performEffect(RunsafePlayer player)
 	{
-		Buff.Utility.Movement.IncreaseSpeed.duration(15).amplification(3).applyTo(player);
+		Buff.Utility.Movement.IncreaseSpeed.amplification(3).duration(15).applyTo(player);
 	}
 }

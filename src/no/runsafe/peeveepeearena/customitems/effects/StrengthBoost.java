@@ -8,6 +8,6 @@ public class StrengthBoost implements ICustomItemEffect
 	@Override
 	public void performEffect(RunsafePlayer player)
 	{
-		Buff.Combat.Damage.Increase.duration(20).amplification(1).applyTo(player);
+		Buff.Combat.Damage.Increase.amplification(1).duration(20).applyTo(player);
 	}
 }
