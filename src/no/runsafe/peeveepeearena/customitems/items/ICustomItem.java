@@ -1,4 +1,4 @@
-package no.runsafe.peeveepeearena.customitems;
+package no.runsafe.peeveepeearena.customitems.items;
 
 import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.player.RunsafePlayer;

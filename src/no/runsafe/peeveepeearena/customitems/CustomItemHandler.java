@@ -6,6 +6,7 @@ import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.PvPArenaEngine;
+import no.runsafe.peeveepeearena.customitems.items.ICustomItem;
 
 import java.util.HashMap;
 import java.util.Set;

@@ -5,7 +5,8 @@ import no.runsafe.framework.command.Command;
 import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.commands.*;
 import no.runsafe.peeveepeearena.customitems.CustomItemHandler;
-import no.runsafe.peeveepeearena.customitems.JarOfDirt;
+import no.runsafe.peeveepeearena.customitems.items.JarOfDirt;
+import no.runsafe.peeveepeearena.customitems.items.SuspiciousMushroom;
 import no.runsafe.peeveepeearena.events.PlayerDeath;
 import no.runsafe.peeveepeearena.events.PlayerDropItems;
 import no.runsafe.peeveepeearena.events.RightClickBlock;
@@ -37,6 +38,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		// Custom Items
 		this.addComponent(CustomItemHandler.class);
 		this.addComponent(JarOfDirt.class);
+		this.addComponent(SuspiciousMushroom.class);
 
 		// Commands
 		Command pvp = new Command("pvp", "PvP related commands", null);
