@@ -33,12 +33,16 @@ public class CustomItemHandler implements IPlayerRightClick
 					itemName = itemName.toLowerCase();
 					if (this.customItems.containsKey(itemName))
 					{
-						if (this.pvpEngine.isInPvPWorld(player))
+						if (this.pvpEngine.isInPvPZone(player))
 						{
 							ICustomItem customItem = this.customItems.get(itemName);
 							customItem.onUse(player);
 
 							player.removeItem(usingItem.getItemType(), 1);
+						}
+						else
+						{
+							player.sendColouredMessage("&cYou cannot use that here.");
 						}
 						return false;
 					}
