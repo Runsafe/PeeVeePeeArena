@@ -38,7 +38,7 @@ public class CustomItemHandler implements IPlayerRightClick
 						{
 							ICustomItem customItem = this.customItems.get(itemName);
 							customItem.onUse(player);
-
+							player.sendColouredMessage("This: " + usingItem.getItemType().getTypeID());
 							player.removeItem(usingItem.getItemType(), 1);
 						}
 						else
