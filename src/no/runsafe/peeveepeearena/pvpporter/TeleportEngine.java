@@ -2,6 +2,7 @@ package no.runsafe.peeveepeearena.pvpporter;
 
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.RunsafeLocation;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.RunsafeWorld;
@@ -44,7 +45,7 @@ public class TeleportEngine implements IConfigurationChanged
 
 	private boolean safeToTeleport(RunsafeLocation location)
 	{
-		return location.getBlock().getMaterialType().getMaterialId() == Material.AIR.getId();
+		return location.getBlock().is(Item.Unavailable.Air);
 	}
 
 	public void teleportToArena(RunsafePlayer player)
