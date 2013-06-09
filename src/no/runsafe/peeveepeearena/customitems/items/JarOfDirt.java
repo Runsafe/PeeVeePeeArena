@@ -27,7 +27,7 @@ public class JarOfDirt implements ICustomItem
 	@Override
 	public RunsafeItemStack getItem()
 	{
-		RunsafeItemStack item = new Item.Miscellaneous.ExperienceBottle.getItem();
+		RunsafeItemStack item = Item.Miscellaneous.Beacon.getItem();
 		item.setDisplayName(this.getItemName()).addLore("You've got a jar of dirt, guess what's inside it!");
 		return item;
 	}
