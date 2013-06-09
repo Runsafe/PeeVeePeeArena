@@ -73,6 +73,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 					RunsafeInventory newPackage = RunsafeServer.Instance.createInventory(null, 54);
 					RunsafeSkull head = (RunsafeSkull) Item.Decoration.Head.Human.getItem();
 					head.setPlayer(killed);
+					head.setAmount(1);
 					newPackage.addItems(head);
 					this.mailSender.sendMail(killer, "Kjorn the Arena Janitor", newPackage);
 				}
