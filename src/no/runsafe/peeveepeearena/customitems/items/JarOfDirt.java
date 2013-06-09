@@ -1,10 +1,9 @@
 package no.runsafe.peeveepeearena.customitems.items;
 
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.pvpporter.TeleportEngine;
-import org.bukkit.Material;
 
 public class JarOfDirt implements ICustomItem
 {
@@ -28,12 +27,8 @@ public class JarOfDirt implements ICustomItem
 	@Override
 	public RunsafeItemStack getItem()
 	{
-		RunsafeItemStack item = new RunsafeItemStack(Material.EXP_BOTTLE.getId());
-		RunsafeItemMeta meta = item.getItemMeta();
-		meta.setDisplayName(this.getItemName());
-		meta.addLore("You've got a jar of dirt, guess what's inside it!");
-		item.setItemMeta(meta);
-
+		RunsafeItemStack item = new Item.Miscellaneous.ExperienceBottle.getItem();
+		item.setDisplayName(this.getItemName()).addLore("You've got a jar of dirt, guess what's inside it!");
 		return item;
 	}
 
