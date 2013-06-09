@@ -23,5 +23,5 @@ public class PvPItems extends ExecutableCommand
 		return null;
 	}
 
-	private CustomItemHandler customItemHandler;
+	private final CustomItemHandler customItemHandler;
 }

@@ -22,5 +22,5 @@ public class RightClickBlock implements IPlayerRightClickSign
 		return true;
 	}
 
-	private TeleportEngine teleportEngine;
+	private final TeleportEngine teleportEngine;
 }

@@ -29,5 +29,5 @@ public class GetItemSet extends PlayerCommand
 		return String.format("&2The item set %s has been added to your inventory.", itemSet.getName());
 	}
 
-	private ShopRepository shopRepository;
+	private final ShopRepository shopRepository;
 }

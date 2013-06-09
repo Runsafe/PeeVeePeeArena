@@ -24,5 +24,5 @@ public class GetScore extends PlayerCommand
 		return String.format("&fYou have &a%s&f kills and &c%s&f deaths.", kills, deaths);
 	}
 
-	private PlayerScoresRepository scoresRepository;
+	private final PlayerScoresRepository scoresRepository;
 }

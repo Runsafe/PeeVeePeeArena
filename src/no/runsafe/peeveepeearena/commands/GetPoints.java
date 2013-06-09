@@ -20,5 +20,5 @@ public class GetPoints extends PlayerCommand
 		return String.format("&fYou currently have &a%s&f PvP points to spend.", this.playerScoresRepository.getPoints(executor));
 	}
 
-	private PlayerScoresRepository playerScoresRepository;
+	private final PlayerScoresRepository playerScoresRepository;
 }

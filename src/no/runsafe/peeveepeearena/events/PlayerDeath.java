@@ -111,11 +111,11 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			RunsafeServer.Instance.broadcastMessage(String.format(broadcast, player.getPrettyName()));
 	}
 
-	private PlayerScoresRepository playerScoresRepository;
+	private final PlayerScoresRepository playerScoresRepository;
 	private String pvpWorldName;
-	private MailSender mailSender;
-	private HashMap<String, Integer> kills = new HashMap<String, Integer>();
+	private final MailSender mailSender;
+	private final HashMap<String, Integer> kills = new HashMap<String, Integer>();
 	private int headDropChance;
 	private int pointsPerRating;
-	private RatingHandler ratingHandler;
+	private final RatingHandler ratingHandler;
 }

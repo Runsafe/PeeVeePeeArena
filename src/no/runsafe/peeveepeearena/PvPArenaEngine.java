@@ -43,8 +43,8 @@ public class PvPArenaEngine implements IConfigurationChanged
 		this.pvpRegion = configuration.getConfigValueAsString("pvpZoneRegion");
 	}
 
-	private IOutput output;
+	private final IOutput output;
 	private String pvpWorld;
 	private String pvpRegion;
-	private WorldGuardInterface worldGuardInterface;
+	private final WorldGuardInterface worldGuardInterface;
 }

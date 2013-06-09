@@ -138,6 +138,6 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 		this.defaultRating = configuration.getConfigValueAsInt("defaultRating");
 	}
 
-	private IDatabase database;
+	private final IDatabase database;
 	private int defaultRating;
 }

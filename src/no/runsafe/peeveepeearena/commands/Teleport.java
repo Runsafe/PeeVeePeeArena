@@ -21,5 +21,5 @@ public class Teleport extends PlayerCommand
 		return null;
 	}
 
-	private TeleportEngine teleportEngine;
+	private final TeleportEngine teleportEngine;
 }

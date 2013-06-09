@@ -27,5 +27,5 @@ public class ListItemSets extends ExecutableCommand
 		return null;
 	}
 
-	private ShopRepository shopRepository;
+	private final ShopRepository shopRepository;
 }

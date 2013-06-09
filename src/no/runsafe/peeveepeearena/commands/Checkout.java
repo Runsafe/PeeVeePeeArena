@@ -48,6 +48,6 @@ public class Checkout extends PlayerCommand
 		return "&2Retrieved all items from your checkout.";
 	}
 
-	private PurchasedRepository purchasedRepository;
-	private ShopRepository shopRepository;
+	private final PurchasedRepository purchasedRepository;
+	private final ShopRepository shopRepository;
 }

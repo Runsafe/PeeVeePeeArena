@@ -49,6 +49,6 @@ public class RatingHandler implements IConfigurationChanged
 		this.kFactor = configuration.getConfigValueAsInt("ratingKFactor");
 	}
 
-	private PlayerScoresRepository repository;
+	private final PlayerScoresRepository repository;
 	private int kFactor;
 }

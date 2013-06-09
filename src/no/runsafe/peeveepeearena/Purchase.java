@@ -18,6 +18,6 @@ public class Purchase
 		return this.setID;
 	}
 
-	private int purchaseID;
-	private int setID;
+	private final int purchaseID;
+	private final int setID;
 }

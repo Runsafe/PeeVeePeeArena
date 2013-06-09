@@ -28,5 +28,5 @@ public class EditItemSet extends PlayerCommand
 		return (edit ? "&2The item set has been updated." : "&cUnable to find an item set with that ID.");
 	}
 
-	private ShopRepository shopRepository;
+	private final ShopRepository shopRepository;
 }

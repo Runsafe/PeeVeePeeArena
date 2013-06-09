@@ -21,5 +21,5 @@ public class GetRating extends PlayerCommand
 		return String.format("&fYour PvP rating is currently %s%s&f.", (rating < 0 ? "&a" : "&c"), rating);
 	}
 
-	private RatingHandler ratingHandler;
+	private final RatingHandler ratingHandler;
 }

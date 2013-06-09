@@ -27,5 +27,5 @@ public class PvPItem extends PlayerCommand
 		return "&cThat item does not exist.";
 	}
 
-	private CustomItemHandler customItemHandler;
+	private final CustomItemHandler customItemHandler;
 }

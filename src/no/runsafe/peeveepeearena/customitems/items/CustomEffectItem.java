@@ -18,5 +18,5 @@ public class CustomEffectItem
 		this.itemEffects.add(effect);
 	}
 
-	private List<ICustomItemEffect> itemEffects = new ArrayList<ICustomItemEffect>();
+	private final List<ICustomItemEffect> itemEffects = new ArrayList<ICustomItemEffect>();
 }

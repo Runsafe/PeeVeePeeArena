@@ -57,8 +57,8 @@ public class ShopItemSet
 		return true;
 	}
 
-	private int ID;
-	private String name;
-	private int cost;
+	private final int ID;
+	private final String name;
+	private final int cost;
 	private RunsafeInventory items;
 }

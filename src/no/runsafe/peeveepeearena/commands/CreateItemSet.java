@@ -25,5 +25,5 @@ public class CreateItemSet extends PlayerCommand
 		return String.format("&2The item set %s has been created.", setName);
 	}
 
-	private ShopRepository shopRepository;
+	private final ShopRepository shopRepository;
 }

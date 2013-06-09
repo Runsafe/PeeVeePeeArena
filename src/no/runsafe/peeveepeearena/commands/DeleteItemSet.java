@@ -24,5 +24,5 @@ public class DeleteItemSet extends ExecutableCommand
 		return "&2The item set has been deleted.";
 	}
 
-	private ShopRepository shopRepository;
+	private final ShopRepository shopRepository;
 }
