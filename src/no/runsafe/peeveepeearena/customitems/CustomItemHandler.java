@@ -2,7 +2,6 @@ package no.runsafe.peeveepeearena.customitems;
 
 import no.runsafe.framework.event.player.IPlayerRightClick;
 import no.runsafe.framework.server.block.RunsafeBlock;
-import no.runsafe.framework.server.item.RunsafeItemStack;
 import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.PvPArenaEngine;
@@ -21,11 +20,11 @@ public class CustomItemHandler implements IPlayerRightClick
 	}
 
 	@Override
-	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeItemStack usingItem, RunsafeBlock targetBlock)
+	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeMeta usingItem, RunsafeBlock targetBlock)
 	{
-		if (usingItem != null && usingItem instanceof RunsafeMeta)
+		if (usingItem != null)
 		{
-			String itemName = ((RunsafeMeta)usingItem).getDisplayName();
+			String itemName = usingItem.getDisplayName();
 			if (itemName != null)
 			{
 				itemName = itemName.toLowerCase();

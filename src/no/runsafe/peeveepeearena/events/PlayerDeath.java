@@ -7,7 +7,7 @@ import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
-import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import no.runsafe.framework.server.item.meta.RunsafeSkull;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.mailbox.MailSender;
@@ -33,7 +33,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		RunsafePlayer killed = event.getEntity();
 		if (killed.getWorld().getName().equals(pvpWorldName))
 		{
-			event.setDrops(new ArrayList<RunsafeItemStack>());
+			event.setDrops(new ArrayList<RunsafeMeta>());
 
 			RunsafePlayer killer = event.getEntity().getKiller();
 			this.killSpreeCheck(killer);
@@ -97,12 +97,24 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		String broadcast = null;
 		switch (kills)
 		{
-			case 5: broadcast = "%s&e is on a killing spree."; break;
-			case 10: broadcast = "%s&e is on a rampage."; break;
-			case 15: broadcast = "%s&e is dominating."; break;
-			case 20: broadcast = "%s&e is unstoppable."; break;
-			case 25: broadcast = "%s&e is godlike!"; break;
-			case 30: broadcast = "%s&e is wicked sick!"; break;
+			case 5:
+				broadcast = "%s&e is on a killing spree.";
+				break;
+			case 10:
+				broadcast = "%s&e is on a rampage.";
+				break;
+			case 15:
+				broadcast = "%s&e is dominating.";
+				break;
+			case 20:
+				broadcast = "%s&e is unstoppable.";
+				break;
+			case 25:
+				broadcast = "%s&e is godlike!";
+				break;
+			case 30:
+				broadcast = "%s&e is wicked sick!";
+				break;
 		}
 
 		if (broadcast != null)

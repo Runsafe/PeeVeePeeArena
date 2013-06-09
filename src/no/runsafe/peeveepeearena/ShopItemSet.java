@@ -3,7 +3,7 @@ package no.runsafe.peeveepeearena;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.inventory.RunsafeInventoryType;
-import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
 import java.util.List;
@@ -46,12 +46,12 @@ public class ShopItemSet
 	public boolean giveToPlayer(RunsafePlayer player)
 	{
 		RunsafeInventory playerInventory = player.getInventory();
-		List<RunsafeItemStack> setContents = this.items.getContents();
+		List<RunsafeMeta> setContents = this.items.getContents();
 
 		if (playerInventory.getSize() - playerInventory.getContents().size() < setContents.size())
 			return false; // Not enough room in the players inventory.
 
-		for (RunsafeItemStack item : this.items.getContents())
+		for (RunsafeMeta item : this.items.getContents())
 			playerInventory.addItems(item);
 
 		return true;
