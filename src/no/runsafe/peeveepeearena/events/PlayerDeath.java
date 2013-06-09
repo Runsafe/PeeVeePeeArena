@@ -3,16 +3,16 @@ package no.runsafe.peeveepeearena.events;
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
 import no.runsafe.framework.event.player.IPlayerDeathEvent;
+import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.RunsafeServer;
 import no.runsafe.framework.server.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeSkullMeta;
+import no.runsafe.framework.server.item.meta.RunsafeSkull;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.RatingHandler;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
-import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,9 +53,9 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 
 			killed.sendColouredMessage(
 				String.format(
-						"&7&oYou lost %s rating from being killed by %s.",
-						(looserRatingChange == 0 ? "no" : looserRatingChange),
-						killer.getName()
+					"&7&oYou lost %s rating from being killed by %s.",
+					(looserRatingChange == 0 ? "no" : looserRatingChange),
+					killer.getName()
 				)
 			);
 
@@ -71,10 +71,8 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 				if (this.mailSender.hasFreeMailboxSpace(killer))
 				{
 					RunsafeInventory newPackage = RunsafeServer.Instance.createInventory(null, 54);
-					RunsafeItemStack head = new RunsafeItemStack(Material.SKULL_ITEM.getId(), 1, (short) 3);
-					RunsafeSkullMeta meta = (RunsafeSkullMeta) head.getItemMeta();
-					meta.setOwner(killed.getName());
-					head.setItemMeta(meta);
+					RunsafeSkull head = (RunsafeSkull) Item.Decoration.Head.Human.getItem();
+					head.setPlayer(killed);
 					newPackage.addItems(head);
 					this.mailSender.sendMail(killer, "Kjorn the Arena Janitor", newPackage);
 				}

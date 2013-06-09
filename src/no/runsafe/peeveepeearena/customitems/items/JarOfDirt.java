@@ -2,6 +2,7 @@ package no.runsafe.peeveepeearena.customitems.items;
 
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.item.RunsafeItemStack;
+import no.runsafe.framework.server.item.meta.RunsafeMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.pvpporter.TeleportEngine;
 
@@ -27,7 +28,7 @@ public class JarOfDirt implements ICustomItem
 	@Override
 	public RunsafeItemStack getItem()
 	{
-		RunsafeItemStack item = Item.Miscellaneous.Beacon.getItem();
+		RunsafeMeta item = (RunsafeMeta) Item.Miscellaneous.Beacon.getItem();
 		item.setAmount(1);
 		item.setDisplayName(this.getItemName()).addLore("You've got a jar of dirt, guess what's inside it!");
 		return item;
