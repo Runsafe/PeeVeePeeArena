@@ -34,7 +34,7 @@ public class SuspiciousMushroom extends CustomEffectItem implements ICustomItem
 	@Override
 	public RunsafeItemStack getItem()
 	{
-		RunsafeMeta item = (RunsafeMeta)Item.Decoration.Mushroom.Red.getItem();
+		RunsafeMeta item = Item.Decoration.Mushroom.Red.getMeta();
 		item.setAmount(1);
 		item.setDisplayName("Suspicious Mushroom").addLore("You're not sure what this does, but eating it might be fun.");
 		return item;
