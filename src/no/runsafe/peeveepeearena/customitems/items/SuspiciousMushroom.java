@@ -2,7 +2,6 @@ package no.runsafe.peeveepeearena.customitems.items;
 
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.customitems.effects.BlindSelf;
 import no.runsafe.peeveepeearena.customitems.effects.PoisonSelf;
@@ -36,12 +35,7 @@ public class SuspiciousMushroom extends CustomEffectItem implements ICustomItem
 	{
 		RunsafeItemStack item = Item.Decoration.Mushroom.Red.getItem();
 		item.setAmount(1);
-
-		RunsafeItemMeta meta = item.getItemMeta();
-		meta.setDisplayName("Suspicious Mushroom");
-		meta.addLore("You're not sure what this does, but eating it might be fun.");
-		item.setItemMeta(meta);
-
+		item.setDisplayName("Suspicious Mushroom").addLore("You're not sure what this does, but eating it might be fun.");
 		return item;
 	}
 

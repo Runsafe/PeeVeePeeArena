@@ -3,7 +3,6 @@ package no.runsafe.peeveepeearena.customitems;
 import no.runsafe.framework.event.player.IPlayerRightClick;
 import no.runsafe.framework.server.block.RunsafeBlock;
 import no.runsafe.framework.server.item.RunsafeItemStack;
-import no.runsafe.framework.server.item.meta.RunsafeItemMeta;
 import no.runsafe.framework.server.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.PvPArenaEngine;
 import no.runsafe.peeveepeearena.customitems.items.ICustomItem;
@@ -25,27 +24,23 @@ public class CustomItemHandler implements IPlayerRightClick
 	{
 		if (usingItem != null)
 		{
-			RunsafeItemMeta meta = usingItem.getItemMeta();
-			if (meta != null)
+			String itemName = usingItem.getDisplayName();
+			if (itemName != null)
 			{
-				String itemName = meta.getDisplayName();
-				if (itemName != null)
+				itemName = itemName.toLowerCase();
+				if (this.customItems.containsKey(itemName))
 				{
-					itemName = itemName.toLowerCase();
-					if (this.customItems.containsKey(itemName))
+					if (this.pvpEngine.isInPvPZone(player))
 					{
-						if (this.pvpEngine.isInPvPZone(player))
-						{
-							ICustomItem customItem = this.customItems.get(itemName);
-							customItem.onUse(player);
-							player.removeItem(usingItem.getItemType(), 1);
-						}
-						else
-						{
-							player.sendColouredMessage("&cYou cannot use that here.");
-						}
-						return false;
+						ICustomItem customItem = this.customItems.get(itemName);
+						customItem.onUse(player);
+						player.removeItem(usingItem.getItemType(), 1);
 					}
+					else
+					{
+						player.sendColouredMessage("&cYou cannot use that here.");
+					}
+					return false;
 				}
 			}
 		}
@@ -71,6 +66,6 @@ public class CustomItemHandler implements IPlayerRightClick
 		}
 	}
 
-	private HashMap<String, ICustomItem> customItems = new HashMap<String, ICustomItem>();
-	private PvPArenaEngine pvpEngine;
+	private final HashMap<String, ICustomItem> customItems = new HashMap<String, ICustomItem>();
+	private final PvPArenaEngine pvpEngine;
 }
