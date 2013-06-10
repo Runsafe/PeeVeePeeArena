@@ -2,13 +2,14 @@ package no.runsafe.peeveepeearena.repositories;
 
 import no.runsafe.framework.database.IDatabase;
 import no.runsafe.framework.database.Repository;
+import no.runsafe.framework.database.Row;
 import no.runsafe.framework.server.inventory.RunsafeInventory;
+import no.runsafe.framework.database.Set;
 import no.runsafe.peeveepeearena.ShopItemSet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ShopRepository extends Repository
 {
@@ -24,24 +25,24 @@ public class ShopRepository extends Repository
 
 	public boolean itemSetExists(int id)
 	{
-		Map<String, Object> data = this.database.QueryRow("SELECT ID FROM peeveepee_shop WHERE ID = ?", id);
-		return !data.isEmpty();
+		Row data = this.database.QueryRow("SELECT ID FROM peeveepee_shop WHERE ID = ?", id);
+		return data != null;
 	}
 
 	public ShopItemSet getItemSet(int id)
 	{
 		if (this.itemSetExists(id))
 		{
-			Map<String, Object> data = this.database.QueryRow(
+			Row data = this.database.QueryRow(
 					"SELECT name, cost, items FROM peeveepee_shop WHERE ID = ?", id
 			);
 
 			if (data != null)
 				return new ShopItemSet(
 					id,
-					(String) data.get("name"),
-					(Integer) data.get("cost"),
-					(String) data.get("items")
+					data.String("name"),
+					data.Integer("cost"),
+					data.String("items")
 				);
 		}
 		return null;
@@ -79,11 +80,11 @@ public class ShopRepository extends Repository
 	public List<ShopItemSet> getAllSets()
 	{
 		List<ShopItemSet> itemSets = new ArrayList<ShopItemSet>();
-		List<Map<String, Object>> data = this.database.Query("SELECT ID, name, cost FROM peeveepee_shop");
+		Set data = this.database.Query("SELECT ID, name, cost FROM peeveepee_shop");
 
 		if (data != null)
-			for (Map<String, Object> node : data)
-				itemSets.add(new ShopItemSet((Integer) node.get("ID"), (String) node.get("name"), (Integer) node.get("cost")));
+			for (Row node : data)
+				itemSets.add(new ShopItemSet(node.Integer("ID"), node.String("name"), node.Integer("cost")));
 
 		return itemSets;
 	}

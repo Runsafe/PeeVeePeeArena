@@ -2,12 +2,13 @@ package no.runsafe.peeveepeearena.repositories;
 
 import no.runsafe.framework.database.IDatabase;
 import no.runsafe.framework.database.Repository;
+import no.runsafe.framework.database.Row;
+import no.runsafe.framework.database.Set;
 import no.runsafe.peeveepeearena.Purchase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PurchasedRepository extends Repository
 {
@@ -24,11 +25,11 @@ public class PurchasedRepository extends Repository
 	public List<Purchase> getPurchases(String playerName)
 	{
 		List<Purchase> purchases = new ArrayList<Purchase>();
-		List<Map<String, Object>> data = this.database.Query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", playerName);
+		Set data = this.database.Query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", playerName);
 
 		if (data != null)
-			for (Map<String, Object> node : data)
-				purchases.add(new Purchase((Integer) node.get("ID"), (Integer) node.get("setID")));
+			for (Row node : data)
+				purchases.add(new Purchase(node.Integer("ID"), node.Integer("setID")));
 
 		return purchases;
 	}

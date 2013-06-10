@@ -3,13 +3,13 @@ package no.runsafe.peeveepeearena.repositories;
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.database.IDatabase;
 import no.runsafe.framework.database.Repository;
+import no.runsafe.framework.database.Row;
 import no.runsafe.framework.event.IConfigurationChanged;
 import no.runsafe.framework.server.player.RunsafePlayer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PlayerScoresRepository extends Repository implements IConfigurationChanged
 {
@@ -28,14 +28,14 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	public HashMap<String, Integer> getScores(RunsafePlayer player)
 	{
 		HashMap<String, Integer> scores = new HashMap<String, Integer>();
-		Map<String, Object> data = this.database.QueryRow(
+		Row data = this.database.QueryRow(
 				"SELECT kills, deaths FROM peeveepee_scores WHERE playerName = ?", player.getName()
 		);
 
 		if (data != null)
 		{
-			scores.put("kills", (Integer) data.get("kills"));
-			scores.put("deaths", (Integer) data.get("deaths"));
+			scores.put("kills", data.Integer("kills"));
+			scores.put("deaths", data.Integer("deaths"));
 		}
 
 		return scores;
@@ -60,12 +60,12 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	// RATING
 	public int getRating(RunsafePlayer player)
 	{
-		Map<String, Object> data = this.database.QueryRow(
+		Row data = this.database.QueryRow(
 				"SELECT rating FROM peeveepee_scores WHERE playerName = ?", player.getName()
 		);
 
 		if (data != null)
-			return (Integer) data.get("rating");
+			return data.Integer("rating");
 
 		return this.defaultRating;
 	}
@@ -81,12 +81,12 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	// POINTS
 	public int getPoints(RunsafePlayer player)
 	{
-		Map<String, Object> data = this.database.QueryRow(
+		Row data = this.database.QueryRow(
 			"SELECT points FROM peeveepee_scores WHERE playerName = ?", player.getName()
 		);
 
 		if (data != null)
-			return (Integer) data.get("points");
+			return data.Integer("points");
 
 		return 0;
 	}
