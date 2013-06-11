@@ -1,16 +1,17 @@
 package no.runsafe.peeveepeearena.events;
 
 import no.runsafe.cheeves.AchievementFinder;
-import no.runsafe.framework.configuration.IConfiguration;
-import no.runsafe.framework.event.IConfigurationChanged;
-import no.runsafe.framework.event.player.IPlayerDeathEvent;
+import no.runsafe.cheeves.Achievements;
+import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.event.player.IPlayerDeathEvent;
+import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.server.RunsafeServer;
-import no.runsafe.framework.server.event.player.RunsafePlayerDeathEvent;
-import no.runsafe.framework.server.inventory.RunsafeInventory;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.item.meta.RunsafeSkull;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.RunsafeServer;
+import no.runsafe.framework.minecraft.event.player.RunsafePlayerDeathEvent;
+import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.item.meta.RunsafeSkull;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.RatingHandler;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
@@ -117,7 +118,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 				break;
 			case 30:
 				broadcast = "%s&e is wicked sick!";
-				this.achievementFinder.getAchievementByID(11).award(player);
+				this.achievementFinder.getAchievement(Achievements.WICKED_SICK).award(player);
 			break;
 		}
 

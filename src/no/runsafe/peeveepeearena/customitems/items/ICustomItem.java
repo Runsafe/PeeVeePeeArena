@@ -1,7 +1,7 @@
 package no.runsafe.peeveepeearena.customitems.items;
 
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 public interface ICustomItem
 {

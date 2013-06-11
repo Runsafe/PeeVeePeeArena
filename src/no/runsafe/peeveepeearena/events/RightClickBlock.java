@@ -1,9 +1,9 @@
 package no.runsafe.peeveepeearena.events;
 
-import no.runsafe.framework.event.player.IPlayerRightClickSign;
-import no.runsafe.framework.server.block.RunsafeSign;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.event.player.IPlayerRightClickSign;
+import no.runsafe.framework.minecraft.block.RunsafeSign;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.pvpporter.TeleportEngine;
 
 public class RightClickBlock implements IPlayerRightClickSign

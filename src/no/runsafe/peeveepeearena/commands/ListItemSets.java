@@ -1,7 +1,7 @@
 package no.runsafe.peeveepeearena.commands;
 
-import no.runsafe.framework.command.ExecutableCommand;
-import no.runsafe.framework.server.ICommandExecutor;
+import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.internal.command.ExecutableCommand;
 import no.runsafe.peeveepeearena.ShopItemSet;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 

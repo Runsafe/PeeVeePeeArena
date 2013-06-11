@@ -1,6 +1,6 @@
 package no.runsafe.peeveepeearena.customitems.items;
 
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.customitems.effects.ICustomItemEffect;
 
 import java.util.ArrayList;

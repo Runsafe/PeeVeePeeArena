@@ -1,7 +1,7 @@
 package no.runsafe.peeveepeearena.customitems.effects;
 
 import no.runsafe.framework.minecraft.Buff;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 public class StrengthBoost implements ICustomItemEffect
 {

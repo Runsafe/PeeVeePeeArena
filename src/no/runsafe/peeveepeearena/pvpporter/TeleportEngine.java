@@ -1,13 +1,12 @@
 package no.runsafe.peeveepeearena.pvpporter;
 
-import no.runsafe.framework.configuration.IConfiguration;
-import no.runsafe.framework.event.IConfigurationChanged;
+import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.server.RunsafeLocation;
-import no.runsafe.framework.server.RunsafeServer;
-import no.runsafe.framework.server.RunsafeWorld;
-import no.runsafe.framework.server.player.RunsafePlayer;
-import org.bukkit.Material;
+import no.runsafe.framework.minecraft.RunsafeLocation;
+import no.runsafe.framework.minecraft.RunsafeServer;
+import no.runsafe.framework.minecraft.RunsafeWorld;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.Map;
 

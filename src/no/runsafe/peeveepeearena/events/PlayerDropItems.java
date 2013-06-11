@@ -1,9 +1,9 @@
 package no.runsafe.peeveepeearena.events;
 
-import no.runsafe.framework.configuration.IConfiguration;
-import no.runsafe.framework.event.IConfigurationChanged;
-import no.runsafe.framework.event.player.IPlayerDropItemEvent;
-import no.runsafe.framework.server.event.player.RunsafePlayerDropItemEvent;
+import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.event.player.IPlayerDropItemEvent;
+import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
+import no.runsafe.framework.minecraft.event.player.RunsafePlayerDropItemEvent;
 
 public class PlayerDropItems implements IPlayerDropItemEvent, IConfigurationChanged
 {

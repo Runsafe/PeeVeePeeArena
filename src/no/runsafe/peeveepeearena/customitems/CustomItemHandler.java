@@ -1,9 +1,9 @@
 package no.runsafe.peeveepeearena.customitems;
 
-import no.runsafe.framework.event.player.IPlayerRightClick;
-import no.runsafe.framework.server.block.RunsafeBlock;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.event.player.IPlayerRightClick;
+import no.runsafe.framework.minecraft.block.RunsafeBlock;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.PvPArenaEngine;
 import no.runsafe.peeveepeearena.customitems.items.ICustomItem;
 

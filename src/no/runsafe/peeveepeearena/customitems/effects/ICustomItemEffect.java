@@ -1,6 +1,6 @@
 package no.runsafe.peeveepeearena.customitems.effects;
 
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 public interface ICustomItemEffect
 {

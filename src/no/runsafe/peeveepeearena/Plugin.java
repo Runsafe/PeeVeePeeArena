@@ -2,7 +2,7 @@ package no.runsafe.peeveepeearena;
 
 import no.runsafe.cheeves.AchievementFinder;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
-import no.runsafe.framework.command.Command;
+import no.runsafe.framework.api.command.Command;
 import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.commands.*;
 import no.runsafe.peeveepeearena.customitems.CustomItemHandler;

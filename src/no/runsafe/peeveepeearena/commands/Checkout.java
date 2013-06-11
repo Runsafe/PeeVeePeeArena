@@ -1,7 +1,7 @@
 package no.runsafe.peeveepeearena.commands;
 
-import no.runsafe.framework.command.player.PlayerCommand;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.command.player.PlayerCommand;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.Purchase;
 import no.runsafe.peeveepeearena.ShopItemSet;
 import no.runsafe.peeveepeearena.repositories.PurchasedRepository;

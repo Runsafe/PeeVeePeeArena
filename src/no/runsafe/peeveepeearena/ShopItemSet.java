@@ -1,10 +1,10 @@
 package no.runsafe.peeveepeearena;
 
-import no.runsafe.framework.server.RunsafeServer;
-import no.runsafe.framework.server.inventory.RunsafeInventory;
-import no.runsafe.framework.server.inventory.RunsafeInventoryType;
-import no.runsafe.framework.server.item.meta.RunsafeMeta;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.minecraft.RunsafeServer;
+import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
+import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
+import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.List;
 

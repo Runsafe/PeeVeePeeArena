@@ -1,9 +1,9 @@
 package no.runsafe.peeveepeearena.repositories;
 
-import no.runsafe.framework.database.IDatabase;
-import no.runsafe.framework.database.Repository;
-import no.runsafe.framework.database.Row;
-import no.runsafe.framework.database.Set;
+import no.runsafe.framework.api.database.IDatabase;
+import no.runsafe.framework.internal.database.Repository;
+import no.runsafe.framework.internal.database.Row;
+import no.runsafe.framework.internal.database.Set;
 import no.runsafe.peeveepeearena.Purchase;
 
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
 package no.runsafe.peeveepeearena.events;
 
-import no.runsafe.framework.event.block.ISignChange;
-import no.runsafe.framework.server.block.RunsafeBlock;
-import no.runsafe.framework.server.player.RunsafePlayer;
+import no.runsafe.framework.api.event.block.ISignChange;
+import no.runsafe.framework.minecraft.block.RunsafeBlock;
+import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 public class SignChange implements ISignChange
 {
