@@ -1,5 +1,6 @@
 package no.runsafe.peeveepeearena;
 
+import no.runsafe.cheeves.AchievementFinder;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.command.Command;
 import no.runsafe.mailbox.MailSender;
@@ -24,6 +25,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 	{
 		this.addComponent(Instances.get("RunsafeMailbox").getComponent(MailSender.class));
 		this.addComponent(Instances.get("RunsafeWorldGuardBridge").getComponent(WorldGuardInterface.class));
+		this.addComponent(Instances.get("Cheeves").getComponent(AchievementFinder.class));
 		this.addComponent(PvPArenaEngine.class);
 		this.addComponent(RatingHandler.class);
 

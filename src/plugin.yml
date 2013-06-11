@@ -2,7 +2,7 @@ name: PeeVeePeeArena
 main: no.runsafe.peeveepeearena.Plugin
 version: 1.0.@BUILD@
 author: Kruithne
-depend: [RunsafeMailbox, RunsafeWorldGuardBridge]
+depend: [RunsafeMailbox, RunsafeWorldGuardBridge, Cheeves]
 description:
 commands:
   pvp:

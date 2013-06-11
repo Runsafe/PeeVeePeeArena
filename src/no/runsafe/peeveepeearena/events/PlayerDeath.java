@@ -1,5 +1,6 @@
 package no.runsafe.peeveepeearena.events;
 
+import no.runsafe.cheeves.AchievementFinder;
 import no.runsafe.framework.configuration.IConfiguration;
 import no.runsafe.framework.event.IConfigurationChanged;
 import no.runsafe.framework.event.player.IPlayerDeathEvent;
@@ -20,11 +21,12 @@ import java.util.List;
 
 public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 {
-	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, RatingHandler ratingHandler)
+	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, RatingHandler ratingHandler, AchievementFinder achievementFinder)
 	{
 		this.playerScoresRepository = playerScoresRepository;
 		this.mailSender = mailSender;
 		this.ratingHandler = ratingHandler;
+		this.achievementFinder = achievementFinder;
 	}
 
 	@Override
@@ -115,7 +117,8 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 				break;
 			case 30:
 				broadcast = "%s&e is wicked sick!";
-				break;
+				this.achievementFinder.getAchievementByID(11).award(player);
+			break;
 		}
 
 		if (broadcast != null)
@@ -129,4 +132,5 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	private int headDropChance;
 	private int pointsPerRating;
 	private final RatingHandler ratingHandler;
+	private AchievementFinder achievementFinder;
 }
