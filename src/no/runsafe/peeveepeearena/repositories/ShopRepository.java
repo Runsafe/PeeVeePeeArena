@@ -1,9 +1,9 @@
 package no.runsafe.peeveepeearena.repositories;
 
 import no.runsafe.framework.api.database.IDatabase;
-import no.runsafe.framework.internal.database.Repository;
-import no.runsafe.framework.internal.database.Row;
-import no.runsafe.framework.internal.database.Set;
+import no.runsafe.framework.api.database.IRow;
+import no.runsafe.framework.api.database.ISet;
+import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.peeveepeearena.ShopItemSet;
 
@@ -25,7 +25,7 @@ public class ShopRepository extends Repository
 
 	public boolean itemSetExists(int id)
 	{
-		Row data = this.database.QueryRow("SELECT ID FROM peeveepee_shop WHERE ID = ?", id);
+		IRow data = this.database.QueryRow("SELECT ID FROM peeveepee_shop WHERE ID = ?", id);
 		return data != null;
 	}
 
@@ -33,8 +33,8 @@ public class ShopRepository extends Repository
 	{
 		if (this.itemSetExists(id))
 		{
-			Row data = this.database.QueryRow(
-					"SELECT name, cost, items FROM peeveepee_shop WHERE ID = ?", id
+			IRow data = this.database.QueryRow(
+				"SELECT name, cost, items FROM peeveepee_shop WHERE ID = ?", id
 			);
 
 			if (data != null)
@@ -54,8 +54,8 @@ public class ShopRepository extends Repository
 			return false;
 
 		this.database.Execute(
-				"UPDATE peeveepee_shop SET name = ?, cost = ?, items = ? WHERE ID = ?",
-				name, cost, itemHolder.serialize(), id
+			"UPDATE peeveepee_shop SET name = ?, cost = ?, items = ? WHERE ID = ?",
+			name, cost, itemHolder.serialize(), id
 		);
 		return true;
 	}
@@ -63,8 +63,8 @@ public class ShopRepository extends Repository
 	public void createItemSet(String name, int cost, RunsafeInventory itemHolder)
 	{
 		this.database.Execute(
-				"INSERT INTO peeveepee_shop (name, cost, items) VALUES(?, ?, ?)",
-				name, cost, itemHolder.serialize()
+			"INSERT INTO peeveepee_shop (name, cost, items) VALUES(?, ?, ?)",
+			name, cost, itemHolder.serialize()
 		);
 	}
 
@@ -80,10 +80,10 @@ public class ShopRepository extends Repository
 	public List<ShopItemSet> getAllSets()
 	{
 		List<ShopItemSet> itemSets = new ArrayList<ShopItemSet>();
-		Set data = this.database.Query("SELECT ID, name, cost FROM peeveepee_shop");
+		ISet data = this.database.Query("SELECT ID, name, cost FROM peeveepee_shop");
 
 		if (data != null)
-			for (Row node : data)
+			for (IRow node : data)
 				itemSets.add(new ShopItemSet(node.Integer("ID"), node.String("name"), node.Integer("cost")));
 
 		return itemSets;
@@ -95,13 +95,13 @@ public class ShopRepository extends Repository
 		HashMap<Integer, List<String>> versions = new HashMap<Integer, List<String>>();
 		ArrayList<String> sql = new ArrayList<String>();
 		sql.add(
-				"CREATE TABLE `peeveepee_shop` (" +
-						"`ID` int(10) NOT NULL AUTO_INCREMENT," +
-						"`name` varchar(50) NOT NULL," +
-						"`cost` int(10) NOT NULL," +
-						"`items` longtext NOT NULL," +
-						"PRIMARY KEY (`ID`)" +
-						")"
+			"CREATE TABLE `peeveepee_shop` (" +
+				"`ID` int(10) NOT NULL AUTO_INCREMENT," +
+				"`name` varchar(50) NOT NULL," +
+				"`cost` int(10) NOT NULL," +
+				"`items` longtext NOT NULL," +
+				"PRIMARY KEY (`ID`)" +
+				")"
 		);
 		versions.put(1, sql);
 		return versions;

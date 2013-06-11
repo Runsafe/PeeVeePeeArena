@@ -1,9 +1,9 @@
 package no.runsafe.peeveepeearena.repositories;
 
 import no.runsafe.framework.api.database.IDatabase;
-import no.runsafe.framework.internal.database.Repository;
-import no.runsafe.framework.internal.database.Row;
-import no.runsafe.framework.internal.database.Set;
+import no.runsafe.framework.api.database.IRow;
+import no.runsafe.framework.api.database.ISet;
+import no.runsafe.framework.api.database.Repository;
 import no.runsafe.peeveepeearena.Purchase;
 
 import java.util.ArrayList;
@@ -25,10 +25,10 @@ public class PurchasedRepository extends Repository
 	public List<Purchase> getPurchases(String playerName)
 	{
 		List<Purchase> purchases = new ArrayList<Purchase>();
-		Set data = this.database.Query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", playerName);
+		ISet data = this.database.Query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", playerName);
 
 		if (data != null)
-			for (Row node : data)
+			for (IRow node : data)
 				purchases.add(new Purchase(node.Integer("ID"), node.Integer("setID")));
 
 		return purchases;
