@@ -1,5 +1,7 @@
 package no.runsafe.peeveepeearena.repositories;
 
+import no.runsafe.cheeves.AchievementFinder;
+import no.runsafe.cheeves.Achievements;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
@@ -13,9 +15,10 @@ import java.util.List;
 
 public class PlayerScoresRepository extends Repository implements IConfigurationChanged
 {
-	public PlayerScoresRepository(IDatabase database)
+	public PlayerScoresRepository(IDatabase database, AchievementFinder achievementFinder)
 	{
 		this.database = database;
+		this.achievementFinder = achievementFinder;
 	}
 
 	@Override
@@ -72,6 +75,12 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 
 	public void updateRating(RunsafePlayer player, int newRating)
 	{
+		if (newRating >= 2000)
+			this.achievementFinder.getAchievement(Achievements.GLADIATOR).award(player);
+
+		if (newRating >= 2500)
+			this.achievementFinder.getAchievement(Achievements.MERCILESS_GLADIATOR).award(player);
+
 		this.database.Execute(
 			"INSERT INTO peeveepee_scores (playerName, rating) VALUES(?, ?) " +
 				"ON DUPLICATE KEY UPDATE rating = ?", player.getName(), newRating, newRating
@@ -140,4 +149,5 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 
 	private final IDatabase database;
 	private int defaultRating;
+	private AchievementFinder achievementFinder;
 }
