@@ -39,7 +39,6 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			event.setDrops(new ArrayList<RunsafeMeta>());
 
 			RunsafePlayer killer = event.getEntity().getKiller();
-
 			if (killer != null)
 			{
 				this.killSpreeCheck(killer);
