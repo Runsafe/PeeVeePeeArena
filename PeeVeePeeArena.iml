@@ -12,7 +12,6 @@
     <orderEntry type="library" name="craftbukkit" level="project" />
     <orderEntry type="library" name="RunsafeMailbox" level="project" />
     <orderEntry type="library" name="RunsafeWorldGuardBridge" level="project" />
-    <orderEntry type="library" name="Cheeves" level="project" />
   </component>
 </module>
 

@@ -1,12 +1,11 @@
 package no.runsafe.peeveepeearena.events;
 
-import no.runsafe.cheeves.AchievementFinder;
-import no.runsafe.cheeves.Achievements;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.event.player.IPlayerDeathEvent;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeServer;
+import no.runsafe.framework.minecraft.event.player.RunsafeCustomEvent;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -22,12 +21,11 @@ import java.util.List;
 
 public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 {
-	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, RatingHandler ratingHandler, AchievementFinder achievementFinder)
+	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, RatingHandler ratingHandler)
 	{
 		this.playerScoresRepository = playerScoresRepository;
 		this.mailSender = mailSender;
 		this.ratingHandler = ratingHandler;
-		this.achievementFinder = achievementFinder;
 	}
 
 	@Override
@@ -121,7 +119,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 				break;
 			case 30:
 				broadcast = "%s&e is wicked sick!";
-				this.achievementFinder.getAchievement(Achievements.WICKED_SICK).award(player);
+				new RunsafeCustomEvent(player, "peeveepee.killspree.wickedsick", null).Fire();
 			break;
 		}
 
@@ -136,5 +134,4 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	private int headDropChance;
 	private int pointsPerRating;
 	private final RatingHandler ratingHandler;
-	private AchievementFinder achievementFinder;
 }

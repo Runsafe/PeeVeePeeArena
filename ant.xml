@@ -9,15 +9,12 @@
     <property name="lib.dir" value="${framework.dir}/workspace/lib"/>
 	<property name="runsafemailbox.dir" value="../../RunsafeMailbox/lastStable/archive/build/jar"/>
 	<property name="worldguard.dir" value="../../WorldGuardBridge/lastStable/archive/build/jar"/>
-	<property name="cheeves.dir" value="../../Cheeves/lastStable/archive/build/jar"/>
 
     <path id="classpath">
         <fileset dir="${runsafe.dir}" includes="framework.jar"/>
         <fileset dir="${lib.dir}" includes="*.jar"/>
 		<fileset dir="${runsafemailbox.dir}" includes="*.jar"/>
 		<fileset dir="${worldguard.dir}" includes="*.jar"/>
-		<fileset dir="${cheeves.dir}" includes="*.jar"/>
-
     </path>
 
     <target name="clean">
