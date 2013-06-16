@@ -1,12 +1,11 @@
 package no.runsafe.peeveepeearena.repositories;
 
-import no.runsafe.cheeves.AchievementFinder;
-import no.runsafe.cheeves.Achievements;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
+import no.runsafe.framework.minecraft.event.player.RunsafeCustomEvent;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.ArrayList;
@@ -15,10 +14,9 @@ import java.util.List;
 
 public class PlayerScoresRepository extends Repository implements IConfigurationChanged
 {
-	public PlayerScoresRepository(IDatabase database, AchievementFinder achievementFinder)
+	public PlayerScoresRepository(IDatabase database)
 	{
 		this.database = database;
-		this.achievementFinder = achievementFinder;
 	}
 
 	@Override
@@ -75,11 +73,8 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 
 	public void updateRating(RunsafePlayer player, int newRating)
 	{
-		if (newRating >= 2000)
-			this.achievementFinder.getAchievement(Achievements.GLADIATOR).award(player);
-
-		if (newRating >= 2500)
-			this.achievementFinder.getAchievement(Achievements.MERCILESS_GLADIATOR).award(player);
+		// Fire a rating change event
+		new RunsafeCustomEvent(player, "peeveepee.rating.change", newRating).Fire();
 
 		this.database.Execute(
 			"INSERT INTO peeveepee_scores (playerName, rating) VALUES(?, ?) " +
@@ -149,5 +144,4 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 
 	private final IDatabase database;
 	private int defaultRating;
-	private AchievementFinder achievementFinder;
 }
