@@ -7,7 +7,7 @@ public class RatingChangeEvent extends RunsafeCustomEvent
 {
 	public RatingChangeEvent(RunsafePlayer player, Integer rating)
 	{
-		super(player, "peeveepee.rating.change", null);
+		super(player, "peeveepee.rating.change");
 		this.rating = rating;
 	}
 

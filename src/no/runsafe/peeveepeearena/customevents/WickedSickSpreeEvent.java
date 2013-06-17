@@ -7,6 +7,12 @@ public class WickedSickSpreeEvent extends RunsafeCustomEvent
 {
 	public WickedSickSpreeEvent(RunsafePlayer player)
 	{
-		super(player, "peeveepee.killspree.wickedsick", null);
+		super(player, "peeveepee.killspree.wickedsick");
+	}
+
+	@Override
+	public Object getData()
+	{
+		return null;
 	}
 }
