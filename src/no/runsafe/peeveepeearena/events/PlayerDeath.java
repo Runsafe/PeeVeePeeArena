@@ -5,7 +5,6 @@ import no.runsafe.framework.api.event.player.IPlayerDeathEvent;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeServer;
-import no.runsafe.framework.minecraft.event.player.RunsafeCustomEvent;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -13,6 +12,7 @@ import no.runsafe.framework.minecraft.item.meta.RunsafeSkull;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.RatingHandler;
+import no.runsafe.peeveepeearena.customevents.WickedSickSpreeEvent;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 
 import java.util.ArrayList;
@@ -119,7 +119,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 				break;
 			case 30:
 				broadcast = "%s&e is wicked sick!";
-				new RunsafeCustomEvent(player, "peeveepee.killspree.wickedsick", null).Fire();
+				new WickedSickSpreeEvent(player).Fire();
 			break;
 		}
 
