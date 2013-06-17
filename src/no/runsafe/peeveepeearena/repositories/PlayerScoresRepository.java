@@ -5,8 +5,8 @@ import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
-import no.runsafe.framework.minecraft.event.player.RunsafeCustomEvent;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
+import no.runsafe.peeveepeearena.customevents.RatingChangeEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,7 +74,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	public void updateRating(RunsafePlayer player, int newRating)
 	{
 		// Fire a rating change event
-		new RunsafeCustomEvent(player, "peeveepee.rating.change", newRating).Fire();
+		new RatingChangeEvent(player, newRating).Fire();
 
 		this.database.Execute(
 			"INSERT INTO peeveepee_scores (playerName, rating) VALUES(?, ?) " +
