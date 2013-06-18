@@ -13,3 +13,9 @@ teleporterRadius: 32
 headDropChance: 1
 ratingKFactor: 32
 pointsPerRating: 1
+wilderness:
+  world: Spawn
+  region: wild
+  deathRegions:
+    - wildDeath1
+    - wildDeath2

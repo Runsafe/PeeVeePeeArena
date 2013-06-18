@@ -15,6 +15,7 @@ import no.runsafe.peeveepeearena.pvpporter.TeleportEngine;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 import no.runsafe.peeveepeearena.repositories.PurchasedRepository;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
+import no.runsafe.peeveepeearena.wilderness.DeathTriggers;
 import no.runsafe.worldguardbridge.WorldGuardInterface;
 
 public class Plugin extends RunsafeConfigurablePlugin
@@ -26,6 +27,9 @@ public class Plugin extends RunsafeConfigurablePlugin
 		this.addComponent(Instances.get("RunsafeWorldGuardBridge").getComponent(WorldGuardInterface.class));
 		this.addComponent(PvPArenaEngine.class);
 		this.addComponent(RatingHandler.class);
+
+		// Wilderness
+		this.addComponent(DeathTriggers.class);
 
 		// Repositories
 		this.addComponent(PlayerScoresRepository.class);
