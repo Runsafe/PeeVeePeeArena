@@ -25,8 +25,7 @@ public class ShopRepository extends Repository
 
 	public boolean itemSetExists(int id)
 	{
-		IRow data = this.database.QueryRow("SELECT ID FROM peeveepee_shop WHERE ID = ?", id);
-		return data != null;
+		return this.database.QueryInteger("SELECT ID FROM peeveepee_shop WHERE ID = ?", id) != null;
 	}
 
 	public ShopItemSet getItemSet(int id)
@@ -81,10 +80,8 @@ public class ShopRepository extends Repository
 	{
 		List<ShopItemSet> itemSets = new ArrayList<ShopItemSet>();
 		ISet data = this.database.Query("SELECT ID, name, cost FROM peeveepee_shop");
-
-		if (data != null)
-			for (IRow node : data)
-				itemSets.add(new ShopItemSet(node.Integer("ID"), node.String("name"), node.Integer("cost")));
+		for (IRow node : data)
+			itemSets.add(new ShopItemSet(node.Integer("ID"), node.String("name"), node.Integer("cost")));
 
 		return itemSets;
 	}

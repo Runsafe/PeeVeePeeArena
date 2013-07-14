@@ -98,5 +98,5 @@ public class TeleportEngine implements IConfigurationChanged
 	private RunsafeLocation teleportPoint;
 	private RunsafeLocation arenaPoint;
 	private int teleportRadius;
-	private IOutput output;
+	private final IOutput output;
 }

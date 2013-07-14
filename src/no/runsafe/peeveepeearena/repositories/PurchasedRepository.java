@@ -26,10 +26,8 @@ public class PurchasedRepository extends Repository
 	{
 		List<Purchase> purchases = new ArrayList<Purchase>();
 		ISet data = this.database.Query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", playerName);
-
-		if (data != null)
-			for (IRow node : data)
-				purchases.add(new Purchase(node.Integer("ID"), node.Integer("setID")));
+		for (IRow node : data)
+			purchases.add(new Purchase(node.Integer("ID"), node.Integer("setID")));
 
 		return purchases;
 	}
@@ -45,12 +43,12 @@ public class PurchasedRepository extends Repository
 		HashMap<Integer, List<String>> versions = new HashMap<Integer, List<String>>();
 		ArrayList<String> sql = new ArrayList<String>();
 		sql.add(
-				"CREATE TABLE `peeveepee_purchases` (" +
-						"`ID` int(10) NOT NULL AUTO_INCREMENT," +
-						"`player` varchar(50) NOT NULL," +
-						"`setID` int(10) NOT NULL," +
-						"PRIMARY KEY (`ID`)" +
-						")"
+			"CREATE TABLE `peeveepee_purchases` (" +
+				"`ID` int(10) NOT NULL AUTO_INCREMENT," +
+				"`player` varchar(50) NOT NULL," +
+				"`setID` int(10) NOT NULL," +
+				"PRIMARY KEY (`ID`)" +
+				")"
 		);
 		versions.put(1, sql);
 		return versions;

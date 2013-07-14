@@ -26,20 +26,11 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	}
 
 	// KILL / DEATH COUNTS
-	public HashMap<String, Integer> getScores(RunsafePlayer player)
+	public IRow getScores(RunsafePlayer player)
 	{
-		HashMap<String, Integer> scores = new HashMap<String, Integer>();
-		IRow data = this.database.QueryRow(
+		return this.database.QueryRow(
 			"SELECT kills, deaths FROM peeveepee_scores WHERE playerName = ?", player.getName()
 		);
-
-		if (data != null)
-		{
-			scores.put("kills", data.Integer("kills"));
-			scores.put("deaths", data.Integer("deaths"));
-		}
-
-		return scores;
 	}
 
 	public void incrementKills(RunsafePlayer player)
@@ -61,14 +52,11 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	// RATING
 	public int getRating(RunsafePlayer player)
 	{
-		IRow data = this.database.QueryRow(
-			"SELECT rating FROM peeveepee_scores WHERE playerName = ?", player.getName()
+		Integer rating = this.database.QueryInteger(
+			"SELECT rating FROM peeveepee_scores WHERE playerName = ?",
+			player.getName()
 		);
-
-		if (data != null)
-			return data.Integer("rating");
-
-		return this.defaultRating;
+		return rating == null ? defaultRating : rating;
 	}
 
 	public void updateRating(RunsafePlayer player, int newRating)
@@ -85,14 +73,10 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	// POINTS
 	public int getPoints(RunsafePlayer player)
 	{
-		IRow data = this.database.QueryRow(
+		Integer points = this.database.QueryInteger(
 			"SELECT points FROM peeveepee_scores WHERE playerName = ?", player.getName()
 		);
-
-		if (data != null)
-			return data.Integer("points");
-
-		return 0;
+		return points == null ? 0 : points;
 	}
 
 	public void updatePoints(RunsafePlayer player, int points)

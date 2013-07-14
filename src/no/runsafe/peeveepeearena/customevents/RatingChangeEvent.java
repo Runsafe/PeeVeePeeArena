@@ -17,5 +17,5 @@ public class RatingChangeEvent extends RunsafeCustomEvent
 		return this.rating;
 	}
 
-	private Integer rating;
+	private final Integer rating;
 }

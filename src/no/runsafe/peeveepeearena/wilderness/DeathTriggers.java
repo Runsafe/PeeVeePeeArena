@@ -20,6 +20,7 @@ public class DeathTriggers implements IConfigurationChanged, IPlayerCustomEvent
 		this.wildernessWorld = config.getConfigValueAsString("wilderness.world");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void OnPlayerCustomEvent(RunsafeCustomEvent event)
 	{
