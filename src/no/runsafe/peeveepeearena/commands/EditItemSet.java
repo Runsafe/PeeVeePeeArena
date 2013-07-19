@@ -4,7 +4,7 @@ import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class EditItemSet extends PlayerCommand
 {
@@ -16,13 +16,13 @@ public class EditItemSet extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		boolean edit = this.shopRepository.editItemSet(
-				Integer.parseInt(parameters.get("id")),
-				parameters.get("name"),
-				Integer.parseInt(parameters.get("cost")),
-				executor.getInventory()
+			Integer.parseInt(parameters.get("id")),
+			parameters.get("name"),
+			Integer.parseInt(parameters.get("cost")),
+			executor.getInventory()
 		);
 
 		return (edit ? "&2The item set has been updated." : "&cUnable to find an item set with that ID.");

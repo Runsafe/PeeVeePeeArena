@@ -7,8 +7,8 @@ import no.runsafe.peeveepeearena.ShopItemSet;
 import no.runsafe.peeveepeearena.repositories.PurchasedRepository;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Checkout extends PlayerCommand
 {
@@ -21,7 +21,7 @@ public class Checkout extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		List<Purchase> purchases = this.purchasedRepository.getPurchases(executor.getName());
 		if (purchases.isEmpty())

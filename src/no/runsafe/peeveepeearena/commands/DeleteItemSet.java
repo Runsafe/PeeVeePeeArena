@@ -4,7 +4,7 @@ import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class DeleteItemSet extends ExecutableCommand
 {
@@ -15,7 +15,7 @@ public class DeleteItemSet extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
 		int itemSetID = Integer.parseInt(parameters.get("id"));
 		if (!this.shopRepository.deleteItemSet(itemSetID))

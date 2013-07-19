@@ -33,7 +33,7 @@ public class DeathTriggers implements IConfigurationChanged, IPlayerCustomEvent
 			if (deathRegions.contains(data.get("region")) && data.get("world").equals(this.wildernessWorld))
 			{
 				world.createExplosion(player.getLocation(), 5, false, false);
-				player.damage(100);
+				player.damage(100.0D);
 			}
 		}
 	}

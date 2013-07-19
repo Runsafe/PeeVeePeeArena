@@ -5,7 +5,7 @@ import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class GetScore extends PlayerCommand
 {
@@ -16,7 +16,7 @@ public class GetScore extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, HashMap<String, String> parameters)
+	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
 	{
 		IRow scores = this.scoresRepository.getScores(executor);
 		int kills = (scores.Integer("kills") != null ? scores.Integer("kills") : 0);

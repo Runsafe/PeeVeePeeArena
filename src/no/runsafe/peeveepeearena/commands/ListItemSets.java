@@ -5,8 +5,8 @@ import no.runsafe.framework.api.command.ICommandExecutor;
 import no.runsafe.peeveepeearena.ShopItemSet;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ListItemSets extends ExecutableCommand
 {
@@ -17,12 +17,12 @@ public class ListItemSets extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, HashMap<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
 		List<ShopItemSet> itemSets = this.shopRepository.getAllSets();
 
 		for (ShopItemSet itemSet : itemSets)
-			executor.sendColouredMessage(String.format("&3%s - %s (%s)", itemSet.getID(),  itemSet.getName(), itemSet.getCost()));
+			executor.sendColouredMessage(String.format("&3%s - %s (%s)", itemSet.getID(), itemSet.getName(), itemSet.getCost()));
 
 		return null;
 	}
