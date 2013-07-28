@@ -2,6 +2,7 @@ package no.runsafe.peeveepeearena.commands;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
 import java.util.Map;
@@ -10,7 +11,10 @@ public class DeleteItemSet extends ExecutableCommand
 {
 	public DeleteItemSet(ShopRepository shopRepository)
 	{
-		super("deleteset", "Deletes an item set from the shop", "runsafe.peeveepee.sets.delete", "id");
+		super(
+			"deleteset", "Deletes an item set from the shop", "runsafe.peeveepee.sets.delete",
+			new RequiredArgument("id")
+		);
 		this.shopRepository = shopRepository;
 	}
 

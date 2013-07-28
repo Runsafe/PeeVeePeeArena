@@ -1,5 +1,6 @@
 package no.runsafe.peeveepeearena.commands;
 
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.ShopItemSet;
@@ -11,7 +12,10 @@ public class GetItemSet extends PlayerCommand
 {
 	public GetItemSet(ShopRepository shopRepository)
 	{
-		super("getset", "Retrieves an item set from the shop", "runsafe.peeveepee.set.get", "id");
+		super(
+			"getset", "Retrieves an item set from the shop", "runsafe.peeveepee.set.get",
+			new RequiredArgument("id")
+		);
 		this.shopRepository = shopRepository;
 	}
 

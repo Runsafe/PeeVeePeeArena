@@ -1,5 +1,6 @@
 package no.runsafe.peeveepeearena.commands;
 
+import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
@@ -11,7 +12,10 @@ public class CreateItemSet extends PlayerCommand
 {
 	public CreateItemSet(ShopRepository shopRepository)
 	{
-		super("createset", "Creates an item set for the shop", "runsafe.peeveepee.set.create", "cost", new TrailingArgument("name"));
+		super(
+			"createset", "Creates an item set for the shop", "runsafe.peeveepee.set.create",
+			new RequiredArgument("cost"), new TrailingArgument("name")
+		);
 		this.shopRepository = shopRepository;
 	}
 
