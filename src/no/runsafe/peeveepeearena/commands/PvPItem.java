@@ -1,5 +1,6 @@
 package no.runsafe.peeveepeearena.commands;
 
+import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.customitems.CustomItemHandler;
@@ -10,9 +11,8 @@ public class PvPItem extends PlayerCommand
 {
 	public PvPItem(CustomItemHandler customItemHandler)
 	{
-		super("item", "Gives you one of the PvP items", "runsafe.peeveepeearena.item.give", "item");
+		super("item", "Gives you one of the PvP items", "runsafe.peeveepeearena.item.give", new TrailingArgument("item"));
 		this.customItemHandler = customItemHandler;
-		this.captureTail();
 	}
 
 	@Override

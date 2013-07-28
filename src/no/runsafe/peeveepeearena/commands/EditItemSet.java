@@ -1,5 +1,6 @@
 package no.runsafe.peeveepeearena.commands;
 
+import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
@@ -10,8 +11,7 @@ public class EditItemSet extends PlayerCommand
 {
 	public EditItemSet(ShopRepository shopRepository)
 	{
-		super("editset", "Edits an item set.", "runsafe.peeveepee.set.edit", "id", "cost", "name");
-		super.captureTail();
+		super("editset", "Edits an item set.", "runsafe.peeveepee.set.edit", "id", "cost", new TrailingArgument("name"));
 		this.shopRepository = shopRepository;
 	}
 
