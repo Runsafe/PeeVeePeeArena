@@ -28,7 +28,8 @@ public class PvPArenaEngine implements IConfigurationChanged
 
 	public boolean isInPvPWorld(RunsafePlayer player)
 	{
-		return player.getWorld().getName().equals(this.pvpWorld);
+		RunsafeWorld playerWorld = player.getWorld();
+		return playerWorld != null && playerWorld.getName().equals(this.pvpWorld);
 	}
 
 	public boolean isInPvPZone(RunsafePlayer player)
