@@ -11,6 +11,7 @@ import no.runsafe.peeveepeearena.events.PlayerDeath;
 import no.runsafe.peeveepeearena.events.PlayerDropItems;
 import no.runsafe.peeveepeearena.events.RightClickBlock;
 import no.runsafe.peeveepeearena.events.SignChange;
+import no.runsafe.peeveepeearena.pvpporter.DeathDrop;
 import no.runsafe.peeveepeearena.pvpporter.TeleportEngine;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 import no.runsafe.peeveepeearena.repositories.PurchasedRepository;
@@ -38,6 +39,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 
 		// Teleport
 		this.addComponent(TeleportEngine.class);
+		this.addComponent(DeathDrop.class); // Drop the wub wub pew pew.
 
 		// Custom Items
 		this.addComponent(CustomItemHandler.class);
