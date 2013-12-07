@@ -2,10 +2,10 @@ package no.runsafe.peeveepeearena;
 
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.RunsafeServer;
-import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.worldguardbridge.WorldGuardInterface;
 
 public class PvPArenaEngine implements IConfigurationChanged
@@ -21,14 +21,14 @@ public class PvPArenaEngine implements IConfigurationChanged
 		this.output.broadcastColoured("&c[PvP] &f" + message);
 	}
 
-	public RunsafeWorld getPvPWorld()
+	public IWorld getPvPWorld()
 	{
 		return RunsafeServer.Instance.getWorld(this.pvpWorld);
 	}
 
 	public boolean isInPvPWorld(IPlayer player)
 	{
-		RunsafeWorld playerWorld = player.getWorld();
+		IWorld playerWorld = player.getWorld();
 		return playerWorld != null && playerWorld.getName().equals(this.pvpWorld);
 	}
 

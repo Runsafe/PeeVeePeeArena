@@ -2,12 +2,12 @@ package no.runsafe.peeveepeearena.pvpporter;
 
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.IOutput;
+import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeLocation;
 import no.runsafe.framework.minecraft.RunsafeServer;
-import no.runsafe.framework.minecraft.RunsafeWorld;
 
 import java.util.Map;
 
@@ -66,7 +66,7 @@ public class TeleportEngine implements IConfigurationChanged
 	public void OnConfigurationChanged(IConfiguration configuration)
 	{
 		String pvpWorldName = configuration.getConfigValueAsString("pvpWorld");
-		RunsafeWorld pvpWorld = RunsafeServer.Instance.getWorld(pvpWorldName);
+		IWorld pvpWorld = RunsafeServer.Instance.getWorld(pvpWorldName);
 
 		if (pvpWorld == null)
 		{

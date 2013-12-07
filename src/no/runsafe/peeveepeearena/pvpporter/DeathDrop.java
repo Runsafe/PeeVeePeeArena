@@ -1,10 +1,10 @@
 package no.runsafe.peeveepeearena.pvpporter;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.player.IPlayerCustomEvent;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.framework.minecraft.event.player.RunsafeCustomEvent;
 import no.runsafe.peeveepeearena.PvPArenaEngine;
 
@@ -31,7 +31,7 @@ public class DeathDrop implements IConfigurationChanged, IPlayerCustomEvent
 		{
 			Map<String, String> data = (Map<String, String>) event.getData();
 			IPlayer player = event.getPlayer();
-			RunsafeWorld playerWorld = player.getWorld();
+			IWorld playerWorld = player.getWorld();
 
 			if (playerWorld != null && playerWorld.isWorld(engine.getPvPWorld()) && data.get("region").equals(noEntryRegion))
 				player.damage(100.0D); // Carrrrrl, that kills people.

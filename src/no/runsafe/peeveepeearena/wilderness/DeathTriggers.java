@@ -1,10 +1,10 @@
 package no.runsafe.peeveepeearena.wilderness;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.player.IPlayerCustomEvent;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeWorld;
 import no.runsafe.framework.minecraft.event.player.RunsafeCustomEvent;
 
 import java.util.ArrayList;
@@ -28,13 +28,9 @@ public class DeathTriggers implements IConfigurationChanged, IPlayerCustomEvent
 		{
 			Map<String, String> data = (Map<String, String>) event.getData();
 			IPlayer player = event.getPlayer();
-			RunsafeWorld world = player.getWorld();
 
 			if (deathRegions.contains(data.get("region")) && data.get("world").equals(this.wildernessWorld))
-			{
-				//world.createExplosion(player.getLocation(), 5, false, false);
 				player.damage(100.0D);
-			}
 		}
 	}
 
