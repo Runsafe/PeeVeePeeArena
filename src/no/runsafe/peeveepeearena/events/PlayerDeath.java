@@ -33,7 +33,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	public void OnPlayerDeathEvent(RunsafePlayerDeathEvent event)
 	{
 		RunsafePlayer killed = event.getEntity();
-		if (killed.getWorld().getName().equals(pvpWorldName))
+		if (killed.getWorldName().equals(pvpWorldName))
 		{
 			event.setDrops(new ArrayList<RunsafeMeta>());
 
@@ -48,19 +48,15 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 				int looserRatingChange = ratings.get(1);
 
 				killer.sendColouredMessage(
-					String.format(
-						"&7&oYou gained %s rating for killing %s.",
-						(winnerRatingChange == 0 ? "no" : winnerRatingChange),
-						killed.getName()
-					)
+					"&7&oYou gained %s rating for killing %s.",
+					(winnerRatingChange == 0 ? "no" : winnerRatingChange),
+					killed.getName()
 				);
 
 				killed.sendColouredMessage(
-					String.format(
-						"&7&oYou lost %s rating from being killed by %s.",
-						(looserRatingChange == 0 ? "no" : looserRatingChange),
-						killer.getName()
-					)
+					"&7&oYou lost %s rating from being killed by %s.",
+					(looserRatingChange == 0 ? "no" : looserRatingChange),
+					killer.getName()
 				);
 
 				int pointsGain = winnerRatingChange * this.pointsPerRating;
