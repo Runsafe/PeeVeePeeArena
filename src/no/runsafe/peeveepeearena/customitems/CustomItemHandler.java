@@ -1,7 +1,7 @@
 package no.runsafe.peeveepeearena.customitems;
 
+import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.player.IPlayerRightClick;
-import no.runsafe.framework.minecraft.block.RunsafeBlock;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.PvPArenaEngine;
@@ -20,7 +20,7 @@ public class CustomItemHandler implements IPlayerRightClick
 	}
 
 	@Override
-	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeMeta usingItem, RunsafeBlock targetBlock)
+	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeMeta usingItem, IBlock targetBlock)
 	{
 		if (usingItem != null)
 		{
