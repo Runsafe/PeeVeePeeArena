@@ -1,10 +1,10 @@
 package no.runsafe.peeveepeearena;
 
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class ShopItemSet
 		return this.cost;
 	}
 
-	public boolean giveToPlayer(RunsafePlayer player)
+	public boolean giveToPlayer(IPlayer player)
 	{
 		RunsafeInventory playerInventory = player.getInventory();
 		List<RunsafeMeta> setContents = this.items.getContents();

@@ -2,7 +2,7 @@ package no.runsafe.peeveepeearena;
 
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class RatingHandler implements IConfigurationChanged
 		this.repository = repository;
 	}
 
-	public int getRating(RunsafePlayer player)
+	public int getRating(IPlayer player)
 	{
 		return this.repository.getRating(player);
 	}
@@ -25,7 +25,7 @@ public class RatingHandler implements IConfigurationChanged
 		return 1 / (1 + Math.pow(10, (againstPlayerRating - playerRating) / 400));
 	}
 
-	public List<Integer> getNewRating(RunsafePlayer winner, RunsafePlayer looser)
+	public List<Integer> getNewRating(IPlayer winner, IPlayer looser)
 	{
 		List<Integer> ratings = new ArrayList<Integer>();
 		int winnerRating = this.getRating(winner);

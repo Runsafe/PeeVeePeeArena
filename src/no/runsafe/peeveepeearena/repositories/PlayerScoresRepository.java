@@ -5,7 +5,7 @@ import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.customevents.RatingChangeEvent;
 
 import java.util.ArrayList;
@@ -26,14 +26,14 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	}
 
 	// KILL / DEATH COUNTS
-	public IRow getScores(RunsafePlayer player)
+	public IRow getScores(IPlayer player)
 	{
 		return this.database.QueryRow(
 			"SELECT kills, deaths FROM peeveepee_scores WHERE playerName = ?", player.getName()
 		);
 	}
 
-	public void incrementKills(RunsafePlayer player)
+	public void incrementKills(IPlayer player)
 	{
 		this.database.Execute(
 			"INSERT INTO peeveepee_scores (playerName, kills, deaths) VALUES(?,1,0) " +
@@ -41,7 +41,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 		);
 	}
 
-	public void incrementDeaths(RunsafePlayer player)
+	public void incrementDeaths(IPlayer player)
 	{
 		this.database.Execute(
 			"INSERT INTO peeveepee_scores (playerName, kills, deaths) VALUES(?,0,1) " +
@@ -50,7 +50,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	}
 
 	// RATING
-	public int getRating(RunsafePlayer player)
+	public int getRating(IPlayer player)
 	{
 		Integer rating = this.database.QueryInteger(
 			"SELECT rating FROM peeveepee_scores WHERE playerName = ?",
@@ -59,7 +59,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 		return rating == null ? defaultRating : rating;
 	}
 
-	public void updateRating(RunsafePlayer player, int newRating)
+	public void updateRating(IPlayer player, int newRating)
 	{
 		// Fire a rating change event
 		new RatingChangeEvent(player, newRating).Fire();
@@ -71,7 +71,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	}
 
 	// POINTS
-	public int getPoints(RunsafePlayer player)
+	public int getPoints(IPlayer player)
 	{
 		Integer points = this.database.QueryInteger(
 			"SELECT points FROM peeveepee_scores WHERE playerName = ?", player.getName()
@@ -79,7 +79,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 		return points == null ? 0 : points;
 	}
 
-	public void updatePoints(RunsafePlayer player, int points)
+	public void updatePoints(IPlayer player, int points)
 	{
 		this.database.Execute(
 			"INSERT INTO peeveepee_scores (playerName, points) VALUES(?, ?) " +

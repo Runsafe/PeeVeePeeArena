@@ -2,7 +2,7 @@ package no.runsafe.peeveepeearena.commands;
 
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.ShopItemSet;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
@@ -20,7 +20,7 @@ public class GetItemSet extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, Map<String, String> parameters)
 	{
 		ShopItemSet itemSet = this.shopRepository.getItemSet(Integer.parseInt(parameters.get("id")));
 

@@ -3,6 +3,7 @@ package no.runsafe.peeveepeearena.events;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.event.player.IPlayerDeathEvent;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerDeathEvent;
@@ -36,7 +37,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		{
 			event.setDrops(new ArrayList<RunsafeMeta>());
 
-			RunsafePlayer killer = event.getEntity().getKiller();
+			IPlayer killer = event.getEntity().getKiller();
 			if (killer != null)
 			{
 				this.killSpreeCheck(killer);
@@ -93,7 +94,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		this.pointsPerRating = configuration.getConfigValueAsInt("pointsPerRating");
 	}
 
-	private void killSpreeCheck(RunsafePlayer player)
+	private void killSpreeCheck(IPlayer player)
 	{
 		String playerName = player.getName();
 		int kills = (this.kills.containsKey(playerName) ? this.kills.get(playerName) + 1 : 1);
@@ -120,7 +121,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			case 30:
 				broadcast = "%s&e is wicked sick!";
 				new WickedSickSpreeEvent(player).Fire();
-			break;
+				break;
 		}
 
 		if (broadcast != null)

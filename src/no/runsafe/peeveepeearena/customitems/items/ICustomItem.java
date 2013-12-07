@@ -1,11 +1,11 @@
 package no.runsafe.peeveepeearena.customitems.items;
 
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 
 public interface ICustomItem
 {
-	public void onUse(RunsafePlayer player);
+	public void onUse(IPlayer player);
 
 	public String getItemName();
 

@@ -18,7 +18,7 @@ public class PvPItems extends ExecutableCommand
 	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
 	{
 		for (String itemName : this.customItemHandler.getCustomItems())
-			executor.sendColouredMessage("&3" + itemName);
+			executor.sendColouredMessage("&3%s", itemName);
 
 		return null;
 	}

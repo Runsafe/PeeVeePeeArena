@@ -1,5 +1,6 @@
 package no.runsafe.peeveepeearena.customitems.items;
 
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import no.runsafe.framework.minecraft.player.RunsafePlayer;
@@ -13,7 +14,7 @@ public class JarOfDirt implements ICustomItem
 	}
 
 	@Override
-	public void onUse(RunsafePlayer player)
+	public void onUse(IPlayer player)
 	{
 		this.teleportEngine.teleportIntoArena(player);
 	}

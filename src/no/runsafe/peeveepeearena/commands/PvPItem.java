@@ -2,7 +2,7 @@ package no.runsafe.peeveepeearena.commands;
 
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.customitems.CustomItemHandler;
 
 import java.util.Map;
@@ -16,7 +16,7 @@ public class PvPItem extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, Map<String, String> parameters)
 	{
 		String customItemName = parameters.get("item");
 		if (this.customItemHandler.customItemExists(customItemName))

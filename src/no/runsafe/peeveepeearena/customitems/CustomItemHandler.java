@@ -2,8 +2,8 @@ package no.runsafe.peeveepeearena.customitems;
 
 import no.runsafe.framework.api.block.IBlock;
 import no.runsafe.framework.api.event.player.IPlayerRightClick;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.PvPArenaEngine;
 import no.runsafe.peeveepeearena.customitems.items.ICustomItem;
 
@@ -20,7 +20,7 @@ public class CustomItemHandler implements IPlayerRightClick
 	}
 
 	@Override
-	public boolean OnPlayerRightClick(RunsafePlayer player, RunsafeMeta usingItem, IBlock targetBlock)
+	public boolean OnPlayerRightClick(IPlayer player, RunsafeMeta usingItem, IBlock targetBlock)
 	{
 		if (usingItem != null)
 		{
@@ -57,7 +57,7 @@ public class CustomItemHandler implements IPlayerRightClick
 		return this.customItems.containsKey(customItemName.toLowerCase());
 	}
 
-	public void givePlayerCustomItem(RunsafePlayer player, String customItemName)
+	public void givePlayerCustomItem(IPlayer player, String customItemName)
 	{
 		if (this.customItemExists(customItemName))
 		{

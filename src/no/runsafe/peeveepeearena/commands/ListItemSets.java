@@ -22,7 +22,7 @@ public class ListItemSets extends ExecutableCommand
 		List<ShopItemSet> itemSets = this.shopRepository.getAllSets();
 
 		for (ShopItemSet itemSet : itemSets)
-			executor.sendColouredMessage(String.format("&3%s - %s (%s)", itemSet.getID(), itemSet.getName(), itemSet.getCost()));
+			executor.sendColouredMessage("&3%s - %s (%s)", itemSet.getID(), itemSet.getName(), itemSet.getCost());
 
 		return null;
 	}

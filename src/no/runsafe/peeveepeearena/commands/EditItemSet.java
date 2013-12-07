@@ -3,7 +3,7 @@ package no.runsafe.peeveepeearena.commands;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
 import java.util.Map;
@@ -20,7 +20,7 @@ public class EditItemSet extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(RunsafePlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, Map<String, String> parameters)
 	{
 		boolean edit = this.shopRepository.editItemSet(
 			Integer.parseInt(parameters.get("id")),

@@ -1,8 +1,8 @@
 package no.runsafe.peeveepeearena.customitems.items;
 
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.peeveepeearena.customitems.effects.BlindSelf;
 import no.runsafe.peeveepeearena.customitems.effects.PoisonSelf;
 import no.runsafe.peeveepeearena.customitems.effects.SpeedBoost;
@@ -19,7 +19,7 @@ public class SuspiciousMushroom extends CustomEffectItem implements ICustomItem
 	}
 
 	@Override
-	public void onUse(RunsafePlayer player)
+	public void onUse(IPlayer player)
 	{
 		this.applyRandomEffect(player);
 	}
