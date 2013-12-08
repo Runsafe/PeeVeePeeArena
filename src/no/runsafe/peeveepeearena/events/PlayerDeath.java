@@ -10,7 +10,6 @@ import no.runsafe.framework.minecraft.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import no.runsafe.framework.minecraft.item.meta.RunsafeSkull;
-import no.runsafe.framework.minecraft.player.RunsafePlayer;
 import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.RatingHandler;
 import no.runsafe.peeveepeearena.customevents.WickedSickSpreeEvent;
@@ -33,7 +32,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	@Override
 	public void OnPlayerDeathEvent(RunsafePlayerDeathEvent event)
 	{
-		RunsafePlayer killed = event.getEntity();
+		IPlayer killed = event.getEntity();
 		if (killed.getWorldName().equals(pvpWorldName))
 		{
 			event.setDrops(new ArrayList<RunsafeMeta>());
