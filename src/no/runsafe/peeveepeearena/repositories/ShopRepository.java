@@ -1,10 +1,12 @@
 package no.runsafe.peeveepeearena.repositories;
 
+import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.database.IDatabase;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.database.ISet;
 import no.runsafe.framework.api.database.Repository;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
+import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
 import no.runsafe.peeveepeearena.ShopItemSet;
 
 import java.util.ArrayList;
@@ -13,9 +15,10 @@ import java.util.List;
 
 public class ShopRepository extends Repository
 {
-	public ShopRepository(IDatabase database)
+	public ShopRepository(IDatabase database, IServer server)
 	{
 		this.database = database;
+		this.server = server;
 	}
 
 	public String getTableName()
@@ -36,13 +39,15 @@ public class ShopRepository extends Repository
 				"SELECT name, cost, items FROM peeveepee_shop WHERE ID = ?", id
 			);
 
+			RunsafeInventory itemHolder = server.createInventory(null, RunsafeInventoryType.CHEST);
 			if (data != null)
 				return new ShopItemSet(
 					id,
 					data.String("name"),
 					data.Integer("cost"),
 					data.String("items"),
-					server);
+					itemHolder
+				);
 		}
 		return null;
 	}
@@ -105,4 +110,5 @@ public class ShopRepository extends Repository
 	}
 
 	private final IDatabase database;
+	private final IServer server;
 }

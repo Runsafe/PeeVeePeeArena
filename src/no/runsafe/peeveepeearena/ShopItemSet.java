@@ -1,25 +1,21 @@
 package no.runsafe.peeveepeearena;
 
-import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
-import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 import java.util.List;
 
 public class ShopItemSet
 {
-	public ShopItemSet(int ID, String name, int cost, String inventoryString, IServer server)
+	public ShopItemSet(int ID, String name, int cost, String inventoryString, RunsafeInventory inventory)
 	{
 		this.ID = ID;
 		this.name = name;
 		this.cost = cost;
 
-		RunsafeInventory itemHolder = RunsafeServer.Instance.createInventory(null, RunsafeInventoryType.CHEST);
-		itemHolder.unserialize(inventoryString);
-		this.items = itemHolder;
+		inventory.unserialize(inventoryString);
+		this.items = inventory;
 	}
 
 	public ShopItemSet(int ID, String name, int cost)
