@@ -41,8 +41,8 @@ public class ShopRepository extends Repository
 					id,
 					data.String("name"),
 					data.Integer("cost"),
-					data.String("items")
-				);
+					data.String("items"),
+					server);
 		}
 		return null;
 	}

@@ -1,11 +1,11 @@
 package no.runsafe.peeveepeearena.events;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.event.player.IPlayerDeathEvent;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
@@ -22,11 +22,12 @@ import java.util.List;
 
 public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 {
-	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, RatingHandler ratingHandler)
+	public PlayerDeath(PlayerScoresRepository playerScoresRepository, MailSender mailSender, RatingHandler ratingHandler, IServer server)
 	{
 		this.playerScoresRepository = playerScoresRepository;
 		this.mailSender = mailSender;
 		this.ratingHandler = ratingHandler;
+		this.server = server;
 	}
 
 	@Override
@@ -70,7 +71,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 				{
 					if (this.mailSender.hasFreeMailboxSpace(killer))
 					{
-						RunsafeInventory newPackage = RunsafeServer.Instance.createInventory(null, 54);
+						RunsafeInventory newPackage = server.createInventory(null, 54);
 						RunsafeSkull head = (RunsafeSkull) Item.Decoration.Head.Human.getItem();
 						head.setPlayer(killed);
 						head.setAmount(1);
@@ -121,7 +122,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		}
 
 		if (broadcast != null)
-			RunsafeServer.Instance.broadcastMessage(String.format(broadcast, player.getPrettyName()));
+			server.broadcastMessage(String.format(broadcast, player.getPrettyName()));
 	}
 
 	private final PlayerScoresRepository playerScoresRepository;
@@ -131,4 +132,5 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	private int headDropChance;
 	private int pointsPerRating;
 	private final RatingHandler ratingHandler;
+	private final IServer server;
 }

@@ -1,5 +1,6 @@
 package no.runsafe.peeveepeearena;
 
+import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.RunsafeServer;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class ShopItemSet
 {
-	public ShopItemSet(int ID, String name, int cost, String inventoryString)
+	public ShopItemSet(int ID, String name, int cost, String inventoryString, IServer server)
 	{
 		this.ID = ID;
 		this.name = name;

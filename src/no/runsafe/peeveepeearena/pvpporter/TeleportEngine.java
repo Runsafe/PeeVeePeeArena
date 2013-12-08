@@ -7,7 +7,6 @@ import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeLocation;
-import no.runsafe.framework.minecraft.RunsafeServer;
 
 import java.util.Map;
 
@@ -65,13 +64,12 @@ public class TeleportEngine implements IConfigurationChanged
 	@Override
 	public void OnConfigurationChanged(IConfiguration configuration)
 	{
-		String pvpWorldName = configuration.getConfigValueAsString("pvpWorld");
-		IWorld pvpWorld = RunsafeServer.Instance.getWorld(pvpWorldName);
+		IWorld pvpWorld = configuration.getConfigValueAsWorld("pvpWorld");
 
 		if (pvpWorld == null)
 		{
 			this.setup = false;
-			this.output.logError("Invalid world supplied: %s. Teleportation disabled.", pvpWorldName);
+			this.output.logError("Invalid world supplied: %s. Teleportation disabled.", configuration.getConfigValueAsString("pvpWorld"));
 			return;
 		}
 
