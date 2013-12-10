@@ -1,9 +1,9 @@
 package no.runsafe.peeveepeearena.pvpporter;
 
 import no.runsafe.framework.api.IConfiguration;
-import no.runsafe.framework.api.IOutput;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
+import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.RunsafeLocation;
@@ -12,9 +12,9 @@ import java.util.Map;
 
 public class TeleportEngine implements IConfigurationChanged
 {
-	public TeleportEngine(IOutput output)
+	public TeleportEngine(IConsole output)
 	{
-		this.output = output;
+		this.console = output;
 	}
 
 	public void teleportIntoArena(IPlayer player)
@@ -69,7 +69,7 @@ public class TeleportEngine implements IConfigurationChanged
 		if (pvpWorld == null)
 		{
 			this.setup = false;
-			this.output.logError("Invalid world supplied: %s. Teleportation disabled.", configuration.getConfigValueAsString("pvpWorld"));
+			this.console.logError("Invalid world supplied: %s. Teleportation disabled.", configuration.getConfigValueAsString("pvpWorld"));
 			return;
 		}
 
@@ -96,5 +96,5 @@ public class TeleportEngine implements IConfigurationChanged
 	private RunsafeLocation teleportPoint;
 	private RunsafeLocation arenaPoint;
 	private int teleportRadius;
-	private final IOutput output;
+	private final IConsole console;
 }
