@@ -1,6 +1,7 @@
 package no.runsafe.peeveepeearena;
 
 import no.runsafe.framework.RunsafeConfigurablePlugin;
+import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.commands.*;
@@ -24,8 +25,8 @@ public class Plugin extends RunsafeConfigurablePlugin
 	@Override
 	protected void PluginSetup()
 	{
-		this.addComponent(Instances.get("RunsafeMailbox").getComponent(MailSender.class));
-		this.addComponent(Instances.get("RunsafeWorldGuardBridge").getComponent(WorldGuardInterface.class));
+		this.addDependence(MailSender.class);
+		this.addDependence(WorldGuardInterface.class);
 		this.addComponent(PvPArenaEngine.class);
 		this.addComponent(RatingHandler.class);
 
