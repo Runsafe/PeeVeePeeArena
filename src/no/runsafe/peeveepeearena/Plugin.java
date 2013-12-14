@@ -25,8 +25,6 @@ public class Plugin extends RunsafeConfigurablePlugin
 	@Override
 	protected void PluginSetup()
 	{
-		this.addDependence(MailSender.class);
-		this.addDependence(WorldGuardInterface.class);
 		this.addComponent(PvPArenaEngine.class);
 		this.addComponent(RatingHandler.class);
 

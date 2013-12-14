@@ -6,11 +6,11 @@ import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
-import no.runsafe.worldguardbridge.WorldGuardInterface;
+import no.runsafe.worldguardbridge.IRegionControl;
 
 public class PvPArenaEngine implements IConfigurationChanged
 {
-	public PvPArenaEngine(IOutput output, WorldGuardInterface worldGuardInterface, IServer server)
+	public PvPArenaEngine(IOutput output, IRegionControl worldGuardInterface, IServer server)
 	{
 		this.output = output;
 		this.worldGuardInterface = worldGuardInterface;
@@ -48,6 +48,6 @@ public class PvPArenaEngine implements IConfigurationChanged
 	private final IOutput output;
 	private String pvpWorld;
 	private String pvpRegion;
-	private final WorldGuardInterface worldGuardInterface;
+	private final IRegionControl worldGuardInterface;
 	private final IServer server;
 }
