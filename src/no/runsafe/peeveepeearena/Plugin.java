@@ -3,6 +3,7 @@ package no.runsafe.peeveepeearena;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.api.command.Command;
 import no.runsafe.framework.features.Commands;
+import no.runsafe.framework.features.Database;
 import no.runsafe.framework.features.Events;
 import no.runsafe.peeveepeearena.commands.*;
 import no.runsafe.peeveepeearena.customitems.CustomItemHandler;
@@ -27,6 +28,7 @@ public class Plugin extends RunsafeConfigurablePlugin
 		// Framework features
 		addComponent(Events.class);
 		addComponent(Commands.class);
+		addComponent(Database.class);
 
 		// Plugin components
 		this.addComponent(PvPArenaEngine.class);
