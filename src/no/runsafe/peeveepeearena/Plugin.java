@@ -1,9 +1,9 @@
 package no.runsafe.peeveepeearena;
 
 import no.runsafe.framework.RunsafeConfigurablePlugin;
-import no.runsafe.framework.RunsafePlugin;
 import no.runsafe.framework.api.command.Command;
-import no.runsafe.mailbox.MailSender;
+import no.runsafe.framework.features.Commands;
+import no.runsafe.framework.features.Events;
 import no.runsafe.peeveepeearena.commands.*;
 import no.runsafe.peeveepeearena.customitems.CustomItemHandler;
 import no.runsafe.peeveepeearena.customitems.items.JarOfDirt;
@@ -18,13 +18,17 @@ import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
 import no.runsafe.peeveepeearena.repositories.PurchasedRepository;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 import no.runsafe.peeveepeearena.wilderness.DeathTriggers;
-import no.runsafe.worldguardbridge.WorldGuardInterface;
 
 public class Plugin extends RunsafeConfigurablePlugin
 {
 	@Override
 	protected void PluginSetup()
 	{
+		// Framework features
+		addComponent(Events.class);
+		addComponent(Commands.class);
+
+		// Plugin components
 		this.addComponent(PvPArenaEngine.class);
 		this.addComponent(RatingHandler.class);
 
