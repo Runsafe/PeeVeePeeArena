@@ -23,7 +23,7 @@ import no.runsafe.peeveepeearena.wilderness.DeathTriggers;
 public class Plugin extends RunsafeConfigurablePlugin
 {
 	@Override
-	protected void PluginSetup()
+	protected void pluginSetup()
 	{
 		// Framework features
 		addComponent(Events.class);
