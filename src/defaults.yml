@@ -3,10 +3,12 @@ pvpZoneRegion: pvpring
 noEntryRegion: pvp_out
 defaultRating: 1200
 arenaTeleport:
+  world: gameroom
   x: 200
   y: 90
   z: 200
 teleporterPosition:
+  world: gameroom
   x: 197
   y: 64
   z: 260

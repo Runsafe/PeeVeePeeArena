@@ -1,14 +1,12 @@
 package no.runsafe.peeveepeearena.pvpporter;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.log.IConsole;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
-import no.runsafe.framework.minecraft.RunsafeLocation;
-
-import java.util.Map;
 
 public class TeleportEngine implements IConfigurationChanged
 {
@@ -22,12 +20,7 @@ public class TeleportEngine implements IConfigurationChanged
 		if (!this.setup)
 			return;
 
-		RunsafeLocation newLocation = new RunsafeLocation(
-			this.teleportPoint.getWorld(),
-			this.teleportPoint.getX(),
-			this.teleportPoint.getY(),
-			this.teleportPoint.getZ()
-		);
+		ILocation newLocation = this.teleportPoint.add(0.0, 0.0, 0.0);
 		int highX = this.teleportPoint.getBlockX() + this.teleportRadius;
 		int highZ = this.teleportPoint.getBlockZ() + this.teleportRadius;
 		int lowX = this.teleportPoint.getBlockX() - this.teleportRadius;
@@ -50,7 +43,7 @@ public class TeleportEngine implements IConfigurationChanged
 		return low + (int) (Math.random() * ((high - low) + 1));
 	}
 
-	private boolean safeToTeleport(RunsafeLocation location)
+	private boolean safeToTeleport(ILocation location)
 	{
 		return location.getBlock().is(Item.Unavailable.Air);
 	}
@@ -74,27 +67,14 @@ public class TeleportEngine implements IConfigurationChanged
 		}
 
 		this.teleportRadius = configuration.getConfigValueAsInt("teleporterRadius");
-		Map<String, String> teleporterPoint = configuration.getConfigValuesAsMap("teleporterPosition");
-		this.teleportPoint = new RunsafeLocation(
-			pvpWorld,
-			Integer.valueOf(teleporterPoint.get("x")),
-			Integer.valueOf(teleporterPoint.get("y")),
-			Integer.valueOf(teleporterPoint.get("z"))
-		);
-
-		Map<String, String> arenaPoint = configuration.getConfigValuesAsMap("arenaTeleport");
-		this.arenaPoint = new RunsafeLocation(
-			pvpWorld,
-			Integer.valueOf(arenaPoint.get("x")),
-			Integer.valueOf(arenaPoint.get("y")),
-			Integer.valueOf(arenaPoint.get("z"))
-		);
+		this.teleportPoint = configuration.getConfigValueAsLocation("teleporterPosition");
+		this.arenaPoint = configuration.getConfigValueAsLocation("arenaTeleport");
 		this.setup = true;
 	}
 
 	private boolean setup;
-	private RunsafeLocation teleportPoint;
-	private RunsafeLocation arenaPoint;
+	private ILocation teleportPoint;
+	private ILocation arenaPoint;
 	private int teleportRadius;
 	private final IConsole console;
 }
