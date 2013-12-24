@@ -20,7 +20,7 @@ public class TeleportEngine implements IConfigurationChanged
 		if (!this.setup)
 			return;
 
-		ILocation newLocation = this.teleportPoint.add(0.0, 0.0, 0.0);
+		ILocation newLocation = this.teleportPoint.clone();
 		int highX = this.teleportPoint.getBlockX() + this.teleportRadius;
 		int highZ = this.teleportPoint.getBlockZ() + this.teleportRadius;
 		int lowX = this.teleportPoint.getBlockX() - this.teleportRadius;
