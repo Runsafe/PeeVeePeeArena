@@ -17,22 +17,22 @@ public class TeleportEngine implements IConfigurationChanged
 
 	public void teleportIntoArena(IPlayer player)
 	{
-		if (!this.setup)
+		if (!setup)
 			return;
 
-		ILocation newLocation = this.teleportPoint.clone();
-		int highX = this.teleportPoint.getBlockX() + this.teleportRadius;
-		int highZ = this.teleportPoint.getBlockZ() + this.teleportRadius;
-		int lowX = this.teleportPoint.getBlockX() - this.teleportRadius;
-		int lowZ = this.teleportPoint.getBlockZ() - this.teleportRadius;
+		ILocation newLocation = teleportPoint.clone();
+		int highX = teleportPoint.getBlockX() + teleportRadius;
+		int highZ = teleportPoint.getBlockZ() + teleportRadius;
+		int lowX = teleportPoint.getBlockX() - teleportRadius;
+		int lowZ = teleportPoint.getBlockZ() - teleportRadius;
 
-		newLocation.setX(this.getRandom(lowX, highX));
-		newLocation.setZ(this.getRandom(lowZ, highZ));
+		newLocation.setX(getRandom(lowX, highX));
+		newLocation.setZ(getRandom(lowZ, highZ));
 
-		while (!this.safeToTeleport(newLocation))
+		while (!safeToTeleport(newLocation))
 		{
-			newLocation.setX(this.getRandom(lowX, highX));
-			newLocation.setZ(this.getRandom(lowZ, highZ));
+			newLocation.setX(getRandom(lowX, highX));
+			newLocation.setZ(getRandom(lowZ, highZ));
 		}
 
 		player.teleport(newLocation);
@@ -50,8 +50,8 @@ public class TeleportEngine implements IConfigurationChanged
 
 	public void teleportToArena(IPlayer player)
 	{
-		if (this.setup)
-			player.teleport(this.arenaPoint);
+		if (setup)
+			player.teleport(arenaPoint);
 	}
 
 	@Override
@@ -61,15 +61,15 @@ public class TeleportEngine implements IConfigurationChanged
 
 		if (pvpWorld == null)
 		{
-			this.setup = false;
-			this.console.logError("Invalid world supplied: %s. Teleportation disabled.", configuration.getConfigValueAsString("pvpWorld"));
+			setup = false;
+			console.logError("Invalid world supplied: %s. Teleportation disabled.", configuration.getConfigValueAsString("pvpWorld"));
 			return;
 		}
 
-		this.teleportRadius = configuration.getConfigValueAsInt("teleporterRadius");
-		this.teleportPoint = configuration.getConfigValueAsLocation("teleporterPosition");
-		this.arenaPoint = configuration.getConfigValueAsLocation("arenaTeleport");
-		this.setup = true;
+		teleportRadius = configuration.getConfigValueAsInt("teleporterRadius");
+		teleportPoint = configuration.getConfigValueAsLocation("teleporterPosition");
+		arenaPoint = configuration.getConfigValueAsLocation("arenaTeleport");
+		setup = true;
 	}
 
 	private boolean setup;
