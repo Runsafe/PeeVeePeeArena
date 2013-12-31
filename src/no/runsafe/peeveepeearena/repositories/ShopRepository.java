@@ -28,14 +28,14 @@ public class ShopRepository extends Repository
 
 	public boolean itemSetExists(int id)
 	{
-		return this.database.QueryInteger("SELECT ID FROM peeveepee_shop WHERE ID = ?", id) != null;
+		return this.database.queryInteger("SELECT ID FROM peeveepee_shop WHERE ID = ?", id) != null;
 	}
 
 	public ShopItemSet getItemSet(int id)
 	{
 		if (this.itemSetExists(id))
 		{
-			IRow data = this.database.QueryRow(
+			IRow data = this.database.queryRow(
 				"SELECT name, cost, items FROM peeveepee_shop WHERE ID = ?", id
 			);
 
@@ -57,7 +57,7 @@ public class ShopRepository extends Repository
 		if (!this.itemSetExists(id))
 			return false;
 
-		this.database.Execute(
+		this.database.execute(
 			"UPDATE peeveepee_shop SET name = ?, cost = ?, items = ? WHERE ID = ?",
 			name, cost, itemHolder.serialize(), id
 		);
@@ -66,7 +66,7 @@ public class ShopRepository extends Repository
 
 	public void createItemSet(String name, int cost, RunsafeInventory itemHolder)
 	{
-		this.database.Execute(
+		this.database.execute(
 			"INSERT INTO peeveepee_shop (name, cost, items) VALUES(?, ?, ?)",
 			name, cost, itemHolder.serialize()
 		);
@@ -77,14 +77,14 @@ public class ShopRepository extends Repository
 		if (!this.itemSetExists(id))
 			return false;
 
-		this.database.Execute("DELETE FROM peeveepee_shop WHERE ID = ?", id);
+		this.database.execute("DELETE FROM peeveepee_shop WHERE ID = ?", id);
 		return true;
 	}
 
 	public List<ShopItemSet> getAllSets()
 	{
 		List<ShopItemSet> itemSets = new ArrayList<ShopItemSet>();
-		ISet data = this.database.Query("SELECT ID, name, cost FROM peeveepee_shop");
+		ISet data = this.database.query("SELECT ID, name, cost FROM peeveepee_shop");
 		for (IRow node : data)
 			itemSets.add(new ShopItemSet(node.Integer("ID"), node.String("name"), node.Integer("cost")));
 

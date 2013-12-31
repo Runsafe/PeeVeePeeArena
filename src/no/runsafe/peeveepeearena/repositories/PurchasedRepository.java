@@ -25,7 +25,7 @@ public class PurchasedRepository extends Repository
 	public List<Purchase> getPurchases(String playerName)
 	{
 		List<Purchase> purchases = new ArrayList<Purchase>();
-		ISet data = this.database.Query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", playerName);
+		ISet data = this.database.query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", playerName);
 		for (IRow node : data)
 			purchases.add(new Purchase(node.Integer("ID"), node.Integer("setID")));
 
@@ -34,7 +34,7 @@ public class PurchasedRepository extends Repository
 
 	public void deletePurchase(int id)
 	{
-		this.database.Execute("DELETE FROM peeveepee_purchases WHERE ID = ?", id);
+		this.database.execute("DELETE FROM peeveepee_purchases WHERE ID = ?", id);
 	}
 
 	@Override

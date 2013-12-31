@@ -28,14 +28,14 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	// KILL / DEATH COUNTS
 	public IRow getScores(IPlayer player)
 	{
-		return this.database.QueryRow(
+		return this.database.queryRow(
 			"SELECT kills, deaths FROM peeveepee_scores WHERE playerName = ?", player.getName()
 		);
 	}
 
 	public void incrementKills(IPlayer player)
 	{
-		this.database.Execute(
+		this.database.execute(
 			"INSERT INTO peeveepee_scores (playerName, kills, deaths) VALUES(?,1,0) " +
 				"ON DUPLICATE KEY UPDATE kills = kills + 1", player.getName()
 		);
@@ -43,7 +43,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 
 	public void incrementDeaths(IPlayer player)
 	{
-		this.database.Execute(
+		this.database.execute(
 			"INSERT INTO peeveepee_scores (playerName, kills, deaths) VALUES(?,0,1) " +
 				"ON DUPLICATE KEY UPDATE deaths = deaths + 1", player.getName()
 		);
@@ -52,7 +52,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	// RATING
 	public int getRating(IPlayer player)
 	{
-		Integer rating = this.database.QueryInteger(
+		Integer rating = this.database.queryInteger(
 			"SELECT rating FROM peeveepee_scores WHERE playerName = ?",
 			player.getName()
 		);
@@ -64,7 +64,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 		// Fire a rating change event
 		new RatingChangeEvent(player, newRating).Fire();
 
-		this.database.Execute(
+		this.database.execute(
 			"INSERT INTO peeveepee_scores (playerName, rating) VALUES(?, ?) " +
 				"ON DUPLICATE KEY UPDATE rating = ?", player.getName(), newRating, newRating
 		);
@@ -73,7 +73,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	// POINTS
 	public int getPoints(IPlayer player)
 	{
-		Integer points = this.database.QueryInteger(
+		Integer points = this.database.queryInteger(
 			"SELECT points FROM peeveepee_scores WHERE playerName = ?", player.getName()
 		);
 		return points == null ? 0 : points;
@@ -81,7 +81,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 
 	public void updatePoints(IPlayer player, int points)
 	{
-		this.database.Execute(
+		this.database.execute(
 			"INSERT INTO peeveepee_scores (playerName, points) VALUES(?, ?) " +
 				"ON DUPLICATE KEY UPDATE points = points + ?", player.getName(), points, points
 		);
