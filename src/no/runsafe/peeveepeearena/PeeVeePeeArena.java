@@ -20,7 +20,7 @@ import no.runsafe.peeveepeearena.repositories.PurchasedRepository;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 import no.runsafe.peeveepeearena.wilderness.DeathTriggers;
 
-public class Plugin extends RunsafeConfigurablePlugin
+public class PeeVeePeeArena extends RunsafeConfigurablePlugin
 {
 	@Override
 	protected void pluginSetup()

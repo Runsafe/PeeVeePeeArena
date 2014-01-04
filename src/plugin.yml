@@ -1,5 +1,5 @@
 name: PeeVeePeeArena
-main: no.runsafe.peeveepeearena.Plugin
+main: no.runsafe.peeveepeearena.PeeVeePeeArena
 version: 1.0.@BUILD@
 author: Kruithne
 depend: [RunsafeMailbox, RunsafeWorldGuardBridge]
