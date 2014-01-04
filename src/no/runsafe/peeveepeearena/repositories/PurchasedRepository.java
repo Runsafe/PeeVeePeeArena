@@ -1,13 +1,9 @@
 package no.runsafe.peeveepeearena.repositories;
 
-import no.runsafe.framework.api.database.IDatabase;
-import no.runsafe.framework.api.database.IRow;
-import no.runsafe.framework.api.database.ISet;
-import no.runsafe.framework.api.database.Repository;
+import no.runsafe.framework.api.database.*;
 import no.runsafe.peeveepeearena.Purchase;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class PurchasedRepository extends Repository
@@ -38,20 +34,20 @@ public class PurchasedRepository extends Repository
 	}
 
 	@Override
-	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
+	public ISchemaUpdate getSchemaUpdateQueries()
 	{
-		HashMap<Integer, List<String>> versions = new HashMap<Integer, List<String>>();
-		ArrayList<String> sql = new ArrayList<String>();
-		sql.add(
+		ISchemaUpdate update = new SchemaUpdate();
+
+		update.addQueries(
 			"CREATE TABLE `peeveepee_purchases` (" +
 				"`ID` int(10) NOT NULL AUTO_INCREMENT," +
 				"`player` varchar(50) NOT NULL," +
 				"`setID` int(10) NOT NULL," +
 				"PRIMARY KEY (`ID`)" +
-				")"
+			")"
 		);
-		versions.put(1, sql);
-		return versions;
+
+		return update;
 	}
 
 	private final IDatabase database;

@@ -1,16 +1,12 @@
 package no.runsafe.peeveepeearena.repositories;
 
 import no.runsafe.framework.api.IServer;
-import no.runsafe.framework.api.database.IDatabase;
-import no.runsafe.framework.api.database.IRow;
-import no.runsafe.framework.api.database.ISet;
-import no.runsafe.framework.api.database.Repository;
+import no.runsafe.framework.api.database.*;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
 import no.runsafe.peeveepeearena.ShopItemSet;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ShopRepository extends Repository
@@ -92,21 +88,21 @@ public class ShopRepository extends Repository
 	}
 
 	@Override
-	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
+	public ISchemaUpdate getSchemaUpdateQueries()
 	{
-		HashMap<Integer, List<String>> versions = new HashMap<Integer, List<String>>();
-		ArrayList<String> sql = new ArrayList<String>();
-		sql.add(
+		ISchemaUpdate update = new SchemaUpdate();
+
+		update.addQueries(
 			"CREATE TABLE `peeveepee_shop` (" +
 				"`ID` int(10) NOT NULL AUTO_INCREMENT," +
 				"`name` varchar(50) NOT NULL," +
 				"`cost` int(10) NOT NULL," +
 				"`items` longtext NOT NULL," +
 				"PRIMARY KEY (`ID`)" +
-				")"
+			")"
 		);
-		versions.put(1, sql);
-		return versions;
+
+		return update;
 	}
 
 	private final IDatabase database;
