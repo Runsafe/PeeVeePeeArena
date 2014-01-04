@@ -31,25 +31,25 @@ public class PeeVeePeeArena extends RunsafeConfigurablePlugin
 		addComponent(Database.class);
 
 		// Plugin components
-		this.addComponent(PvPArenaEngine.class);
-		this.addComponent(RatingHandler.class);
+		addComponent(PvPArenaEngine.class);
+		addComponent(RatingHandler.class);
 
 		// Wilderness
-		this.addComponent(DeathTriggers.class);
+		addComponent(DeathTriggers.class);
 
 		// Repositories
-		this.addComponent(PlayerScoresRepository.class);
-		this.addComponent(ShopRepository.class);
-		this.addComponent(PurchasedRepository.class);
+		addComponent(PlayerScoresRepository.class);
+		addComponent(ShopRepository.class);
+		addComponent(PurchasedRepository.class);
 
 		// Teleport
-		this.addComponent(TeleportEngine.class);
-		this.addComponent(DeathDrop.class); // Drop the wub wub pew pew.
+		addComponent(TeleportEngine.class);
+		addComponent(DeathDrop.class); // Drop the wub wub pew pew.
 
 		// Custom Items
-		this.addComponent(CustomItemHandler.class);
-		this.addComponent(JarOfDirt.class);
-		this.addComponent(SuspiciousMushroom.class);
+		addComponent(CustomItemHandler.class);
+		addComponent(JarOfDirt.class);
+		addComponent(SuspiciousMushroom.class);
 
 		// Commands
 		Command pvp = new Command("pvp", "PvP related commands", null);
@@ -58,7 +58,7 @@ public class PeeVeePeeArena extends RunsafeConfigurablePlugin
 		pvp.addSubCommand(getInstance(GetScore.class));
 		pvp.addSubCommand(getInstance(GetPoints.class));
 		pvp.addSubCommand(getInstance(Checkout.class));
-		this.addComponent(pvp);
+		addComponent(pvp);
 
 		Command pvpAdmin = new Command("admin", "PvP admin related commands", null);
 		pvpAdmin.addSubCommand(getInstance(CreateItemSet.class));
@@ -72,9 +72,9 @@ public class PeeVeePeeArena extends RunsafeConfigurablePlugin
 		pvp.addSubCommand(pvpAdmin);
 
 		// Events
-		this.addComponent(SignChange.class);
-		this.addComponent(RightClickBlock.class);
-		this.addComponent(PlayerDeath.class);
-		this.addComponent(PlayerDropItems.class);
+		addComponent(SignChange.class);
+		addComponent(RightClickBlock.class);
+		addComponent(PlayerDeath.class);
+		addComponent(PlayerDropItems.class);
 	}
 }
