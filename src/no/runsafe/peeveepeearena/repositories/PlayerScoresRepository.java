@@ -10,6 +10,7 @@ import no.runsafe.peeveepeearena.customevents.RatingChangeEvent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class PlayerScoresRepository extends Repository implements IConfigurationChanged
@@ -90,7 +91,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	@Override
 	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
 	{
-		HashMap<Integer, List<String>> versions = new HashMap<Integer, List<String>>();
+		HashMap<Integer, List<String>> versions = new LinkedHashMap<Integer, List<String>>();
 		ArrayList<String> sql = new ArrayList<String>();
 		sql.add(
 			"CREATE TABLE `peeveepee_scores` (" +
