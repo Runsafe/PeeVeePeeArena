@@ -62,7 +62,7 @@ public class TeleportEngine implements IConfigurationChanged
 		if (pvpWorld == null)
 		{
 			setup = false;
-			console.logError("Invalid world supplied: %s. Teleportation disabled.", configuration.getConfigValueAsString("pvpWorld"));
+			console.logWarning("Invalid world supplied: %s. Teleportation disabled.", configuration.getConfigValueAsString("pvpWorld"));
 			return;
 		}
 
