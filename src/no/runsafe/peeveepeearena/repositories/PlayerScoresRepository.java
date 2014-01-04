@@ -91,7 +91,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	@Override
 	public HashMap<Integer, List<String>> getSchemaUpdateQueries()
 	{
-		HashMap<Integer, List<String>> versions = new LinkedHashMap<Integer, List<String>>();
+		HashMap<Integer, List<String>> versions = new LinkedHashMap<Integer, List<String>>(3);
 		ArrayList<String> sql = new ArrayList<String>();
 		sql.add(
 			"CREATE TABLE `peeveepee_scores` (" +
