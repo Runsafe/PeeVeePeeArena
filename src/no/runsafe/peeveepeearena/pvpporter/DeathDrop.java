@@ -33,7 +33,8 @@ public class DeathDrop implements IConfigurationChanged, IPlayerCustomEvent
 			IPlayer player = event.getPlayer();
 			IWorld playerWorld = player.getWorld();
 
-			if (playerWorld != null && playerWorld.isWorld(engine.getPvPWorld()) && data.get("region").equals(noEntryRegion))
+			IWorld pvpWorld = engine.getPvPWorld();
+			if (playerWorld != null && pvpWorld != null && playerWorld.isWorld(pvpWorld) && data.get("region").equals(noEntryRegion))
 				player.damage(100.0D); // Carrrrrl, that kills people.
 		}
 	}
