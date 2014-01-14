@@ -1,11 +1,10 @@
 package no.runsafe.peeveepeearena.commands;
 
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.customitems.CustomItemHandler;
-
-import java.util.Map;
 
 public class PvPItem extends PlayerCommand
 {
@@ -16,7 +15,7 @@ public class PvPItem extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		String customItemName = parameters.get("item");
 		if (this.customItemHandler.customItemExists(customItemName))

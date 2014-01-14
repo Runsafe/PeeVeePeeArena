@@ -2,9 +2,8 @@ package no.runsafe.peeveepeearena.commands;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.peeveepeearena.customitems.CustomItemHandler;
-
-import java.util.Map;
 
 public class PvPItems extends ExecutableCommand
 {
@@ -15,7 +14,7 @@ public class PvPItems extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		for (String itemName : this.customItemHandler.getCustomItems())
 			executor.sendColouredMessage("&3%s", itemName);

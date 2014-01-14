@@ -1,12 +1,11 @@
 package no.runsafe.peeveepeearena.commands;
 
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.argument.RequiredArgument;
 import no.runsafe.framework.api.command.argument.TrailingArgument;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
-
-import java.util.Map;
 
 public class CreateItemSet extends PlayerCommand
 {
@@ -20,7 +19,7 @@ public class CreateItemSet extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		String setName = parameters.get("name");
 		int cost = Integer.parseInt(parameters.get("cost"));

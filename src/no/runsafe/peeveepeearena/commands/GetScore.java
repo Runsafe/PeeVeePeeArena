@@ -1,11 +1,10 @@
 package no.runsafe.peeveepeearena.commands;
 
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.database.IRow;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.repositories.PlayerScoresRepository;
-
-import java.util.Map;
 
 public class GetScore extends PlayerCommand
 {
@@ -16,7 +15,7 @@ public class GetScore extends PlayerCommand
 	}
 
 	@Override
-	public String OnExecute(IPlayer executor, Map<String, String> parameters)
+	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		IRow scores = this.scoresRepository.getScores(executor);
 		int kills = (scores.Integer("kills") != null ? scores.Integer("kills") : 0);

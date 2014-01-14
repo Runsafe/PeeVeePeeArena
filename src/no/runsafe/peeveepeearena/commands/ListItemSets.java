@@ -2,11 +2,11 @@ package no.runsafe.peeveepeearena.commands;
 
 import no.runsafe.framework.api.command.ExecutableCommand;
 import no.runsafe.framework.api.command.ICommandExecutor;
+import no.runsafe.framework.api.command.argument.IArgumentList;
 import no.runsafe.peeveepeearena.ShopItemSet;
 import no.runsafe.peeveepeearena.repositories.ShopRepository;
 
 import java.util.List;
-import java.util.Map;
 
 public class ListItemSets extends ExecutableCommand
 {
@@ -17,7 +17,7 @@ public class ListItemSets extends ExecutableCommand
 	}
 
 	@Override
-	public String OnExecute(ICommandExecutor executor, Map<String, String> parameters)
+	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
 		List<ShopItemSet> itemSets = this.shopRepository.getAllSets();
 
