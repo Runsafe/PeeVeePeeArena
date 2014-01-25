@@ -11,9 +11,8 @@ import java.util.List;
 
 public class ShopRepository extends Repository
 {
-	public ShopRepository(IDatabase database, IServer server)
+	public ShopRepository(IServer server)
 	{
-		this.database = database;
 		this.server = server;
 	}
 
@@ -105,6 +104,5 @@ public class ShopRepository extends Repository
 		return update;
 	}
 
-	private final IDatabase database;
 	private final IServer server;
 }

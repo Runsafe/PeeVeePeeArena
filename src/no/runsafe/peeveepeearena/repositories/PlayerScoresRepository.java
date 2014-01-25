@@ -1,18 +1,16 @@
 package no.runsafe.peeveepeearena.repositories;
 
 import no.runsafe.framework.api.IConfiguration;
-import no.runsafe.framework.api.database.*;
+import no.runsafe.framework.api.database.IRow;
+import no.runsafe.framework.api.database.ISchemaUpdate;
+import no.runsafe.framework.api.database.Repository;
+import no.runsafe.framework.api.database.SchemaUpdate;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.customevents.RatingChangeEvent;
 
 public class PlayerScoresRepository extends Repository implements IConfigurationChanged
 {
-	public PlayerScoresRepository(IDatabase database)
-	{
-		this.database = database;
-	}
-
 	@Override
 	public String getTableName()
 	{
@@ -92,7 +90,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 				"`kills` int(10) NOT NULL," +
 				"`deaths` int(10) NOT NULL," +
 				"PRIMARY KEY (`playerName`)" +
-			")"
+				")"
 		);
 
 		update.addQueries(
@@ -117,6 +115,5 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 		this.defaultRating = configuration.getConfigValueAsInt("defaultRating");
 	}
 
-	private final IDatabase database;
 	private int defaultRating;
 }

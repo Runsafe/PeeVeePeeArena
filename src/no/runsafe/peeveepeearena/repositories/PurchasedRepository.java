@@ -8,11 +8,6 @@ import java.util.List;
 
 public class PurchasedRepository extends Repository
 {
-	public PurchasedRepository(IDatabase database)
-	{
-		this.database = database;
-	}
-
 	public String getTableName()
 	{
 		return "peeveepee_purchases";
@@ -49,6 +44,4 @@ public class PurchasedRepository extends Repository
 
 		return update;
 	}
-
-	private final IDatabase database;
 }
