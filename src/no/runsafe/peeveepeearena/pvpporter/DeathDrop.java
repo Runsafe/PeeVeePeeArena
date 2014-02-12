@@ -1,6 +1,7 @@
 package no.runsafe.peeveepeearena.pvpporter;
 
 import no.runsafe.framework.api.IConfiguration;
+import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.player.IPlayerCustomEvent;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
@@ -12,9 +13,10 @@ import java.util.Map;
 
 public class DeathDrop implements IConfigurationChanged, IPlayerCustomEvent
 {
-	public DeathDrop(PvPArenaEngine engine)
+	public DeathDrop(PvPArenaEngine engine, IScheduler scheduler)
 	{
 		this.engine = engine;
+		this.scheduler = scheduler;
 	}
 
 	@Override
@@ -30,15 +32,26 @@ public class DeathDrop implements IConfigurationChanged, IPlayerCustomEvent
 		if (event.getEvent().equals("region.enter"))
 		{
 			Map<String, String> data = (Map<String, String>) event.getData();
-			IPlayer player = event.getPlayer();
+			final IPlayer player = event.getPlayer();
 			IWorld playerWorld = player.getWorld();
 
 			IWorld pvpWorld = engine.getPvPWorld();
+
 			if (playerWorld != null && pvpWorld != null && playerWorld.isWorld(pvpWorld) && data.get("region").equals(noEntryRegion))
-				player.damage(100.0D); // Carrrrrl, that kills people.
+			{
+				scheduler.runNow(new Runnable()
+				{
+					@Override
+					public void run()
+					{
+						player.damage(100.0D); // Carrrrrl, that kills people.
+					}
+				});
+			}
 		}
 	}
 
 	private String noEntryRegion;
 	private PvPArenaEngine engine;
+	private final IScheduler scheduler;
 }
