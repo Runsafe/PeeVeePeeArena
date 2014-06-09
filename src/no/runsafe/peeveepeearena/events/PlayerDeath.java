@@ -40,8 +40,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 			IPlayer killer = event.getEntity().getKiller();
 			if (killer != null && !killer.getName().equals(killed.getName()))
 			{
-				this.killSpreeCheck(killer);
-				this.kills.remove(killed.getName());
+				this.killSpreeCheck(killer, killed);
 				List<Integer> ratings = this.ratingHandler.getNewRating(killer, killed);
 
 				int winnerRatingChange = ratings.get(0);
@@ -90,14 +89,14 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		this.pointsPerRating = configuration.getConfigValueAsInt("pointsPerRating");
 	}
 
-	private void killSpreeCheck(IPlayer player)
+	private void killSpreeCheck(IPlayer killer, IPlayer killed)
 	{
-		String playerName = player.getName();
-		int kills = (this.kills.containsKey(playerName) ? this.kills.get(playerName) + 1 : 1);
-		this.kills.put(playerName, kills);
+		String playerName = killer.getName();
+		int killCount = (kills.containsKey(playerName) ? kills.get(playerName) + 1 : 1);
+		this.kills.put(playerName, killCount);
 
 		String broadcast = null;
-		switch (kills)
+		switch (killCount)
 		{
 			case 5:
 				broadcast = "%s&e is on a killing spree.";
@@ -116,12 +115,21 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 				break;
 			case 30:
 				broadcast = "%s&e is wicked sick!";
-				new WickedSickSpreeEvent(player).Fire();
+				new WickedSickSpreeEvent(killer).Fire();
 				break;
 		}
 
 		if (broadcast != null)
-			server.broadcastMessage(String.format(broadcast, player.getPrettyName()));
+			server.broadcastMessage(String.format(broadcast, killer.getPrettyName()));
+
+		String killedName = killed.getName();
+		if (kills.containsKey(killedName))
+		{
+			if (kills.get(killedName) > 5)
+				server.broadcastMessage(killed.getPrettyName() + "&e's killing spree was ended by " + killer.getPrettyName() + "&e.");
+
+			kills.remove(killedName);
+		}
 	}
 
 	private final PlayerScoresRepository playerScoresRepository;
