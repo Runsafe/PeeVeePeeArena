@@ -1,7 +1,7 @@
 package no.runsafe.peeveepeearena.commands;
 
 import no.runsafe.framework.api.command.argument.IArgumentList;
-import no.runsafe.framework.api.command.argument.RequiredArgument;
+import no.runsafe.framework.api.command.argument.WholeNumber;
 import no.runsafe.framework.api.command.player.PlayerCommand;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.ShopItemSet;
@@ -13,7 +13,7 @@ public class GetItemSet extends PlayerCommand
 	{
 		super(
 			"getset", "Retrieves an item set from the shop", "runsafe.peeveepee.set.get",
-			new RequiredArgument("id")
+			new WholeNumber("id").require()
 		);
 		this.shopRepository = shopRepository;
 	}
@@ -21,7 +21,7 @@ public class GetItemSet extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		ShopItemSet itemSet = this.shopRepository.getItemSet(Integer.parseInt(parameters.getValue("id")));
+		ShopItemSet itemSet = this.shopRepository.getItemSet(parameters.getValue("id"));
 
 		if (itemSet == null)
 			return "&cUnable to find an item set with that ID.";
