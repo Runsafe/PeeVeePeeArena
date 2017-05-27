@@ -21,8 +21,8 @@ public class CreateItemSet extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		String setName = parameters.get("name");
-		int cost = Integer.parseInt(parameters.get("cost"));
+		String setName = parameters.getValue("name");
+		int cost = Integer.parseInt(parameters.getValue("cost"));
 
 		this.shopRepository.createItemSet(setName, cost, executor.getInventory());
 		return String.format("&2The item set %s has been created.", setName);

@@ -20,7 +20,7 @@ public class DeleteItemSet extends ExecutableCommand
 	@Override
 	public String OnExecute(ICommandExecutor executor, IArgumentList parameters)
 	{
-		int itemSetID = Integer.parseInt(parameters.get("id"));
+		int itemSetID = Integer.parseInt(parameters.getValue("id"));
 		if (!this.shopRepository.deleteItemSet(itemSetID))
 			return "&cUnable to find an item set with that ID.";
 

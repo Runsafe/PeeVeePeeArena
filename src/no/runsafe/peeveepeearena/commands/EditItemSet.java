@@ -22,9 +22,9 @@ public class EditItemSet extends PlayerCommand
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
 		boolean edit = this.shopRepository.editItemSet(
-			Integer.parseInt(parameters.get("id")),
-			parameters.get("name"),
-			Integer.parseInt(parameters.get("cost")),
+			Integer.parseInt(parameters.getValue("id")),
+			parameters.getValue("name"),
+			Integer.parseInt(parameters.getValue("cost")),
 			executor.getInventory()
 		);
 
