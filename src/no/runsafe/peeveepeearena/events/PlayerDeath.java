@@ -33,50 +33,50 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 	public void OnPlayerDeathEvent(RunsafePlayerDeathEvent event)
 	{
 		IPlayer killed = event.getEntity();
-		if (killed.getWorldName().equals(pvpWorldName))
+		if (!killed.getWorldName().equals(pvpWorldName))
+			return;
+
+		event.setDrops(new ArrayList<RunsafeMeta>());
+
+		IPlayer killer = event.getEntity().getKiller();
+		if (killer == null || killer.getName().equals(killed.getName()))
+			return;
+
+		this.killSpreeCheck(killer, killed);
+		List<Integer> ratings = this.ratingHandler.getNewRating(killer, killed);
+
+		int winnerRatingChange = ratings.get(0);
+		int looserRatingChange = ratings.get(1);
+
+		killer.sendColouredMessage(
+			"&7&oYou gained %s rating for killing %s.",
+			(winnerRatingChange == 0 ? "no" : winnerRatingChange),
+			killed.getName()
+		);
+
+		killed.sendColouredMessage(
+			"&7&oYou lost %s rating from being killed by %s.",
+			(looserRatingChange == 0 ? "no" : looserRatingChange),
+			killer.getName()
+		);
+
+		int pointsGain = winnerRatingChange * this.pointsPerRating;
+		killer.sendColouredMessage(String.format("&7&oYou gain %s PvP points.", pointsGain));
+		this.playerScoresRepository.updatePoints(killer, pointsGain);
+
+		this.playerScoresRepository.incrementDeaths(killed);
+		this.playerScoresRepository.incrementKills(killer);
+
+		if ((Math.random() * 100) + 1 <= this.headDropChance)
 		{
-			event.setDrops(new ArrayList<RunsafeMeta>());
-
-			IPlayer killer = event.getEntity().getKiller();
-			if (killer != null && !killer.getName().equals(killed.getName()))
+			if (this.mailSender.hasFreeMailboxSpace(killer))
 			{
-				this.killSpreeCheck(killer, killed);
-				List<Integer> ratings = this.ratingHandler.getNewRating(killer, killed);
-
-				int winnerRatingChange = ratings.get(0);
-				int looserRatingChange = ratings.get(1);
-
-				killer.sendColouredMessage(
-					"&7&oYou gained %s rating for killing %s.",
-					(winnerRatingChange == 0 ? "no" : winnerRatingChange),
-					killed.getName()
-				);
-
-				killed.sendColouredMessage(
-					"&7&oYou lost %s rating from being killed by %s.",
-					(looserRatingChange == 0 ? "no" : looserRatingChange),
-					killer.getName()
-				);
-
-				int pointsGain = winnerRatingChange * this.pointsPerRating;
-				killer.sendColouredMessage(String.format("&7&oYou gain %s PvP points.", pointsGain));
-				this.playerScoresRepository.updatePoints(killer, pointsGain);
-
-				this.playerScoresRepository.incrementDeaths(killed);
-				this.playerScoresRepository.incrementKills(killer);
-
-				if ((Math.random() * 100) + 1 <= this.headDropChance)
-				{
-					if (this.mailSender.hasFreeMailboxSpace(killer))
-					{
-						RunsafeInventory newPackage = server.createInventory(null, 54);
-						RunsafeSkull head = (RunsafeSkull) Item.Decoration.Head.Human.getItem();
-						head.setPlayer(killed);
-						head.setAmount(1);
-						newPackage.addItems(head);
-						this.mailSender.sendMail(killer, "Kjorn the Arena Janitor", newPackage);
-					}
-				}
+				RunsafeInventory newPackage = server.createInventory(null, 54);
+				RunsafeSkull head = (RunsafeSkull) Item.Decoration.Head.Human.getItem();
+				head.setPlayer(killed);
+				head.setAmount(1);
+				newPackage.addItems(head);
+				this.mailSender.sendMail(killer, "Kjorn the Arena Janitor", newPackage);
 			}
 		}
 	}
