@@ -6,6 +6,7 @@ import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventoryType;
 import no.runsafe.peeveepeearena.ShopItemSet;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,8 @@ public class ShopRepository extends Repository
 		this.server = server;
 	}
 
+	@Nonnull
+	@Override
 	public String getTableName()
 	{
 		return "peeveepee_shop";
@@ -86,6 +89,7 @@ public class ShopRepository extends Repository
 		return itemSets;
 	}
 
+	@Nonnull
 	@Override
 	public ISchemaUpdate getSchemaUpdateQueries()
 	{

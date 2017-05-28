@@ -9,8 +9,11 @@ import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.customevents.RatingChangeEvent;
 
+import javax.annotation.Nonnull;
+
 public class PlayerScoresRepository extends Repository implements IConfigurationChanged
 {
+	@Nonnull
 	@Override
 	public String getTableName()
 	{
@@ -79,6 +82,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 		);
 	}
 
+	@Nonnull
 	@Override
 	public ISchemaUpdate getSchemaUpdateQueries()
 	{

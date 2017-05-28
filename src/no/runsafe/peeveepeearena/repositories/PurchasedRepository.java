@@ -3,11 +3,14 @@ package no.runsafe.peeveepeearena.repositories;
 import no.runsafe.framework.api.database.*;
 import no.runsafe.peeveepeearena.Purchase;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PurchasedRepository extends Repository
 {
+	@Nonnull
+	@Override
 	public String getTableName()
 	{
 		return "peeveepee_purchases";
@@ -28,6 +31,7 @@ public class PurchasedRepository extends Repository
 		this.database.execute("DELETE FROM peeveepee_purchases WHERE ID = ?", id);
 	}
 
+	@Nonnull
 	@Override
 	public ISchemaUpdate getSchemaUpdateQueries()
 	{
