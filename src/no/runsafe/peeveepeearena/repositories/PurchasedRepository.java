@@ -20,7 +20,7 @@ public class PurchasedRepository extends Repository
 	public List<Purchase> getPurchases(IPlayer player)
 	{
 		List<Purchase> purchases = new ArrayList<Purchase>();
-		ISet data = this.database.query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", player.getName());
+		ISet data = this.database.query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", player.getUniqueId().toString());
 		for (IRow node : data)
 			purchases.add(new Purchase(node.Integer("ID"), node.Integer("setID")));
 
@@ -45,6 +45,15 @@ public class PurchasedRepository extends Repository
 				"`setID` int(10) NOT NULL," +
 				"PRIMARY KEY (`ID`)" +
 			")"
+		);
+
+		update.addQueries(
+			String.format( // Usernames -> Unique IDs
+				"UPDATE IGNORE `%s` SET `player` = " +
+					"COALESCE((SELECT `uuid` FROM player_db WHERE `name`=`%s`.`player`), `player`) " +
+					"WHERE length(`player`) != 36",
+				getTableName(), getTableName()
+			)
 		);
 
 		return update;

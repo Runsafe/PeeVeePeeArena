@@ -24,7 +24,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	public IRow getScores(IPlayer player)
 	{
 		return this.database.queryRow(
-			"SELECT kills, deaths FROM peeveepee_scores WHERE player = ?", player.getName()
+			"SELECT kills, deaths FROM peeveepee_scores WHERE player = ?", player.getUniqueId().toString()
 		);
 	}
 
@@ -32,7 +32,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	{
 		this.database.execute(
 			"INSERT INTO peeveepee_scores (player, kills, deaths) VALUES(?,1,0) " +
-				"ON DUPLICATE KEY UPDATE kills = kills + 1", player.getName()
+				"ON DUPLICATE KEY UPDATE kills = kills + 1", player.getUniqueId().toString()
 		);
 	}
 
@@ -40,7 +40,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	{
 		this.database.execute(
 			"INSERT INTO peeveepee_scores (player, kills, deaths) VALUES(?,0,1) " +
-				"ON DUPLICATE KEY UPDATE deaths = deaths + 1", player.getName()
+				"ON DUPLICATE KEY UPDATE deaths = deaths + 1", player.getUniqueId().toString()
 		);
 	}
 
@@ -49,7 +49,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	{
 		Integer rating = this.database.queryInteger(
 			"SELECT rating FROM peeveepee_scores WHERE player = ?",
-			player.getName()
+			player.getUniqueId().toString()
 		);
 		return rating == null ? defaultRating : rating;
 	}
@@ -61,7 +61,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 
 		this.database.execute(
 			"INSERT INTO peeveepee_scores (player, rating) VALUES(?, ?) " +
-				"ON DUPLICATE KEY UPDATE rating = ?", player.getName(), newRating, newRating
+				"ON DUPLICATE KEY UPDATE rating = ?", player.getUniqueId().toString(), newRating, newRating
 		);
 	}
 
@@ -69,7 +69,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	public int getPoints(IPlayer player)
 	{
 		Integer points = this.database.queryInteger(
-			"SELECT points FROM peeveepee_scores WHERE player= ?", player.getName()
+			"SELECT points FROM peeveepee_scores WHERE player= ?", player.getUniqueId().toString()
 		);
 		return points == null ? 0 : points;
 	}
@@ -78,7 +78,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 	{
 		this.database.execute(
 			"INSERT INTO peeveepee_scores (player, points) VALUES(?, ?) " +
-				"ON DUPLICATE KEY UPDATE points = points + ?", player.getName(), points, points
+				"ON DUPLICATE KEY UPDATE points = points + ?", player.getUniqueId().toString(), points, points
 		);
 	}
 
@@ -111,7 +111,13 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 		);
 
 		update.addQueries(
-			String.format("ALTER TABLE `%s` CHANGE `playerName` `player` varchar(50) NOT NULL", getTableName())
+			String.format("ALTER TABLE `%s` CHANGE `playerName` `player` varchar(50) NOT NULL", getTableName()),
+			String.format( // Usernames -> Unique IDs
+				"UPDATE IGNORE `%s` SET `player` = " +
+					"COALESCE((SELECT `uuid` FROM player_db WHERE `name`=`%s`.`player`), `player`) " +
+					"WHERE length(`player`) != 36",
+				getTableName(), getTableName()
+			)
 		);
 
 		return update;
