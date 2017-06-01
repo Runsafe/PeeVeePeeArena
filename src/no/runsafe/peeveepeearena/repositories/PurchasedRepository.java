@@ -1,6 +1,7 @@
 package no.runsafe.peeveepeearena.repositories;
 
 import no.runsafe.framework.api.database.*;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.Purchase;
 
 import javax.annotation.Nonnull;
@@ -16,10 +17,10 @@ public class PurchasedRepository extends Repository
 		return "peeveepee_purchases";
 	}
 
-	public List<Purchase> getPurchases(String playerName)
+	public List<Purchase> getPurchases(IPlayer player)
 	{
 		List<Purchase> purchases = new ArrayList<Purchase>();
-		ISet data = this.database.query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", playerName);
+		ISet data = this.database.query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", player.getName());
 		for (IRow node : data)
 			purchases.add(new Purchase(node.Integer("ID"), node.Integer("setID")));
 

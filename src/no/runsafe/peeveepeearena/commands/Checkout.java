@@ -23,7 +23,7 @@ public class Checkout extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		List<Purchase> purchases = this.purchasedRepository.getPurchases(executor.getName());
+		List<Purchase> purchases = this.purchasedRepository.getPurchases(executor);
 		if (purchases.isEmpty())
 			return "&cYour checkout is empty, buy some things at the shop first!";
 
