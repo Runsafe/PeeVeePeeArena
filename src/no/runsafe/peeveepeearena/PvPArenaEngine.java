@@ -2,19 +2,19 @@ package no.runsafe.peeveepeearena;
 
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.IOutput;
-import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
+import no.runsafe.framework.api.server.IWorldManager;
 import no.runsafe.worldguardbridge.IRegionControl;
 
 public class PvPArenaEngine implements IConfigurationChanged
 {
-	public PvPArenaEngine(IOutput output, IRegionControl worldGuardInterface, IServer server)
+	public PvPArenaEngine(IOutput output, IRegionControl worldGuardInterface, IWorldManager worldManager)
 	{
 		this.output = output;
 		this.worldGuardInterface = worldGuardInterface;
-		this.server = server;
+		this.worldManager = worldManager;
 	}
 
 	public void broadcastMessage(String message)
@@ -24,7 +24,7 @@ public class PvPArenaEngine implements IConfigurationChanged
 
 	public IWorld getPvPWorld()
 	{
-		return server.getWorld(this.pvpWorld);
+		return worldManager.getWorld(this.pvpWorld);
 	}
 
 	public boolean isInPvPWorld(IPlayer player)
@@ -49,5 +49,5 @@ public class PvPArenaEngine implements IConfigurationChanged
 	private String pvpWorld;
 	private String pvpRegion;
 	private final IRegionControl worldGuardInterface;
-	private final IServer server;
+	private final IWorldManager worldManager;
 }
