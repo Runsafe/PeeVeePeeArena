@@ -91,9 +91,8 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 
 	private void killSpreeCheck(IPlayer killer, IPlayer killed)
 	{
-		String playerName = killer.getName();
-		int killCount = (kills.containsKey(playerName) ? kills.get(playerName) + 1 : 1);
-		this.kills.put(playerName, killCount);
+		int killCount = (kills.containsKey(killer) ? kills.get(killer) + 1 : 1);
+		this.kills.put(killer, killCount);
 
 		String broadcast = null;
 		switch (killCount)
@@ -122,20 +121,19 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		if (broadcast != null)
 			server.broadcastMessage(String.format(broadcast, killer.getPrettyName()));
 
-		String killedName = killed.getName();
-		if (kills.containsKey(killedName))
+		if (kills.containsKey(killed))
 		{
-			if (kills.get(killedName) > 5)
+			if (kills.get(killed) > 5)
 				server.broadcastMessage(killed.getPrettyName() + "&e's killing spree was ended by " + killer.getPrettyName() + "&e.");
 
-			kills.remove(killedName);
+			kills.remove(killed);
 		}
 	}
 
 	private final PlayerScoresRepository playerScoresRepository;
 	private String pvpWorldName;
 	private final MailSender mailSender;
-	private final HashMap<String, Integer> kills = new HashMap<String, Integer>();
+	private final HashMap<IPlayer, Integer> kills = new HashMap<>();
 	private int headDropChance;
 	private int pointsPerRating;
 	private final RatingHandler ratingHandler;
