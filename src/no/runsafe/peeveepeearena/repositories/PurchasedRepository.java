@@ -1,22 +1,26 @@
 package no.runsafe.peeveepeearena.repositories;
 
 import no.runsafe.framework.api.database.*;
+import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.peeveepeearena.Purchase;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PurchasedRepository extends Repository
 {
+	@Nonnull
+	@Override
 	public String getTableName()
 	{
 		return "peeveepee_purchases";
 	}
 
-	public List<Purchase> getPurchases(String playerName)
+	public List<Purchase> getPurchases(IPlayer player)
 	{
 		List<Purchase> purchases = new ArrayList<Purchase>();
-		ISet data = this.database.query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", playerName);
+		ISet data = this.database.query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", player.getUniqueId().toString());
 		for (IRow node : data)
 			purchases.add(new Purchase(node.Integer("ID"), node.Integer("setID")));
 
@@ -28,6 +32,7 @@ public class PurchasedRepository extends Repository
 		this.database.execute("DELETE FROM peeveepee_purchases WHERE ID = ?", id);
 	}
 
+	@Nonnull
 	@Override
 	public ISchemaUpdate getSchemaUpdateQueries()
 	{
@@ -40,6 +45,15 @@ public class PurchasedRepository extends Repository
 				"`setID` int(10) NOT NULL," +
 				"PRIMARY KEY (`ID`)" +
 			")"
+		);
+
+		update.addQueries(
+			String.format( // Usernames -> Unique IDs
+				"UPDATE IGNORE `%s` SET `player` = " +
+					"COALESCE((SELECT `uuid` FROM player_db WHERE `name`=`%s`.`player`), `player`) " +
+					"WHERE length(`player`) != 36",
+				getTableName(), getTableName()
+			)
 		);
 
 		return update;
