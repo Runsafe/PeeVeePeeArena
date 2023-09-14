@@ -120,6 +120,30 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 			)
 		);
 
+		update.addQueries("ALTER TABLE peeveepee_scores RENAME TO peeveepee_scores_old");
+
+		update.addQueries( // Create new table based on the uuid dataset instead of varchar
+			"CREATE TABLE `" + getTableName() + "` (" +
+				"`player` UUID NOT NULL," +
+				"`kills` int(10) NOT NULL DEFAULT '0'," +
+				"`deaths` int(10) NOT NULL DEFAULT '0'," +
+				"`rating` int(5) NOT NULL DEFAULT '1500'," +
+				"`points` int(10) NOT NULL DEFAULT '0',"+
+				"PRIMARY KEY(`uuid`)" +
+			")"
+		);
+
+		update.addQueries( // Migrate to new table
+			"INSERT INTO `" + getTableName() + "` " +
+				"(`player`, `kills`, `deaths`, `rating`, `points`) " +
+				"SELECT `player`, `kills`, `deaths`, `rating`, `points` " +
+				"FROM `peeveepee_scores_old`"
+		);
+
+		update.addQueries( // Drop old table
+			"DROP TABLE peeveepee_scores_old;"
+		);
+
 		return update;
 	}
 
