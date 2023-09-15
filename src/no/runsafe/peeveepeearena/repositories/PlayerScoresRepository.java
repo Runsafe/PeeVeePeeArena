@@ -135,9 +135,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 			"INSERT INTO `" + getTableName() + "` " +
 				"(`player`, `kills`, `deaths`, `rating`, `points`) " +
 				"SELECT `player`, `kills`, `deaths`, `rating`, `points` " +
-				"FROM `peeveepee_scores_old`;",
-			// Drop old table
-			"DROP TABLE peeveepee_scores_old;"
+				"FROM `peeveepee_scores_old`;"
 		);
 
 		return update;
