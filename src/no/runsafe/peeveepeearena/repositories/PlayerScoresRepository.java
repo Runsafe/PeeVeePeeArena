@@ -120,8 +120,6 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 			)
 		);
 
-		update.addQueries();
-
 		update.addQueries(
 			"ALTER TABLE peeveepee_scores RENAME TO peeveepee_scores_old;",
 			// Create new table based on the uuid dataset instead of varchar
