@@ -128,7 +128,7 @@ public class PlayerScoresRepository extends Repository implements IConfiguration
 				"`kills` int(10) NOT NULL DEFAULT '0'," +
 				"`deaths` int(10) NOT NULL DEFAULT '0'," +
 				"`rating` int(5) NOT NULL DEFAULT '1500'," +
-				"`points` int(10) NOT NULL DEFAULT '0',"+
+				"`points` int(10) NOT NULL DEFAULT '0'," +
 				"PRIMARY KEY(`uuid`)" +
 			")"
 		);

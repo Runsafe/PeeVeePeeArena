@@ -57,7 +57,7 @@ public class PurchasedRepository extends Repository
 		);
 
 		update.addQueries( // New data type for player uuid
-			"ALTER TABLE `" + getTableName() + "`" +
+			"ALTER TABLE `" + getTableName() + "` " +
 				"ALTER COLUMN `player` UUID"
 		);
 
