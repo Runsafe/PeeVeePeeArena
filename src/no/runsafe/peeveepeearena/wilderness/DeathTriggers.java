@@ -13,11 +13,6 @@ import java.util.Map;
 
 public class DeathTriggers implements IConfigurationChanged, IPlayerCustomEvent
 {
-	public DeathTriggers(IScheduler scheduler)
-	{
-		this.scheduler = scheduler;
-	}
-
 	@Override
 	public void OnConfigurationChanged(IConfiguration config)
 	{
@@ -29,23 +24,15 @@ public class DeathTriggers implements IConfigurationChanged, IPlayerCustomEvent
 	@Override
 	public void OnPlayerCustomEvent(RunsafeCustomEvent event)
 	{
-		if (event.getEvent().equals("region.enter"))
-		{
-			Map<String, String> data = (Map<String, String>) event.getData();
-			final IPlayer player = event.getPlayer();
-			if (deathRegions.contains(data.get("region")) && data.get("world").equals(this.wildernessWorld))
-				scheduler.runNow(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						player.damage(100.0D);
-					}
-				});
-		}
+		if (!event.getEvent().equals("region.enter"))
+			return;
+
+		Map<String, String> data = (Map<String, String>) event.getData();
+		final IPlayer player = event.getPlayer();
+		if (deathRegions.contains(data.get("region")) && data.get("world").equals(this.wildernessWorld))
+			player.damage(100.0D);
 	}
 
 	private List<String> deathRegions = new ArrayList<String>();
 	private String wildernessWorld;
-	private final IScheduler scheduler;
 }

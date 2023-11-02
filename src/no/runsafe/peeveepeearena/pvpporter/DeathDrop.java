@@ -11,47 +11,33 @@ import no.runsafe.peeveepeearena.PvPArenaEngine;
 
 import java.util.Map;
 
-public class DeathDrop implements IConfigurationChanged, IPlayerCustomEvent
-{
-	public DeathDrop(PvPArenaEngine engine, IScheduler scheduler)
-	{
-		this.engine = engine;
-		this.scheduler = scheduler;
-	}
+public class DeathDrop implements IConfigurationChanged, IPlayerCustomEvent {
+    public DeathDrop(PvPArenaEngine engine) {
+        this.engine = engine;
+    }
 
-	@Override
-	public void OnConfigurationChanged(IConfiguration configuration)
-	{
-		noEntryRegion = configuration.getConfigValueAsString("noEntryRegion");
-	}
+    @Override
+    public void OnConfigurationChanged(IConfiguration configuration) {
+        noEntryRegion = configuration.getConfigValueAsString("noEntryRegion");
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public void OnPlayerCustomEvent(RunsafeCustomEvent event)
-	{
-		if (event.getEvent().equals("region.enter"))
-		{
-			Map<String, String> data = (Map<String, String>) event.getData();
-			final IPlayer player = event.getPlayer();
-			IWorld playerWorld = player.getWorld();
+    @SuppressWarnings("unchecked")
+    @Override
+    public void OnPlayerCustomEvent(RunsafeCustomEvent event) {
+        if (!event.getEvent().equals("region.enter"))
+            return;
 
-			IWorld pvpWorld = engine.getPvPWorld();
+        Map<String, String> data = (Map<String, String>) event.getData();
+        final IPlayer player = event.getPlayer();
+        IWorld playerWorld = player.getWorld();
 
-			if (playerWorld != null && pvpWorld != null && playerWorld.isWorld(pvpWorld) && data.get("region").equals(noEntryRegion))
-			{
-				scheduler.runNow(new Runnable()
-				{
-					@Override
-					public void run()
-					{
-						player.damage(100.0D); // Carrrrrl, that kills people.
-					}
-				});
-			}
-		}
-	}
+        IWorld pvpWorld = engine.getPvPWorld();
 
-	private String noEntryRegion;
-	private PvPArenaEngine engine;
-	private final IScheduler scheduler;
+        if (playerWorld != null && pvpWorld != null && playerWorld.isWorld(pvpWorld) && data.get("region").equals(noEntryRegion)) {
+            player.damage(100.0D); // Carrrrrl, that kills people.
+        }
+    }
+
+    private String noEntryRegion;
+    private final PvPArenaEngine engine;
 }
