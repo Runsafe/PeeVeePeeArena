@@ -38,7 +38,7 @@ public class Checkout extends PlayerCommand
 				continue;
 			}
 
-			if (!itemSet.giveToPlayer(executor))
+			if (itemSet.giveToPlayer(executor))
 				return "&cYour inventory is too full for the next purchase, aborting.";
 
 			executor.sendColouredMessage(String.format("&3Added %s to your inventory.", itemSet.getName()));

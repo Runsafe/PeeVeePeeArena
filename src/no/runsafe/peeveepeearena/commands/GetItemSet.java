@@ -26,7 +26,7 @@ public class GetItemSet extends PlayerCommand
 		if (itemSet == null)
 			return "&cUnable to find an item set with that ID.";
 
-		if (!itemSet.giveToPlayer(executor))
+		if (itemSet.giveToPlayer(executor))
 			return "&cThere is not enough space in your inventory to hold this set.";
 
 		return String.format("&2The item set %s has been added to your inventory.", itemSet.getName());

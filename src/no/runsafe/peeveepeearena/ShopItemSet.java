@@ -46,12 +46,12 @@ public class ShopItemSet
 		List<RunsafeMeta> setContents = this.items.getContents();
 
 		if (playerInventory.getSize() - playerInventory.getContents().size() < setContents.size())
-			return false; // Not enough room in the players inventory.
+			return true; // Not enough room in the players inventory.
 
 		for (RunsafeMeta item : this.items.getContents())
 			playerInventory.addItems(item);
 
-		return true;
+		return false;
 	}
 
 	private final int ID;

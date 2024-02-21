@@ -24,14 +24,14 @@ public class ShopRepository extends Repository
 		return "peeveepee_shop";
 	}
 
-	public boolean itemSetExists(int id)
+	public boolean itemSetUnknown(int id)
 	{
-		return this.database.queryInteger("SELECT ID FROM peeveepee_shop WHERE ID = ?", id) != null;
+		return this.database.queryInteger("SELECT ID FROM peeveepee_shop WHERE ID = ?", id) == null;
 	}
 
 	public ShopItemSet getItemSet(int id)
 	{
-		if (!this.itemSetExists(id))
+		if (this.itemSetUnknown(id))
 		{
 			return null;
 		}
@@ -55,7 +55,7 @@ public class ShopRepository extends Repository
 
 	public boolean editItemSet(int id, String name, int cost, RunsafeInventory itemHolder)
 	{
-		if (!this.itemSetExists(id))
+		if (this.itemSetUnknown(id))
 			return false;
 
 		this.database.execute(
@@ -75,7 +75,7 @@ public class ShopRepository extends Repository
 
 	public boolean deleteItemSet(int id)
 	{
-		if (!this.itemSetExists(id))
+		if (this.itemSetUnknown(id))
 			return false;
 
 		this.database.execute("DELETE FROM peeveepee_shop WHERE ID = ?", id);
