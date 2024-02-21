@@ -1,7 +1,6 @@
 package no.runsafe.peeveepeearena.wilderness;
 
 import no.runsafe.framework.api.IConfiguration;
-import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.event.player.IPlayerCustomEvent;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.player.IPlayer;
@@ -33,6 +32,6 @@ public class DeathTriggers implements IConfigurationChanged, IPlayerCustomEvent
 			player.damage(100.0D);
 	}
 
-	private List<String> deathRegions = new ArrayList<String>();
+	private List<String> deathRegions = new ArrayList<>();
 	private String wildernessWorld;
 }

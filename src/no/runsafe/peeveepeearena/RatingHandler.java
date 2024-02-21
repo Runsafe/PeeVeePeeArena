@@ -22,12 +22,12 @@ public class RatingHandler implements IConfigurationChanged
 
 	private double getExpectedRating(int playerRating, int againstPlayerRating)
 	{
-		return 1 / (1 + Math.pow(10, (againstPlayerRating - playerRating) / 400));
+		return 1 / (1 + Math.pow(10, (double) (againstPlayerRating - playerRating) / 400));
 	}
 
 	public List<Integer> getNewRating(IPlayer winner, IPlayer looser)
 	{
-		List<Integer> ratings = new ArrayList<Integer>();
+		List<Integer> ratings = new ArrayList<>();
 		int winnerRating = this.getRating(winner);
 		int looserRating = this.getRating(looser);
 

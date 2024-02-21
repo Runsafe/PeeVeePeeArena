@@ -19,7 +19,7 @@ public class PurchasedRepository extends Repository
 
 	public List<Purchase> getPurchases(IPlayer player)
 	{
-		List<Purchase> purchases = new ArrayList<Purchase>();
+		List<Purchase> purchases = new ArrayList<>();
 		ISet data = this.database.query("SELECT ID, setID FROM peeveepee_purchases WHERE player = ?", player.getUniqueId().toString());
 		for (IRow node : data)
 			purchases.add(new Purchase(node.Integer("ID"), node.Integer("setID")));

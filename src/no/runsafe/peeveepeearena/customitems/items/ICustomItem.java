@@ -5,9 +5,9 @@ import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 
 public interface ICustomItem
 {
-	public void onUse(IPlayer player);
+	void onUse(IPlayer player);
 
-	public String getItemName();
+	String getItemName();
 
-	public RunsafeMeta getItem();
+	RunsafeMeta getItem();
 }

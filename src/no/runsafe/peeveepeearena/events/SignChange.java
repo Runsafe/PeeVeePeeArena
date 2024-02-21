@@ -10,8 +10,7 @@ public class SignChange implements ISignChange
 	public boolean OnSignChange(IPlayer player, IBlock block, String[] text)
 	{
 		if (text[0].equalsIgnoreCase("[PVP Warp]"))
-			if (!player.hasPermission("runsafe.peeveepee.teleport.create"))
-				return false;
+			return player.hasPermission("runsafe.peeveepee.teleport.create");
 
 		return true;
 	}

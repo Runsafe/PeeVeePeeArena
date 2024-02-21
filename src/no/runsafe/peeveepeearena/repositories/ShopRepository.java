@@ -31,23 +31,26 @@ public class ShopRepository extends Repository
 
 	public ShopItemSet getItemSet(int id)
 	{
-		if (this.itemSetExists(id))
+		if (!this.itemSetExists(id))
 		{
-			IRow data = this.database.queryRow(
-				"SELECT name, cost, items FROM peeveepee_shop WHERE ID = ?", id
-			);
-
-			RunsafeInventory itemHolder = server.createInventory(null, RunsafeInventoryType.CHEST);
-			if (data != null)
-				return new ShopItemSet(
-					id,
-					data.String("name"),
-					data.Integer("cost"),
-					data.String("items"),
-					itemHolder
-				);
+			return null;
 		}
-		return null;
+		IRow data = this.database.queryRow(
+			"SELECT name, cost, items FROM peeveepee_shop WHERE ID = ?", id
+		);
+
+		RunsafeInventory itemHolder = server.createInventory(null, RunsafeInventoryType.CHEST);
+		if (data.isEmpty() || itemHolder == null)
+		{
+			return null;
+		}
+		return new ShopItemSet(
+			id,
+			data.String("name"),
+			data.Integer("cost"),
+			data.String("items"),
+			itemHolder
+		);
 	}
 
 	public boolean editItemSet(int id, String name, int cost, RunsafeInventory itemHolder)
@@ -81,7 +84,7 @@ public class ShopRepository extends Repository
 
 	public List<ShopItemSet> getAllSets()
 	{
-		List<ShopItemSet> itemSets = new ArrayList<ShopItemSet>();
+		List<ShopItemSet> itemSets = new ArrayList<>();
 		ISet data = this.database.query("SELECT ID, name, cost FROM peeveepee_shop");
 		for (IRow node : data)
 			itemSets.add(new ShopItemSet(node.Integer("ID"), node.String("name"), node.Integer("cost")));

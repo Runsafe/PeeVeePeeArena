@@ -1,7 +1,6 @@
 package no.runsafe.peeveepeearena.pvpporter;
 
 import no.runsafe.framework.api.IConfiguration;
-import no.runsafe.framework.api.IScheduler;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.player.IPlayerCustomEvent;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;

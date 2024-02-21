@@ -66,6 +66,6 @@ public class CustomItemHandler implements IPlayerRightClick
 		}
 	}
 
-	private final HashMap<String, ICustomItem> customItems = new HashMap<String, ICustomItem>();
+	private final HashMap<String, ICustomItem> customItems = new HashMap<>();
 	private final PvPArenaEngine pvpEngine;
 }

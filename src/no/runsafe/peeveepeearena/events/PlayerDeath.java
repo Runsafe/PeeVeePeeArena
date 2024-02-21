@@ -8,7 +8,6 @@ import no.runsafe.framework.api.player.IPlayer;
 import no.runsafe.framework.minecraft.Item;
 import no.runsafe.framework.minecraft.event.player.RunsafePlayerDeathEvent;
 import no.runsafe.framework.minecraft.inventory.RunsafeInventory;
-import no.runsafe.framework.minecraft.item.meta.RunsafeMeta;
 import no.runsafe.framework.minecraft.item.meta.RunsafeSkull;
 import no.runsafe.mailbox.MailSender;
 import no.runsafe.peeveepeearena.RatingHandler;
@@ -36,7 +35,7 @@ public class PlayerDeath implements IConfigurationChanged, IPlayerDeathEvent
 		if (!killed.getWorldName().equals(pvpWorldName))
 			return;
 
-		event.setDrops(new ArrayList<RunsafeMeta>());
+		event.setDrops(new ArrayList<>());
 
 		IPlayer killer = event.getEntity().getKiller();
 		if (killer == null || killer.getName().equals(killed.getName()))

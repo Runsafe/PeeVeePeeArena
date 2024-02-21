@@ -17,7 +17,7 @@ public class PvPItem extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		String customItemName = parameters.getValue("item");
+		String customItemName = parameters.getRequired("item");
 		if (this.customItemHandler.customItemExists(customItemName))
 		{
 			this.customItemHandler.givePlayerCustomItem(executor, customItemName);

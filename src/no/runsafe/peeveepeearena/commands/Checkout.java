@@ -33,7 +33,7 @@ public class Checkout extends PlayerCommand
 
 			if (itemSet == null)
 			{
-				executor.sendColouredMessage(String.format("&cOne of your purchases is longer valid and could not be retrieved."));
+				executor.sendColouredMessage("&cOne of your purchases is longer valid and could not be retrieved.");
 				this.purchasedRepository.deletePurchase(purchase.getPurchaseID());
 				continue;
 			}

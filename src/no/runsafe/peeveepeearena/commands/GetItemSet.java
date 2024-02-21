@@ -21,7 +21,7 @@ public class GetItemSet extends PlayerCommand
 	@Override
 	public String OnExecute(IPlayer executor, IArgumentList parameters)
 	{
-		ShopItemSet itemSet = this.shopRepository.getItemSet(parameters.getValue("id"));
+		ShopItemSet itemSet = this.shopRepository.getItemSet(parameters.getRequired("id"));
 
 		if (itemSet == null)
 			return "&cUnable to find an item set with that ID.";
