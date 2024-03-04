@@ -6,7 +6,7 @@ pipeline {
   }
   environment { plugin = "PeeVeePeeArena" }
   triggers {
-    upstream '/Runsafe/RunsafeMailbox/master,/Runsafe/RunsafeMailbox/develop'
+    upstream '/Runsafe/RunsafeMailbox/' + env.BRANCH_NAME
     pollSCM '@monthly'
   }
   stages {
