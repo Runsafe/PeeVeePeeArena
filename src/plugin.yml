@@ -3,7 +3,7 @@ main: no.runsafe.peeveepeearena.PeeVeePeeArena
 version: 1.0.@BUILD@
 author: Kruithne
 depend: [RunsafeMailbox, RunsafeWorldGuardBridge]
-description:
+description: 'Just some past time'
 commands:
   pvp:
     description: PvP related commands
